@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "car-reparation-managing": {
+    "car-repair": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -39,7 +39,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/car-reparation-managing",
+            "outputPath": "dist/car-repair",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -87,10 +87,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "car-reparation-managing:build:production"
+              "browserTarget": "car-repair:build:production"
             },
             "development": {
-              "browserTarget": "car-reparation-managing:build:development"
+              "browserTarget": "car-repair:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -98,7 +98,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "car-reparation-managing:build"
+            "browserTarget": "car-repair:build"
           }
         },
         "test": {
