@@ -18,15 +18,10 @@ import { TablesComponent } from "./views/admin/tables/tables.component";
 import { LoginComponent } from "./views/auth/login/login.component";
 import { RegisterComponent } from "./views/auth/register/register.component";
 
-// no layouts views
-import { IndexComponent } from "./views/index/index.component";
-import { LandingComponent } from "./views/landing/landing.component";
-import { ProfileComponent } from "./views/profile/profile.component";
 
 // components for views and layouts
 
 import { AdminNavbarComponent } from "./components/navbars/admin-navbar/admin-navbar.component";
-import { AuthNavbarComponent } from "./components/navbars/auth-navbar/auth-navbar.component";
 import { CardBarChartComponent } from "./components/cards/card-bar-chart/card-bar-chart.component";
 import { CardLineChartComponent } from "./components/cards/card-line-chart/card-line-chart.component";
 import { CardPageVisitsComponent } from "./components/cards/card-page-visits/card-page-visits.component";
@@ -48,6 +43,11 @@ import { NotificationDropdownComponent } from "./components/dropdowns/notificati
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user-dropdown.component";
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { DepotComponent } from './views/client/depot/depot.component';
+import { ListeDepotComponent } from './views/client/liste-depot/liste-depot.component';
+import { ListeReparationsComponent } from './views/client/liste-reparations/liste-reparations.component';
+import { ListeFacturesComponent } from './views/client/liste-factures/liste-factures.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +71,6 @@ import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user
     CardTableComponent,
     HeaderStatsComponent,
     MapExampleComponent,
-    AuthNavbarComponent,
     AdminNavbarComponent,
     IndexNavbarComponent,
     AdminComponent,
@@ -81,11 +80,15 @@ import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user
     TablesComponent,
     LoginComponent,
     RegisterComponent,
-    IndexComponent,
-    LandingComponent,
-    ProfileComponent,
+    DepotComponent,
+    ListeDepotComponent,
+    ListeReparationsComponent,
+    ListeFacturesComponent
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

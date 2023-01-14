@@ -18,7 +18,7 @@
       class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
     >
       <span class="block sm:hidden"> Tailwind Angular </span>
-      <span class="hidden sm:block"> Notus Angular </span>
+      <span class="hidden sm:block"> Car Repair </span>
     </a>
     <!-- User -->
     <ul class="md:hidden items-center flex flex-wrap list-none">
@@ -68,6 +68,62 @@
           />
         </div>
       </form>
+
+      <hr class="my-4 md:min-w-full" />
+      <!-- Heading -->
+      <h6
+        class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+      >
+        Gestion des réparations
+      </h6>
+      <!-- Navigation -->
+
+      <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+        <li class="items-center">
+          <a
+            [routerLink]="['/client/depot']"
+            class="text-xs uppercase py-3 font-bold block"
+            routerLinkActive
+            #clientDepot="routerLinkActive"
+            [ngClass]="
+              clientDepot.isActive
+                ? 'text-red-600 hover:text-red-700'
+                : 'text-blueGray-700 hover:text-blueGray-500'
+            "
+          >
+            <i
+              class="fas fa-tv mr-2 text-sm"
+              [ngClass]="
+                adminDashboard.isActive ? 'opacity-75' : 'text-blueGray-300'
+              "
+            ></i>
+            Déposer une voiture
+          </a>
+        </li>
+        <li class="items-center">
+          <a
+            [routerLink]="['/client/liste-voitures']"
+            class="text-xs uppercase py-3 font-bold block"
+            routerLinkActive
+            #clientListeVoitures="routerLinkActive"
+            [ngClass]="
+              clientListeVoitures.isActive
+                ? 'text-red-600 hover:text-red-700'
+                : 'text-blueGray-700 hover:text-blueGray-500'
+            "
+          >
+            <i
+              class="fas fa-tv mr-2 text-sm"
+              [ngClass]="
+                adminDashboard.isActive ? 'opacity-75' : 'text-blueGray-300'
+              "
+            ></i>
+            Liste des dépots
+          </a>
+        </li>
+
+        
+      </ul>
 
       <!-- Divider -->
       <hr class="my-4 md:min-w-full" />

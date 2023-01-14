@@ -14,18 +14,23 @@ import { TablesComponent } from "./views/admin/tables/tables.component";
 // auth views
 import { LoginComponent } from "./views/auth/login/login.component";
 import { RegisterComponent } from "./views/auth/register/register.component";
+import { DepotComponent } from "./views/client/depot/depot.component";
+import { ListeDepotComponent } from "./views/client/liste-depot/liste-depot.component";
+import { ListeFacturesComponent } from "./views/client/liste-factures/liste-factures.component";
+import { ListeReparationsComponent } from "./views/client/liste-reparations/liste-reparations.component";
 
 // no layouts views
-import { IndexComponent } from "./views/index/index.component";
-import { LandingComponent } from "./views/landing/landing.component";
-import { ProfileComponent } from "./views/profile/profile.component";
 
 const routes: Routes = [
   // admin views
   {
-    path: "admin",
+    path: "client",
     component: AdminComponent,
     children: [
+      { path: "liste-factures", component: ListeFacturesComponent },
+      { path: "liste-reparations", component: ListeReparationsComponent },
+      { path: "liste-voitures", component: ListeDepotComponent },
+      { path: "depot", component: DepotComponent },
       { path: "dashboard", component: DashboardComponent },
       { path: "settings", component: SettingsComponent },
       { path: "tables", component: TablesComponent },
@@ -44,8 +49,6 @@ const routes: Routes = [
     ],
   },
   // no layout views
-  // { path: "profile", component: ProfileComponent },
-  // { path: "landing", component: LandingComponent },
   // { path: "", component: IndexComponent },
   { path: "",
     component: AuthComponent,

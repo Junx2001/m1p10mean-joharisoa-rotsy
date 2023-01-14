@@ -1,0 +1,207 @@
+<div>
+    <!-- Card stats -->
+    <div class="flex flex-wrap">
+      <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+        <app-card-stats
+          statSubtitle="TRAFFIC"
+          statTitle="350,897"
+          statArrow="up"
+          statPercent="3.48"
+          statPercentColor="text-emerald-500"
+          statDescripiron="Since last month"
+          statIconName="far fa-chart-bar"
+          statIconColor="bg-red-500"
+        ></app-card-stats>
+      </div>
+      <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+        <app-card-stats
+          statSubtitle="NEW USERS"
+          statTitle="2,356"
+          statArrow="down"
+          statPercent="3.48"
+          statPercentColor="text-red-500"
+          statDescripiron="Since last week"
+          statIconName="fas fa-chart-pie"
+          statIconColor="bg-orange-500"
+        ></app-card-stats>
+      </div>
+      <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+        <app-card-stats
+          statSubtitle="SALES"
+          statTitle="924"
+          statArrow="down"
+          statPercent="1.10"
+          statPercentColor="text-orange-500"
+          statDescripiron="Since yesterday"
+          statIconName="fas fa-users"
+          statIconColor="bg-pink-500"
+        ></app-card-stats>
+      </div>
+      <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+        <app-card-stats
+          statSubtitle="PERFORMANCE"
+          statTitle="49,65%"
+          statArrow="up"
+          statPercent="12"
+          statPercentColor="text-emerald-500"
+          statDescripiron="Since last month"
+          statIconName="fas fa-percent"
+          statIconColor="bg-emerald-500"
+        ></app-card-stats>
+      </div>
+    </div>
+  </div>
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+      <div
+  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+  [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'"
+>
+  <div class="rounded-t mb-0 px-4 py-3 border-0">
+    <div class="flex flex-wrap items-center">
+      <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+        <h3
+          class="font-semibold text-lg"
+          [ngClass]="color === 'light' ? 'text-blueGray-700' : 'text-white'"
+        >
+          Liste des voitures déposées
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div class="block w-full overflow-x-auto">
+    <!-- Projects table -->
+    <table class="items-center w-full bg-transparent border-collapse">
+      <thead>
+        <tr>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            "
+          >
+            
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            "
+          >
+            Immatriculation
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            "
+          >
+            Marque
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            "
+          >
+            Modèle
+          </th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th
+            class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center"
+          >
+            <img
+              src="assets/img/bootstrap.jpg"
+              class="h-12 w-12 bg-white rounded-full border"
+              alt="..."
+            />
+          </th>
+          <td
+            class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+          >
+            TAB1254
+          </td>
+          <td
+            class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+          >
+            Marque
+          </td>
+          <td
+            class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+          >
+            Modèle
+          </td>
+        </tr>
+        <tr>
+            <th
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center"
+            >
+              <img
+                src="assets/img/bootstrap.jpg"
+                class="h-12 w-12 bg-white rounded-full border"
+                alt="..."
+              />
+            </th>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+            >
+              TAB1254
+            </td>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+            >
+              Marque
+            </td>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+            >
+              Modèle
+            </td>
+          </tr>
+          <tr>
+            <th
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center"
+            >
+              <img
+                src="assets/img/bootstrap.jpg"
+                class="h-12 w-12 bg-white rounded-full border"
+                alt="..."
+              />
+            </th>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+            >
+              TAB1254
+            </td>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+            >
+              Marque
+            </td>
+            <td
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+            >
+              Modèle
+            </td>
+          </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+    </div>
+  </div>
+  
