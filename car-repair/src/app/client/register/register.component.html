@@ -1,8 +1,106 @@
-<form [formGroup]="registerForm">
-    <h1>Inscription client </h1>
-    <p>Nom : <input type="text" formControlName="name"></p>
-    <p>Email : <input type="email" formControlName="email"></p>
-    <p>Mot de passe : <input type="password" formControlName="password"></p>
-    <p><button type="submit" (click)="onSubmitRegisterForm()">Valider</button></p>
-</form>
-<p><a routerLink="/login">Se connecter</a></p>
+<div>
+    <main>
+      <section class="relative w-full h-full py-40 min-h-screen">
+        <div
+          class="absolute top-0 w-full h-full bg-blueGray-800 bg-no-repeat bg-full"
+          style="background-image: url('assets/img/register_bg_2.png')"
+        ></div>
+        <div class="container mx-auto px-4 h-full">
+            <div class="flex content-center items-center justify-center h-full">
+              <div class="w-full lg:w-6/12 px-4">
+                <div
+                  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0"
+                >
+                  <div class="rounded-t mb-0 px-6 py-6">
+                    <div class="text-center mb-3">
+                      <h6 class="text-blueGray-500 text-sm font-bold">Inscription client</h6>
+                    </div>
+                    
+                    <hr class="mt-6 border-b-1 border-blueGray-300" />
+                  </div>
+                  <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                    <form [formGroup]="registerForm">
+                      <div class="relative w-full mb-3">
+                        <label
+                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Nom
+                        </label>
+                        <input
+                          type="email"
+                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          placeholder="Nom" formControlName="name"
+                        />
+                      </div>
+          
+                      <div class="relative w-full mb-3">
+                        <label
+                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Email
+                        </label>
+                        <input
+                          type="email"
+                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          placeholder="Email" formControlName="email"
+                        />
+                      </div>
+          
+                      <div class="relative w-full mb-3">
+                        <label
+                          class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password" 
+                        >
+                          Mot de passe
+                        </label>
+                        <input
+                          type="password"
+                          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          placeholder="Mot de passe" formControlName="password"
+                        />
+                      </div>
+          
+                      <div>
+                        <label class="inline-flex items-center cursor-pointer">
+                          <input
+                            id="customCheckLogin"
+                            type="checkbox"
+                            class="form-checkbox border-0 text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 rounded"
+                          />
+                          <span class="ml-2 text-sm font-semibold text-blueGray-600">
+                            J'accepte
+                            <a href="javascript:void(0)" class="text-red-600">
+                              les termes et conditions
+                            </a>
+                          </span>
+                        </label>
+                      </div>
+          
+                      <div class="text-center mt-6">
+                        <button
+                          class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                          type="submit" (click)="onSubmitRegisterForm()"
+                        >
+                          Créer un compte
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="flex flex-wrap mt-6 relative">
+                    <div class="w-1/2">
+                    <a [routerLink]="['/login']" class="text-blueGray-200">
+                        <small>Se connecter</small>
+                    </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      <app-footer-auth [absolute]="true"></app-footer-auth>
+      </section>
+    </main>
+  </div>
+  

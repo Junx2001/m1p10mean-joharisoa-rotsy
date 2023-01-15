@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm! : FormGroup;
   user! : User;
   errorMessage! : string;
+  showAlert! : boolean;
 
   constructor(private formBuilder : FormBuilder,
     private router : Router,
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
     private authService : AuthService) { }
 
   ngOnInit(): void {
+    this.showAlert = false;
     this.loginForm = this.formBuilder.group({
       email : [null, Validators.required],
       password : [null, Validators.required]
@@ -35,6 +37,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("token", this.authService.getToken());
       console.log(`active : ${this.user.active}`);
     }else{
+      this.showAlert = true; 
       this.errorMessage = "Email ou mot de passe invalide";
     }
     // this.router.navigateByUrl('/client/');

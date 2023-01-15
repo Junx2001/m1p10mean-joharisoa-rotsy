@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './interceptors';
+import { FooterAuthComponent } from './components/footer-auth/footer-auth.component';
 
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    FooterAuthComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { httpInterceptorProviders } from './interceptors';
     httpInterceptorProviders
   ],
   exports:[
-    LoginComponent
+    LoginComponent,
+    FooterAuthComponent
   ]
 })
 export class GlobalModule { }

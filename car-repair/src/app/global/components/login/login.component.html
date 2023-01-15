@@ -1,7 +1,80 @@
-<form [formGroup]="loginForm">
-    <h1>Login du {{role}} </h1>
-    <p>Email : <input type="email" formControlName="email"></p>
-    <p>Mot de passe : <input type="password" formControlName="password"></p>
-    <p><button type="submit" (click)="onSubmitLoginForm()">Valider</button></p>
-</form>
-<p *ngIf="errorMessage" style="color: red;">{{errorMessage}}</p>
+
+
+        <div
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0"
+        >
+          <div class="rounded-t mb-0 px-6 py-6">
+            <div class="text-center mb-3">
+              <h6 class="text-blueGray-500 text-sm font-bold">Login du {{role}}</h6>
+            </div>
+            
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+          </div>
+          <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+            <form [formGroup]="loginForm">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlFor="grid-password"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Email" formControlName="email"
+                />
+              </div>
+  
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlFor="grid-password"
+                >
+                  Mot de passe
+                </label>
+                <input
+                  type="password"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Password" formControlName="password"
+                />
+              </div>
+              <div>
+                <label class="inline-flex items-center cursor-pointer">
+                  <input
+                    id="customCheckLogin"
+                    type="checkbox"
+                    class="form-checkbox border-0 text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 rounded"
+                  />
+                  <span class="ml-2 text-sm font-semibold text-blueGray-600">
+                    Se souvenir de moi
+                  </span>
+                </label>
+              </div>
+  
+              <div class="text-center mt-6">
+                <button
+                  class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                  type="submit" (click)="onSubmitLoginForm()"
+                >
+                  Connexion
+                </button>
+              </div>
+
+              <div *ngIf="showAlert" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+                <span class="text-xl inline-block mr-5 align-middle">
+                  <i class="fas fa-bell"></i>
+                </span>
+                <span class="inline-block align-middle mr-8">
+                  {{errorMessage}}
+                </span>
+                <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none" (click)="showAlert = false">
+                  <span>×</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+        
+      
