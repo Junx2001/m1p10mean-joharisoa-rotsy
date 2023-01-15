@@ -1,0 +1,8 @@
+<form [formGroup]="registerForm">
+    <h1>Inscription client </h1>
+    <p>Nom : <input type="text" formControlName="name"></p>
+    <p>Email : <input type="email" formControlName="email"></p>
+    <p>Mot de passe : <input type="password" formControlName="password"></p>
+    <p><button type="submit" (click)="onSubmitRegisterForm()">Valider</button></p>
+</form>
+<p><a routerLink="/login">Se connecter</a></p>
