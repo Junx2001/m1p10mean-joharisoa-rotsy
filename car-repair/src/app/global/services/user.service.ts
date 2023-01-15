@@ -32,4 +32,8 @@ export class UserService {
         console.log("user registered");
     }
 
+    getUserByToken(token: string): User{
+        return this.allUsers()[1];
+    }
+
 }

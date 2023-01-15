@@ -1,11 +1,17 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { LayoutComponent } from "../global/components/layout/layout.component";
+import { AuthGuard } from "../global/guards/auth.guard";
+import { DepotVoitureComponent } from "./depot-voiture/depot-voiture.component";
 import { LoginClientComponent } from "./login-client/login-client.component";
 import { RegisterComponent } from "./register/register.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginClientComponent},
     { path: 'register', component: RegisterComponent},
+    { path: '',
+    component: LayoutComponent,
+    canActivate:[AuthGuard]},
   ];
 @NgModule({
     imports : [

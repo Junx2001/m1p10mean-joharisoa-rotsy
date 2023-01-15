@@ -5,13 +5,15 @@ import { ClientRoutingModule } from './client-routing.module';
 import { GlobalModule } from '../global/global.module';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DepotVoitureComponent } from './depot-voiture/depot-voiture.component';
 
 
 
 @NgModule({
   declarations: [
     LoginClientComponent,
-    RegisterComponent
+    RegisterComponent,
+    DepotVoitureComponent,
   ],
   imports: [
     CommonModule,
