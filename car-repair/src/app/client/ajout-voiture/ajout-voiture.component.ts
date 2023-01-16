@@ -5,11 +5,11 @@ import { UserService } from 'src/app/global/services/user.service';
 import { VoitureService } from 'src/app/global/services/voiture.service';
 
 @Component({
-  selector: 'app-depot-voiture',
-  templateUrl: './depot-voiture.component.html',
-  styleUrls: ['./depot-voiture.component.css']
+  selector: 'app-ajout-voiture',
+  templateUrl: './ajout-voiture.component.html',
+  styleUrls: ['./ajout-voiture.component.css']
 })
-export class DepotVoitureComponent implements OnInit {
+export class AjoutVoitureComponent implements OnInit {
   depotForm! : FormGroup;
   constructor(private formBuilder : FormBuilder,
     private voitureService : VoitureService,
@@ -23,14 +23,15 @@ export class DepotVoitureComponent implements OnInit {
       modele : [null, Validators.required],
     })
   }
-  onSubmitDepotVoiture(){
+  onAddNewCar(){
     const values = this.depotForm.value;
     values['id']=3;
     const user=this.userService.getUserByToken(localStorage.getItem("token"));
     values['clientId'] = user.id;
-    this.voitureService.depotVoiture(values);
+    this.voitureService.addCar(values);
   }
-  onClickListeDepots(){
+  onViewCars(){
     this.router.navigateByUrl('/liste-voitures-deposees');
   }
+
 }

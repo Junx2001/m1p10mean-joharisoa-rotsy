@@ -69,6 +69,49 @@
       <!-- Navigation -->
       <div *ngIf="user.role==='client'">
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+          <li class="items-center">
+            <a
+              [routerLink]="['/ajout-voiture']"
+              class="text-xs uppercase py-3 font-bold block"
+              routerLinkActive
+              #ajoutvoiture="routerLinkActive"
+              [ngClass]="
+                ajoutvoiture.isActive
+                  ? 'text-red-600 hover:text-red-700'
+                  : 'text-blueGray-700 hover:text-blueGray-500'
+              "
+            >
+              <i
+                class="fas fa-tv mr-2 text-sm"
+                [ngClass]="
+                  ajoutvoiture.isActive ? 'opacity-75' : 'text-blueGray-300'
+                "
+              ></i>
+              Ajouter une voiture
+            </a>
+          </li>
+          <li class="items-center">
+            <a
+              [routerLink]="['/liste-voiture']"
+              class="text-xs uppercase py-3 font-bold block"
+              routerLinkActive
+              #listevoitures="routerLinkActive"
+              [ngClass]="
+                listevoitures.isActive
+                  ? 'text-red-600 hover:text-red-700'
+                  : 'text-blueGray-700 hover:text-blueGray-500'
+              "
+            >
+              <i
+                class="fas fa-tv mr-2 text-sm"
+                [ngClass]="
+                  listevoitures.isActive ? 'opacity-75' : 'text-blueGray-300'
+                "
+              ></i>
+              Liste de mes voitures
+            </a>
+          </li>
+
             <li class="items-center">
               <a
                 [routerLink]="['/depot-voiture']"
@@ -87,13 +130,13 @@
                     deposition.isActive ? 'opacity-75' : 'text-blueGray-300'
                   "
                 ></i>
-                Déposition des voitures
+                Déposer une voiture
               </a>
             </li>
     
             <li class="items-center">
               <a
-                [routerLink]="['/login']"
+                [routerLink]="['/liste-voitures-deposees']"
                 class="text-xs uppercase py-3 font-bold block"
                 routerLinkActive
                 #listeDepot="routerLinkActive"
@@ -109,9 +152,10 @@
                     listeDepot.isActive ? 'opacity-75' : 'text-blueGray-300'
                   "
                 ></i>
-                Liste des dépots
+                Liste des voitures déposées
               </a>
             </li>
+            
     
             <li class="items-center">
               <a

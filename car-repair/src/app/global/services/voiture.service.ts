@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Voiture } from '../models/voiture.model';
+import { ReparationService } from './reparation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +22,22 @@ export class VoitureService {
             modele: "Santa Fe"
         }
     ];
-    constructor ( ){}
+    constructor (private reparationService : ReparationService){}
     
+    getVoitures(): Voiture[] {
+        return this.voitures;
+    }
     getVoituresDepot(): Voiture[] {
         return this.voitures;
     }
-    addVoiture(formValue:{id : number,immatriculation: string, clientId: number,marque:string, modele:string }): Voiture{
+    addCar (formValue:{id : number,immatriculation: string, clientId: number,marque:string, modele:string }): void{
         this.voitures.push(formValue);
+    }
+    
+    depotVoiture(formValue:{id : number,immatriculation: string, clientId: number,marque:string, modele:string }): Voiture{
+        this.voitures.push(formValue);
+        // insert into reparation
+        this.reparationService.addVoitureReparation(formValue);
         return formValue;
     }
 }

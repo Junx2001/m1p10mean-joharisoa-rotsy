@@ -12,6 +12,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserDropdownComponent } from './components/user-dropdown/user-dropdown.component';
 import { RouterModule } from '@angular/router';
 import { LogoutComponent } from './components/logout/logout.component';
+import { ListeLayoutComponent } from './components/liste-layout/liste-layout.component';
 
 
 
@@ -25,7 +26,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     FooterComponent,
     HeaderComponent,
     UserDropdownComponent,
-    LogoutComponent
+    LogoutComponent,
+    ListeLayoutComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { LogoutComponent } from './components/logout/logout.component';
   ],
   exports:[
     LoginComponent,
-    FooterAuthComponent
+    FooterAuthComponent,
+    ListeLayoutComponent
   ]
 })
 export class GlobalModule { }
