@@ -12,6 +12,7 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginComponent implements OnInit {
   @Input() role! : string;
+  @Input() landingPage! : string;
   loginForm! : FormGroup;
   user! : User;
   errorMessage! : string;
@@ -35,12 +36,12 @@ export class LoginComponent implements OnInit {
     if (this.user){
       this.authService.login(this.user);
       localStorage.setItem("token", this.authService.getToken());
-      console.log(`active : ${this.user.active}`);
+      // console.log(`active : ${this.user.active}`);
     }else{
       this.showAlert = true; 
       this.errorMessage = "Email ou mot de passe invalide";
     }
-    // this.router.navigateByUrl('/client/');
+    this.router.navigateByUrl(this.landingPage);
   }
 
 }

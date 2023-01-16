@@ -8,6 +8,7 @@ export class UserService {
     constructor ( ){}
     allUsers(): User [] {
         return [{
+            id : 1,
             email : "joh@gmail.com",
             name : "Joharisoa",
             password : "mdp123",
@@ -15,6 +16,7 @@ export class UserService {
             active : 0
           },
           {
+            id : 2,
             email : "ro@gmail.com",
             name : "Rotsy",
             password : "mdp123",
@@ -36,4 +38,7 @@ export class UserService {
         return this.allUsers()[1];
     }
 
+    logout(user: User): void{
+      user.active = 0;
+    }
 }

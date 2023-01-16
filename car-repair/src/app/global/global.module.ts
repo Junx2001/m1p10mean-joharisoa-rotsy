@@ -9,8 +9,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
-import { AppRoutingModule } from '../app-routing.module';
 import { UserDropdownComponent } from './components/user-dropdown/user-dropdown.component';
+import { RouterModule } from '@angular/router';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 
@@ -23,12 +24,13 @@ import { UserDropdownComponent } from './components/user-dropdown/user-dropdown.
     NavbarComponent,
     FooterComponent,
     HeaderComponent,
-    UserDropdownComponent
+    UserDropdownComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    RouterModule
   ],
   providers: [
     httpInterceptorProviders

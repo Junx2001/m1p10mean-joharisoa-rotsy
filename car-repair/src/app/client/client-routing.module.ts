@@ -11,6 +11,10 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent},
     { path: '',
     component: LayoutComponent,
+    children:[
+        { path: "depot-voiture", component: DepotVoitureComponent },
+        { path: "", redirectTo: "depot-voiture", pathMatch: "full" },
+    ],
     canActivate:[AuthGuard]},
   ];
 @NgModule({

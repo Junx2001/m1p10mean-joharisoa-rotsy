@@ -8,10 +8,12 @@ import { Router } from '@angular/router';
 })
 export class LoginClientComponent implements OnInit {
   roleUser! : string;
+  landingPage! : string;
   constructor(private router : Router) { }
 
   ngOnInit(): void {
     this.roleUser = "client";
+    this.landingPage = '';
   }
 
 }
