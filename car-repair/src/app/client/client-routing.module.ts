@@ -18,7 +18,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children:[
         { path: "ajout-voiture", component: AjoutVoitureComponent },
-        { path: "liste-voiture", component: ListeVoituresComponent },
+        { path: "liste-voitures", component: ListeVoituresComponent },
         { path: 'reparations/:immatriculation', component: ListeReparationsComponent },
         { path: 'factures/:immatriculation', component: ListeFacturesComponent },
         { path: "depot-voiture", component: DepotVoitureComponent },

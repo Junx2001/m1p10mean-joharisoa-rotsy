@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Dict } from 'src/app/global/models/dict.interface';
+import {  Observable, Subject } from 'rxjs';
+import {  map, takeUntil} from 'rxjs/operators';
+import { Voiture } from 'src/app/global/models/voiture.model';
 import { VoitureService } from 'src/app/global/services/voiture.service';
 
 
@@ -11,32 +14,32 @@ import { VoitureService } from 'src/app/global/services/voiture.service';
 })
 export class ListeVoituresComponent implements OnInit {
   title!: string;
-  values! : Dict[];
+  cars! : Voiture[];
   selectedDevice! : string;
+  searchGroup! : FormGroup;
+  // resultCarsPreview$! : Observable<Voiture[]>;
+  // notifier = new Subject();
 
   constructor(private voitureService : VoitureService,
-    private router : Router) { }
+    private router : Router,
+    private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
     this.selectedDevice = 'Filtre des voitures';
     this.title = "Liste de mes voitures";
-    const cars = this.voitureService.getVoitures();
-    this.values = [];
-    for (let car of cars){
-      const dict = {
-        'image':'<img\
-        src="assets/img/2017_hyundai_santa_fe.jpg"\
-        class="h-12 w-12 bg-white rounded-full border"\
-        alt="image voiture"\
-      />',
-        'immatriculation':car.immatriculation,
-        'marque':car.marque,
-        'modèle':car.modele,
-        'statut':'<i class="fas fa-circle text-emerald-500 mr-2"></i> déposé',
-        'statutDepot':1
-      }
-      this.values.push(dict);
-    }
+    this.cars = this.voitureService.getVoitures();
+    
+    this.searchGroup = this.formBuilder.group({
+      'immatriculation':[null],
+      'marque':[null],
+      'modele':[null],
+      'depot':[null]
+    });
+    
+    // this.resultCarsPreview$ = this.searchGroup.valueChanges.pipe(
+    //   map(formValue => this.voitureService.searchVoiture(formValue)),
+    //   takeUntil(this.notifier)
+    // )
   }
   onFilterDepositCar(deviceValue:string) {
     this.selectedDevice = deviceValue;
@@ -44,6 +47,8 @@ export class ListeVoituresComponent implements OnInit {
       // car déposés
     }else if(deviceValue === '0'){
       //car non déposées 
+    }else{
+      this.cars = this.voitureService.getVoitures();
     }
   }
   onViewCarReparations(immatriculation){
@@ -52,5 +57,7 @@ export class ListeVoituresComponent implements OnInit {
   onViewCarFactures(immatriculation){
     this.router.navigateByUrl(`/factures/${immatriculation}`);
   }
-
+  onSearchCar(){
+    this.cars = this.voitureService.searchVoiture(this.searchGroup.value);
+  }
 }

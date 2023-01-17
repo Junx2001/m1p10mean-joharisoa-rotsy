@@ -13,28 +13,118 @@
              shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
              #statut (change)="onFilterDepositCar(statut.value)"
           >
-            <option [value]="-1" default >Filtre des voitures</option>
-            <option [value]="1" >Déposées</option>
-            <option [value]="0" >Non déposées</option>
+            <option [value]="-1" default >Tout afficher</option>
+            <option [value]="1" >Voitures déposées</option>
+            <option [value]="0" >Voitures non déposées</option>
         </select>
         </div>
-      </div>
         
+        <form [formGroup]="searchGroup" >
+        <div class="flex flex-wrap">
+                <div class="w-full lg:w-6/12 px-4">
+                    <div class="relative w-full mb-3">
+                    <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                    >
+                        Immatriculation
+                    </label>
+                    <input
+                        type="email"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Immatriculation" formControlName="immatriculation"
+                    />
+                    </div>
+                </div>
+                
+                <div class="w-full lg:w-6/12 px-4">
+                    <div class="relative w-full mb-3">
+                    <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                    >
+                        Date de dépôt
+                    </label>
+                    <input
+                        type="date" formControlName="depot"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    />
+                    </div>
+                </div>
+                <div class="w-full lg:w-6/12 px-4">
+                    <div class="relative w-full mb-3">
+                    <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                    >
+                        Marque
+                    </label>
+                    <input
+                        type="text"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Marque" formControlName="marque"
+                    />
+                    </div>
+                </div>
+                <div class="w-full lg:w-6/12 px-4">
+                    <div class="relative w-full mb-3">
+                    <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                    >
+                        Modèle
+                    </label>
+                    <input
+                        type="text"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Modèle" formControlName="modele"
+                    />
+                    </div>
+                </div>
+                <div class="w-full lg:w-6/12 px-4">
+                    <div class="relative w-full mb-3">
+                        <button
+                        class="bg-red-600
+                         text-white 
+                         active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded 
+                         shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                         type="submit" (click)="onSearchCar()"
+                      >
+                        Rechercher
+                    </button>
+                    </div>
+                </div>
+        </div>
+        </form>
     
       
-        
       <div class="block w-full overflow-x-auto">
         <!-- Projects table -->
+        
+
         <table class="items-center w-full bg-transparent border-collapse">
           <thead>
             <tr >
-                <ng-container *ngFor="let header of values[0] | keyvalue">  
-                    <th *ngIf="header.key!=='statutDepot'"
-                        class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                    >
-                    {{header.key | titlecase}}
-                    </th>
-                </ng-container>
+                <th
+                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                 >
+                 </th>
+                 <th
+                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                 >
+                 Immatriculation</th>
+                 <th
+                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                 >
+                 Marque</th>
+                 <th
+                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                 >
+                 Modèle</th>
+                 <th
+                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                 >
+                 Statut</th>
                  <th
                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                  >
@@ -42,29 +132,51 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let content of values">
-
-                <ng-container *ngFor="let item of content | keyvalue">  
-                    <th *ngIf="item.key!=='statutDepot'"
+                <tr *ngFor="let car of cars">
+                    <th 
                         class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                    [innerHTML]="item.value"
                         >
+                        <img
+                            src="assets/img/2017_hyundai_santa_fe.jpg"
+                            class="h-12 w-12 bg-white rounded-full border"
+                            alt="image voiture"
+                          />
                     </th>
-                </ng-container>
-              
-              <td *ngIf="content.statut">
-                <button 
-                class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
-                type="button" (click)="onViewCarReparations(content.immatriculation)">
-                    Réparations
-                  </button>
-                  <button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  type="button" (click)="onViewCarFactures(content.immatriculation)">
-                    Factures
-                  </button>
-              </td>
-              
-            </tr>
+                    <td 
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                    >
+                    {{car.immatriculation}}
+                    </td>
+                    <td 
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                    >
+                    {{car.marque}}
+                    </td>
+                    <td 
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                    >
+                    {{car.modele}}
+                    </td>
+                    <td 
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                    >
+                    <i class="fas fa-circle text-emerald-500 mr-2"></i> déposé
+                    </td>
+                    
+                  <td 
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                  >
+                    <button 
+                    class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+                    type="button" (click)="onViewCarReparations(content.immatriculation)">
+                        Réparations
+                      </button>
+                      <button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button" (click)="onViewCarFactures(content.immatriculation)">
+                        Factures
+                      </button>
+                  </td>
+                </tr>
           </tbody>
         </table>
       </div>

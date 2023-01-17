@@ -20,6 +20,13 @@ export class VoitureService {
             immatriculation: "TBG1325",​​
             marque: "Hyundai",​​
             modele: "Santa Fe"
+        },
+        {
+            clientId: 2,
+            id: 3,
+            immatriculation: "TAL1115",​​
+            marque: "Toyota",​​
+            modele: "Corolla"
         }
     ];
     constructor (private reparationService : ReparationService){}
@@ -42,5 +49,8 @@ export class VoitureService {
     }
     getVoitureByImmatriculation(immatriculation : string): Voiture{
         return this.voitures.find(voiture => voiture.immatriculation === immatriculation);
+    }
+    searchVoiture(formValue:{immatriculation: string, marque: string, modele:string , depot: Date}): Voiture[]{
+        return this.voitures.filter(car =>  car.marque.toLowerCase() === formValue.marque.toLowerCase());
     }
 }
