@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { LoginClientComponent } from './login-client/login-client.component';
 import { ClientRoutingModule } from './client-routing.module';
 import { GlobalModule } from '../global/global.module';
@@ -10,6 +10,7 @@ import { AjoutVoitureComponent } from './ajout-voiture/ajout-voiture.component';
 import { ListeVoituresComponent } from './liste-voitures/liste-voitures.component';
 import { RecuperationVoitureComponent } from './recuperation-voiture/recuperation-voiture.component';
 import { ListeReparationsComponent } from './liste-reparations/liste-reparations.component';
+import { ListeFacturesComponent } from './liste-factures/liste-factures.component';
 
 
 
@@ -22,12 +23,16 @@ import { ListeReparationsComponent } from './liste-reparations/liste-reparations
     ListeVoituresComponent,
     RecuperationVoitureComponent,
     ListeReparationsComponent,
+    ListeFacturesComponent,
   ],
   imports: [
     CommonModule,
     ClientRoutingModule,
     GlobalModule,
     ReactiveFormsModule
+  ],
+  providers:[
+    CurrencyPipe
   ],
   exports: [
     LoginClientComponent

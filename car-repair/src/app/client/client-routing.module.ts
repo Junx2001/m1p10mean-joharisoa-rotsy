@@ -4,6 +4,7 @@ import { LayoutComponent } from "../global/components/layout/layout.component";
 import { AuthGuard } from "../global/guards/auth.guard";
 import { AjoutVoitureComponent } from "./ajout-voiture/ajout-voiture.component";
 import { DepotVoitureComponent } from "./depot-voiture/depot-voiture.component";
+import { ListeFacturesComponent } from "./liste-factures/liste-factures.component";
 import { ListeReparationsComponent } from "./liste-reparations/liste-reparations.component";
 import { ListeVoituresComponent } from "./liste-voitures/liste-voitures.component";
 import { LoginClientComponent } from "./login-client/login-client.component";
@@ -19,6 +20,7 @@ const routes: Routes = [
         { path: "ajout-voiture", component: AjoutVoitureComponent },
         { path: "liste-voiture", component: ListeVoituresComponent },
         { path: 'reparations/:immatriculation', component: ListeReparationsComponent },
+        { path: 'factures/:immatriculation', component: ListeFacturesComponent },
         { path: "depot-voiture", component: DepotVoitureComponent },
         { path: "recuperation-voiture", component: RecuperationVoitureComponent },
         { path: "", redirectTo: "depot-voiture", pathMatch: "full" },

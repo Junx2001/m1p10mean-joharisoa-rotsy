@@ -32,7 +32,7 @@ export class ListeVoituresComponent implements OnInit {
         'immatriculation':car.immatriculation,
         'marque':car.marque,
         'modèle':car.modele,
-        'statut':'<i class="fas fa-circle text-orange-500 mr-2"></i> déposé',
+        'statut':'<i class="fas fa-circle text-emerald-500 mr-2"></i> déposé',
         'statutDepot':1
       }
       this.values.push(dict);
@@ -48,6 +48,9 @@ export class ListeVoituresComponent implements OnInit {
   }
   onViewCarReparations(immatriculation){
     this.router.navigateByUrl(`/reparations/${immatriculation}`);
+  }
+  onViewCarFactures(immatriculation){
+    this.router.navigateByUrl(`/factures/${immatriculation}`);
   }
 
 }
