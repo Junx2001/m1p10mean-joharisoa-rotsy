@@ -13,4 +13,5 @@ export class ListeLayoutComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  isDate(val): boolean { return val instanceof Date }
 }

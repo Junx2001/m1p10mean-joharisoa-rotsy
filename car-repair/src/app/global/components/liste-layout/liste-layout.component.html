@@ -17,12 +17,17 @@
             </thead>
             <tbody>
               <tr *ngFor="let content of values">
-
-                <td *ngFor="let item of content | keyvalue"
-                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                 [innerHTML]="item.value">
-                </td>
-                
+                <ng-container *ngFor="let item of content | keyvalue">  
+                  <td *ngIf="isDate(item.value)"
+                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                  >
+                  {{item.value|date}}
+                  </td>
+                  <td *ngIf="isDate(item.value)===false"
+                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                  [innerHTML]="item.value">
+                  </td>
+                </ng-container>
               </tr>
             </tbody>
           </table>

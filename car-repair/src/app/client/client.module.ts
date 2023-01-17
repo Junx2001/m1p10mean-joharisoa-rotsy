@@ -9,6 +9,7 @@ import { DepotVoitureComponent } from './depot-voiture/depot-voiture.component';
 import { AjoutVoitureComponent } from './ajout-voiture/ajout-voiture.component';
 import { ListeVoituresComponent } from './liste-voitures/liste-voitures.component';
 import { RecuperationVoitureComponent } from './recuperation-voiture/recuperation-voiture.component';
+import { ListeReparationsComponent } from './liste-reparations/liste-reparations.component';
 
 
 
@@ -20,6 +21,7 @@ import { RecuperationVoitureComponent } from './recuperation-voiture/recuperatio
     AjoutVoitureComponent,
     ListeVoituresComponent,
     RecuperationVoitureComponent,
+    ListeReparationsComponent,
   ],
   imports: [
     CommonModule,

@@ -18,7 +18,11 @@ export class DepotVoitureComponent implements OnInit {
     this.values = [];
     for (let car of cars){
       const dict = {
-        'image':'',
+        'image':'<img\
+        src="assets/img/2017_hyundai_santa_fe.jpg"\
+        class="h-12 w-12 bg-white rounded-full border"\
+        alt="image voiture"\
+      />',
         'immatriculation':car.immatriculation,
         'marque':car.marque,
         'modèle':car.modele,

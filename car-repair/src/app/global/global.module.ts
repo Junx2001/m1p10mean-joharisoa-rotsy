@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './interceptors';
@@ -13,7 +13,8 @@ import { UserDropdownComponent } from './components/user-dropdown/user-dropdown.
 import { RouterModule } from '@angular/router';
 import { LogoutComponent } from './components/logout/logout.component';
 import { ListeLayoutComponent } from './components/liste-layout/liste-layout.component';
-
+import { InfoVoitureComponent } from './components/info-voiture/info-voiture.component';
+import * as fr from '@angular/common/locales/fr';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ListeLayoutComponent } from './components/liste-layout/liste-layout.com
     HeaderComponent,
     UserDropdownComponent,
     LogoutComponent,
-    ListeLayoutComponent
+    ListeLayoutComponent,
+    InfoVoitureComponent
   ],
   imports: [
     CommonModule,
@@ -35,12 +37,18 @@ import { ListeLayoutComponent } from './components/liste-layout/liste-layout.com
     RouterModule
   ],
   providers: [
+    {provide : LOCALE_ID, useValue: 'fr-FR'},
     httpInterceptorProviders
   ],
   exports:[
     LoginComponent,
     FooterAuthComponent,
-    ListeLayoutComponent
+    ListeLayoutComponent,
+    InfoVoitureComponent
   ]
 })
-export class GlobalModule { }
+export class GlobalModule { 
+  constructor(){
+    registerLocaleData(fr.default);
+  }
+}

@@ -57,8 +57,9 @@
               <tr *ngFor="let depositCar of depositCars">
 
                 <td 
-                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  {{depositCar.image}}
+                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                  [innerHTML]="depositCar.image">
+                  
                 </td>
                 <td 
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -74,7 +75,7 @@
                 </td>
                 <td 
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  {{depositCar.depot}}
+                  {{depositCar.depot | date }}
                 </td>
                 <td
                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">

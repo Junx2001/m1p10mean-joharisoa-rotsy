@@ -40,4 +40,7 @@ export class VoitureService {
         this.reparationService.addVoitureReparation(formValue);
         return formValue;
     }
+    getVoitureByImmatriculation(immatriculation : string): Voiture{
+        return this.voitures.find(voiture => voiture.immatriculation === immatriculation);
+    }
 }
