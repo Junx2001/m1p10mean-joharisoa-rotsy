@@ -11,7 +11,7 @@
       <img
         alt="..."
         class="w-full rounded-full align-middle border-none shadow-lg"
-        src="assets/img/team-1-800x800.jpg"
+        src="assets/img/user.png"
       />
     </span>
   </div>
@@ -21,11 +21,21 @@
     class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1 min-w-48"
     [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'"
   >
+      <h6
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-500 uppercase "
+    >
+      {{label}}
+    </h6>
+    <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
+    
     <a
     [routerLink]="['/logout']"
       class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
     >
-      Déconnexion
+    <i
+    class="fas  fa-arrow-right mr-2 text-sm"
+    ></i> 
+    Déconnexion
     </a>
   </div>
 </div>

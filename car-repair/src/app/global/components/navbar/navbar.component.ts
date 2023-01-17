@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
-import {filter} from 'rxjs/operators';
+import { UserService } from '../../services/user.service';
+
 
 
 @Component({
@@ -9,20 +9,21 @@ import {filter} from 'rxjs/operators';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  @Input() pageTitle! : string;
-  linkName! : string;
+  pageTitle! : string;
   
-  constructor(private router : Router) {
-    this.router.events
-     .pipe(filter(e => e instanceof NavigationStart))
-     .subscribe((e: NavigationStart) => {
-      const navigation  = this.router.getCurrentNavigation();
-      this.linkName = navigation.extras.state ? navigation.extras.state.link : '';
-     });
+  constructor(private userService : UserService) {
   
    }
 
   ngOnInit(): void {
+    const user = this.userService.getUserByToken(localStorage.getItem("token"));
+    if (user.role==='financier'){
+      this.pageTitle='Responsable financier';
+    }else if (user.role==='atelier'){
+      this.pageTitle='Responsable atelier';
+    }else{
+      this.pageTitle=`Application de ${user.name}`;
+    }
   }
   
 }
