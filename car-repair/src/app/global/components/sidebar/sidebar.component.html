@@ -133,28 +133,6 @@
                 Déposer une voiture
               </a>
             </li>
-    
-            <li class="items-center">
-              <a
-                [routerLink]="['/liste-voitures-deposees']"
-                class="text-xs uppercase py-3 font-bold block"
-                routerLinkActive
-                #listeDepot="routerLinkActive"
-                [ngClass]="
-                  listeDepot.isActive
-                    ? 'text-red-600 hover:text-red-700'
-                    : 'text-blueGray-700 hover:text-blueGray-500'
-                "
-              >
-                <i
-                  class="fas fa-tools mr-2 text-sm"
-                  [ngClass]="
-                    listeDepot.isActive ? 'opacity-75' : 'text-blueGray-300'
-                  "
-                ></i>
-                Liste des voitures déposées
-              </a>
-            </li>
             
     
             <li class="items-center">
@@ -181,7 +159,7 @@
     
             <li class="items-center">
               <a
-                [routerLink]="['/login']"
+                [routerLink]="['/recuperation-voiture']"
                 class="text-xs uppercase py-3 font-bold block"
                 routerLinkActive
                 #recuperation="routerLinkActive"
@@ -197,7 +175,7 @@
                     recuperation.isActive ? 'opacity-75' : 'text-blueGray-300'
                   "
                 ></i>
-                Recupération des voitures
+                Recupérer mes voitures
               </a>
             </li>
 

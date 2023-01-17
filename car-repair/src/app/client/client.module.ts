@@ -6,9 +6,9 @@ import { GlobalModule } from '../global/global.module';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DepotVoitureComponent } from './depot-voiture/depot-voiture.component';
-import { ListeDepotsComponent } from './liste-depots/liste-depots.component';
 import { AjoutVoitureComponent } from './ajout-voiture/ajout-voiture.component';
 import { ListeVoituresComponent } from './liste-voitures/liste-voitures.component';
+import { RecuperationVoitureComponent } from './recuperation-voiture/recuperation-voiture.component';
 
 
 
@@ -17,9 +17,9 @@ import { ListeVoituresComponent } from './liste-voitures/liste-voitures.componen
     LoginClientComponent,
     RegisterComponent,
     DepotVoitureComponent,
-    ListeDepotsComponent,
     AjoutVoitureComponent,
     ListeVoituresComponent,
+    RecuperationVoitureComponent,
   ],
   imports: [
     CommonModule,

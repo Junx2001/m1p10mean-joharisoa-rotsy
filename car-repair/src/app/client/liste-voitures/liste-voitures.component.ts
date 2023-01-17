@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Dict } from 'src/app/global/models/dict.interface';
 import { VoitureService } from 'src/app/global/services/voiture.service';
 
@@ -10,13 +11,15 @@ import { VoitureService } from 'src/app/global/services/voiture.service';
 })
 export class ListeVoituresComponent implements OnInit {
   title!: string;
-  headers! : string[];
   values! : Dict[];
-  constructor(private voitureService : VoitureService) { }
+  selectedDevice! : string;
+
+  constructor(private voitureService : VoitureService,
+    private router : Router) { }
 
   ngOnInit(): void {
+    this.selectedDevice = 'Filtre des voitures';
     this.title = "Liste de mes voitures";
-    this.headers = ["","Immatriculation","Marque","Modèle","Statut"];
     const cars = this.voitureService.getVoitures();
     this.values = [];
     for (let car of cars){
@@ -24,11 +27,23 @@ export class ListeVoituresComponent implements OnInit {
         'image':'',
         'immatriculation':car.immatriculation,
         'marque':car.marque,
-        'modele':car.modele,
-        'statut':'<i class="fas fa-circle text-orange-500 mr-2"></i> non déposé'
+        'modèle':car.modele,
+        'statut':'<i class="fas fa-circle text-orange-500 mr-2"></i> déposé',
+        'statutDepot':1
       }
       this.values.push(dict);
     }
+  }
+  onFilterDepositCar(deviceValue:string) {
+    this.selectedDevice = deviceValue;
+    if (deviceValue==='1'){
+      // car déposés
+    }else if(deviceValue === '0'){
+      //car non déposées 
+    }
+  }
+  onViewCarReparations(){
+    // this.router.navigateByUrl();
   }
 
 }

@@ -1,4 +1,4 @@
 interface Dict {
-    [idx: string]: string
+    [idx: string]: any
   }
 export { Dict };
