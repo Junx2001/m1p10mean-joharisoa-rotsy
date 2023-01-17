@@ -8,6 +8,7 @@ import { ListeFacturesComponent } from "./liste-factures/liste-factures.componen
 import { ListeReparationsComponent } from "./liste-reparations/liste-reparations.component";
 import { ListeVoituresComponent } from "./liste-voitures/liste-voitures.component";
 import { LoginClientComponent } from "./login-client/login-client.component";
+import { PaiementComponent } from "./paiement/paiement.component";
 import { RecuperationVoitureComponent } from "./recuperation-voiture/recuperation-voiture.component";
 import { RegisterComponent } from "./register/register.component";
 
@@ -17,6 +18,7 @@ const routes: Routes = [
     { path: '',
     component: LayoutComponent,
     children:[
+        { path: "paiement", component: PaiementComponent },
         { path: "ajout-voiture", component: AjoutVoitureComponent },
         { path: "liste-voitures", component: ListeVoituresComponent },
         { path: 'reparations/:immatriculation', component: ListeReparationsComponent },

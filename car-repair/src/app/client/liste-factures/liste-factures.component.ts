@@ -15,8 +15,8 @@ import { VoitureService } from 'src/app/global/services/voiture.service';
 export class ListeFacturesComponent implements OnInit {
   reparations! : ReparationDetails[];
   voiture! : Voiture;
-  title!: string;
   values! : Dict[];
+  du! : number;
 
   constructor(private reparationDetService : ReparationDetailsService,
     private route : ActivatedRoute,
@@ -28,13 +28,14 @@ export class ListeFacturesComponent implements OnInit {
     this.reparations = this.reparationDetService.getReparationsByCar(immatriculation);
     this.voiture = this.voitureService.getVoitureByImmatriculation(immatriculation);
 
-    this.title = "Facture ";
     this.values = [];
+    this.du = 0;
     for (let rep of this.reparations){
       const dict = {
         'intitulé':rep.intitule,
         'montant': this.currency.transform(rep.montant,'AR')
       }
+      this.du += rep.montant;
       this.values.push(dict);
     }
   }

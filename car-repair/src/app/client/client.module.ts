@@ -11,6 +11,7 @@ import { ListeVoituresComponent } from './liste-voitures/liste-voitures.componen
 import { RecuperationVoitureComponent } from './recuperation-voiture/recuperation-voiture.component';
 import { ListeReparationsComponent } from './liste-reparations/liste-reparations.component';
 import { ListeFacturesComponent } from './liste-factures/liste-factures.component';
+import { PaiementComponent } from './paiement/paiement.component';
 
 
 
@@ -24,6 +25,7 @@ import { ListeFacturesComponent } from './liste-factures/liste-factures.componen
     RecuperationVoitureComponent,
     ListeReparationsComponent,
     ListeFacturesComponent,
+    PaiementComponent,
   ],
   imports: [
     CommonModule,
