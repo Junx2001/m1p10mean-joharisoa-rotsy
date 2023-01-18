@@ -71,27 +71,6 @@
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <li class="items-center">
             <a
-              [routerLink]="['/ajout-voiture']"
-              class="text-xs uppercase py-3 font-bold block"
-              routerLinkActive
-              #ajoutvoiture="routerLinkActive"
-              [ngClass]="
-                ajoutvoiture.isActive
-                  ? 'text-red-600 hover:text-red-700'
-                  : 'text-blueGray-700 hover:text-blueGray-500'
-              "
-            >
-              <i
-                class="fas fa-plus mr-2 text-sm"
-                [ngClass]="
-                  ajoutvoiture.isActive ? 'opacity-75' : 'text-blueGray-300'
-                "
-              ></i>
-              Ajouter une voiture
-            </a>
-          </li>
-          <li class="items-center">
-            <a
               [routerLink]="['/liste-voitures']"
               class="text-xs uppercase py-3 font-bold block"
               routerLinkActive
@@ -111,7 +90,27 @@
               Liste de mes voitures
             </a>
           </li>
-
+          <li class="items-center">
+            <a
+              [routerLink]="['/ajout-voiture']"
+              class="text-xs uppercase py-3 font-bold block"
+              routerLinkActive
+              #ajoutvoiture="routerLinkActive"
+              [ngClass]="
+                ajoutvoiture.isActive
+                  ? 'text-red-600 hover:text-red-700'
+                  : 'text-blueGray-700 hover:text-blueGray-500'
+              "
+            >
+              <i
+                class="fas fa-plus mr-2 text-sm"
+                [ngClass]="
+                  ajoutvoiture.isActive ? 'opacity-75' : 'text-blueGray-300'
+                "
+              ></i>
+              Ajouter une voiture
+            </a>
+          </li>
             <li class="items-center">
               <a
                 [routerLink]="['/depot-voiture']"
@@ -178,28 +177,6 @@
                 Recupérer mes voitures
               </a>
             </li>
-
-            <li class="items-center">
-                <a
-                  [routerLink]="['/login']"
-                  class="text-xs uppercase py-3 font-bold block"
-                  routerLinkActive
-                  #historiquerep="routerLinkActive"
-                  [ngClass]="
-                    historiquerep.isActive
-                      ? 'text-red-600 hover:text-red-700'
-                      : 'text-blueGray-700 hover:text-blueGray-500'
-                  "
-                >
-                  <i
-                    class="fas fa-list mr-2 text-sm"
-                    [ngClass]="
-                      historiquerep.isActive ? 'opacity-75' : 'text-blueGray-300'
-                    "
-                  ></i>
-                  Historique des réparations
-                </a>
-              </li>
           </ul>
       </div>
       <div *ngIf="user.role==='atelier'">

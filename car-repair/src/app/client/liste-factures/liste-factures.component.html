@@ -1,4 +1,7 @@
 <div class="flex flex-wrap">
+  <div class="w-full lg:w-3/12 px-4">
+    <app-info-voiture [voiture]="voiture" [reparation]="reparationEnCours"></app-info-voiture>
+  </div>
     <div class="w-full lg:w-9/12 px-4">
         <div
         class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
@@ -55,9 +58,6 @@
         </p>
       </div>
 
-    </div>
-    <div class="w-full lg:w-3/12 px-4">
-      <app-info-voiture [voiture]="voiture" [reparations]="reparations"></app-info-voiture>
     </div>
   </div>
   

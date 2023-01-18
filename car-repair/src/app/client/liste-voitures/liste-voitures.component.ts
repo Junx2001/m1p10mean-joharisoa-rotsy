@@ -60,4 +60,8 @@ export class ListeVoituresComponent implements OnInit {
   onSearchCar(){
     this.cars = this.voitureService.searchVoiture(this.searchGroup.value);
   }
+  onViewCarHistory(immatriculation){
+    this.router.navigateByUrl(`/historique-reparations/${immatriculation}`);
+  }
 }
+

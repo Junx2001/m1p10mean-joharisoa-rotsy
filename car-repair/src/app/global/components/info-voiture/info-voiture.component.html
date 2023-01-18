@@ -29,9 +29,9 @@
       <div class="mb-2 text-blueGray-600">
         {{ voiture.modele }}
       </div>
-      <div class="mb-2 text-blueGray-600">
+      <div *ngIf="reparation" class="mb-2 text-blueGray-600">
         <i class="fas fa-calendar mr-2 text-lg text-blueGray-400"></i>
-        Déposée le {{ reparations[0].dateDebut | date : 'longDate'}} 
+        Déposée le {{ reparation.dateDepot| date : 'longDate'}} 
       </div>
     </div>
     

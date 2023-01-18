@@ -22,6 +22,27 @@ export class ReparationService {
             dateDepot : new Date(),
             dateRecup : null,
             responsableAtelierId : 5
+        },
+        {
+            id : 3, 
+            voitureId : 2,
+            dateDepot : new Date(),
+            dateRecup :  new Date('2023-02-16T23:59:59.000Z'),
+            responsableAtelierId : 5
+        },
+        {
+            id : 4, 
+            voitureId : 2,
+            dateDepot : new Date(),
+            dateRecup : new Date('2023-02-17T23:59:59.000Z'),
+            responsableAtelierId : 5
+        },
+        {
+            id : 5, 
+            voitureId : 2,
+            dateDepot : new Date(),
+            dateRecup : null,
+            responsableAtelierId : 5
         }
     ];
     constructor ( ){}
@@ -34,11 +55,15 @@ export class ReparationService {
             responsableAtelierId : null
         })
     }
-    getVoitureReparation(voiture: Voiture): Reparation{
-        return this.reparations.find(reparation => reparation.voitureId === voiture.id);
+    getReparationsByVoiture(idVoiture : number): Reparation[]{
+        return this.reparations.filter(reparation => reparation.voitureId === idVoiture);
     }
     getReparationsEnCours(client : User): Reparation[]{
         // get reparations en cours du client 
         return this.reparations;
+    }
+    getReparationsEnCoursByCar(idVoiture : number): Reparation{
+        // get reparations en cours de la voiture car du client  
+        return this.reparations.find(reparation => reparation.voitureId === idVoiture);
     }
 }

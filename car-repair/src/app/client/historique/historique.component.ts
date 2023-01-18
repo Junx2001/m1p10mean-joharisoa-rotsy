@@ -1,4 +1,3 @@
-import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Dict } from 'src/app/global/models/dict.interface';
@@ -10,38 +9,38 @@ import { ReparationDetailsService } from 'src/app/global/services/reparationDeta
 import { VoitureService } from 'src/app/global/services/voiture.service';
 
 @Component({
-  selector: 'app-liste-factures',
-  templateUrl: './liste-factures.component.html',
-  styleUrls: ['./liste-factures.component.css']
+  selector: 'app-historique',
+  templateUrl: './historique.component.html',
+  styleUrls: ['./historique.component.css']
 })
-export class ListeFacturesComponent implements OnInit {
-  reparations! : ReparationDetails[];
-  reparationEnCours! : Reparation;
+export class HistoriqueComponent implements OnInit {
+  reparations! : Reparation[];
   voiture! : Voiture;
-  values! : Dict[];
-  du! : number;
+  values! : Array<Dict[]>;
 
   constructor(private reparationDetService : ReparationDetailsService,
     private route : ActivatedRoute,
     private voitureService : VoitureService,
-    private currency : CurrencyPipe,
     private reparationService : ReparationService) { }
 
   ngOnInit(): void {
     const immatriculation = this.route.snapshot.params['immatriculation'];
     this.voiture = this.voitureService.getVoitureByImmatriculation(immatriculation);
-    this.reparationEnCours = this.reparationService.getReparationsEnCoursByCar(this.voiture.id);
-    this.reparations = this.reparationDetService.getReparationsDetByReparation(this.reparationEnCours.id);
-
+    this.reparations = this.reparationService.getReparationsByVoiture(this.voiture.id);
     this.values = [];
-    this.du = 0;
     for (let rep of this.reparations){
-      const dict = {
-        'intitulé':rep.intitule,
-        'montant': this.currency.transform(rep.montant,'AR')
+      let child : Dict[]=[];
+      const reparationDets = this.reparationDetService.getReparationsDetByReparation(rep.id);
+      for(let repDet of reparationDets){
+        const temp = {
+          'intitulé':repDet.intitule,
+          'montant':repDet.montant,
+          'avancement': `${repDet.avancement}%`,
+        }
+        child.push(temp);
       }
-      this.du += rep.montant;
-      this.values.push(dict);
+      this.values.push(child);
     }
   }
+
 }

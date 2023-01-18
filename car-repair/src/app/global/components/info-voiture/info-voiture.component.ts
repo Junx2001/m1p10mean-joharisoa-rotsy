@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Reparation } from '../../models/reparation.model';
 import { ReparationDetails } from '../../models/reparationDetails.model';
 import { Voiture } from '../../models/voiture.model';
 
@@ -9,7 +10,7 @@ import { Voiture } from '../../models/voiture.model';
 })
 export class InfoVoitureComponent implements OnInit {
   @Input() voiture! : Voiture;
-  @Input() reparations! : ReparationDetails;
+  @Input() reparation! : Reparation;
   
   constructor() { }
 

@@ -12,6 +12,7 @@ import { RecuperationVoitureComponent } from './recuperation-voiture/recuperatio
 import { ListeReparationsComponent } from './liste-reparations/liste-reparations.component';
 import { ListeFacturesComponent } from './liste-factures/liste-factures.component';
 import { PaiementComponent } from './paiement/paiement.component';
+import { HistoriqueComponent } from './historique/historique.component';
 
 
 
@@ -26,6 +27,7 @@ import { PaiementComponent } from './paiement/paiement.component';
     ListeReparationsComponent,
     ListeFacturesComponent,
     PaiementComponent,
+    HistoriqueComponent,
   ],
   imports: [
     CommonModule,
