@@ -15,6 +15,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { ListeLayoutComponent } from './components/liste-layout/liste-layout.component';
 import { InfoVoitureComponent } from './components/info-voiture/info-voiture.component';
 import * as fr from '@angular/common/locales/fr';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import * as fr from '@angular/common/locales/fr';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [
     {provide : LOCALE_ID, useValue: 'fr-FR'},
