@@ -11,18 +11,7 @@ export class UserService {
 
   constructor ( private http : HttpClient){}
 
-  login(formValue: { email:string, password:string }): Observable<any>{
-    let body = new URLSearchParams();
-    body.set('email', formValue.email);
-    body.set('password', formValue.password);
-    
-    let header = new HttpHeaders();
-    header = header.append('Access-Control-Allow-Credentials','true');
-    header = header.append('Access-Control-Allow-Origin',this.apiUrl);
-    
-    return this.http.post<any>(`${this.apiUrl}/users/login`, body.toString() ,{headers:header});
-
-  }
+  
   allUsers(): User [] {
       return [{
           id : 1,
@@ -55,7 +44,5 @@ export class UserService {
         return this.allUsers()[1];
     }
 
-    logout(user: User): void{
-      user.active = 0;
-    }
+    
 }

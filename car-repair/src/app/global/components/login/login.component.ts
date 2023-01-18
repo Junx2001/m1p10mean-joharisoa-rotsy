@@ -27,13 +27,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.showAlert = false;
     this.loginForm = this.formBuilder.group({
-      email : [null, Validators.required],
+      email : [null, [Validators.required, Validators.email]],
       password : [null, Validators.required]
     })
   }
   onSubmitLoginForm(){
     // login from API
-    this.userService.login(this.loginForm.value).pipe(
+    this.authService.login(this.loginForm.value).pipe(
       tap(value=>console.log(value))
     ).subscribe();
 

@@ -1,0 +1,4 @@
+- install angular CLI 11.2.19
+- install Node 14.15.0
+- delete node_modules folder 
+- npm install
