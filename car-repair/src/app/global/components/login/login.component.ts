@@ -33,20 +33,27 @@ export class LoginComponent implements OnInit {
   }
   onSubmitLoginForm(){
     // login from API
-    this.authService.login(this.loginForm.value).pipe(
-      tap(value=>console.log(value))
-    ).subscribe();
+    this.authService.login(this.loginForm.value).subscribe(
+      (response) =>{ 
+        console.log("response received");
+        console.log(response);
+        // this.reponse = response;
+        localStorage.setItem("token",response.token);
+      },
+      (error)=>{
+        console.error('request failed with error');
+        if (error.status === 401){
+          this.showAlert = true; 
+          this.errorMessage = "Email ou mot de passe invalide";
+        }
+      },
+      ()=>{
+        console.log('Request completed')
+        // this.loading = false;
+        this.router.navigateByUrl(this.landingPage);
+      }
+    );
 
-    // this.user = this.userService.getUserByCredentials(this.loginForm.value);
-    // if (this.user){
-    //   this.authService.login(this.user);
-    //   localStorage.setItem("token", this.authService.getToken());
-    //   // console.log(`active : ${this.user.active}`);
-    // }else{
-    //   this.showAlert = true; 
-    //   this.errorMessage = "Email ou mot de passe invalide";
-    // }
-    // this.router.navigateByUrl(this.landingPage);
   }
 
 }

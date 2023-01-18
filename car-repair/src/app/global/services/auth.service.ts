@@ -11,27 +11,28 @@ export class AuthService {
     constructor (private http : HttpClient){}
     private token! : string;
 
-    addToken(user : User): string{
-        // insert token
-        return "MyNewToken";
-    }
-    login(formValue: { email:string, password:string }): Observable<any>{
-        let body = new URLSearchParams();
-        body.set('email', formValue.email);
-        body.set('password', formValue.password);
-        
+    setHeaders (){
         let header = new HttpHeaders();
         header = header.append('Access-Control-Allow-Credentials','true');
         header = header.append('Access-Control-Allow-Origin',this.apiUrl);
-        
-        return this.http.post<any>(`${this.apiUrl}/users/login`, body.toString() ,{headers:header});
-    
+        return header;
+    }
+    login(formValue: { email:string, password:string }): Observable<any>{
+        const body = {
+            "email": formValue.email,
+            "password": formValue.password
+        }
+        return this.http.post<any>(`${this.apiUrl}/users/login`, body ,{headers:this.setHeaders()});
       }
-    // login(user : User){
-    //     this.token = this.addToken(user);
-    //     user.active = 1;
-    //     // update active in backend
-    // }
+    registerUser(formValue: { name:string, email: string, password:string }): Observable<User>{
+        const body = {
+            "name": formValue.name,
+            "email": formValue.email,
+            "password": formValue.password
+        }
+        return this.http.post<User>(`${this.apiUrl}/users/signup`, body ,{headers:this.setHeaders()});
+    }
+
     getToken() : string{
         return this.token;
     }

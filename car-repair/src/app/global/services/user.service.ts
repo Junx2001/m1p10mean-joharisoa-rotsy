@@ -14,7 +14,7 @@ export class UserService {
   
   allUsers(): User [] {
       return [{
-          id : 1,
+          id : '1',
           email : "joh@gmail.com",
           name : "Joharisoa",
           password : "mdp123",
@@ -22,7 +22,7 @@ export class UserService {
           active : 0
         },
         {
-          id : 2,
+          id : '2',
           email : "ro@gmail.com",
           name : "Rotsy",
           password : "mdp123",
@@ -35,10 +35,7 @@ export class UserService {
         return this.allUsers().find(user => user.email === formValue.email);
     }
 
-    registerUser(formValue: { name:string, email: string, password:string }): void{
-        console.log(formValue);
-        console.log("user registered");
-    }
+    
 
     getUserByToken(token: string): User{
         return this.allUsers()[1];
