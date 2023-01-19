@@ -16,6 +16,7 @@ import { ListeLayoutComponent } from './components/liste-layout/liste-layout.com
 import { InfoVoitureComponent } from './components/info-voiture/info-voiture.component';
 import * as fr from '@angular/common/locales/fr';
 import { HttpClientModule } from '@angular/common/http';
+import { AvancementPipe } from './pipes/avancement.pipe';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     UserDropdownComponent,
     LogoutComponent,
     ListeLayoutComponent,
-    InfoVoitureComponent
+    InfoVoitureComponent,
+    AvancementPipe
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     FooterAuthComponent,
     ListeLayoutComponent,
-    InfoVoitureComponent
+    InfoVoitureComponent,
+    AvancementPipe
   ]
 })
 export class GlobalModule { 

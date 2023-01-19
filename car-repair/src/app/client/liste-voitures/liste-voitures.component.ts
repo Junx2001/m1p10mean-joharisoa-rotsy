@@ -43,20 +43,10 @@ export class ListeVoituresComponent implements OnInit {
     // )
   }
   onFilterDepositCars(depot:number) {
-    console.log(depot);
     this.cars$ = this.voitureService.filterDepositCarsByUser(depot);
-  }
-  onViewCarReparations(immatriculation){
-    this.router.navigateByUrl(`/reparations/${immatriculation}`);
-  }
-  onViewCarFactures(immatriculation){
-    this.router.navigateByUrl(`/factures/${immatriculation}`);
   }
   onSearchCar(){
     this.voitures = this.voitureService.searchVoiture(this.searchGroup.value);
-  }
-  onViewCarHistory(immatriculation){
-    this.router.navigateByUrl(`/historique-reparations/${immatriculation}`);
   }
 }
 

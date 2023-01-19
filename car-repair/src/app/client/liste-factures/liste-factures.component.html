@@ -1,6 +1,17 @@
-<!-- <div class="flex flex-wrap">
+<div *ngIf="reparation$ | async as rep" class="flex flex-wrap">
   <div class="w-full lg:w-3/12 px-4">
-    <app-info-voiture [voiture]="voiture" [reparation]="reparationEnCours"></app-info-voiture>
+    <ng-container *ngIf="car$ | async as car">
+
+      
+      <ng-container *ngIf="rep.length>0; else norep">
+          <app-info-voiture [voiture]="car[0]" [depot]="rep[0].repair.dateDepot"></app-info-voiture>
+      </ng-container>
+      <ng-template #norep>
+        <app-info-voiture [voiture]="car[0]" ></app-info-voiture>
+      </ng-template>
+
+    </ng-container>
+
   </div>
     <div class="w-full lg:w-9/12 px-4">
         <div
@@ -20,21 +31,56 @@
           </a>
         </div>
       </div>
-        <app-liste-layout [values]="values"></app-liste-layout>
-        <table class="items-center w-full bg-transparent border-collapse">
-          
-          <tbody>
-            <tr>
-              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0  whitespace-nowrap p-4 uppercase font-bold">
+        
+      <ng-container *ngIf="rep.length>0">
+        <div class="block w-full overflow-x-auto">
+          <!-- Projects table -->
+          <table class="items-center w-full bg-transparent border-collapse">
+            <thead>
+              <tr >
+                <th
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                >
+                  intitulé
+                </th>
+                <th
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                >
+                  montant
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let repDet of rep[0].reparationDetail">
+                  <td 
+                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                  >
+                  {{repDet.intitule}}
+                  </td>
+                  <td 
+                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                  >
+                  {{repDet.montant | currency:'AR'}}
+                  </td>
+              </tr>
+              
+              <tr >
+                <td 
+                  class="border-t-0 px-6 align-middle font-bold border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                >
                 TOTAL
-              </td>
-              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0  whitespace-nowrap p-4 uppercase font-bold">
-                {{ du | currency : 'AR'}}
-              </td>
+                </td>
+                <td 
+                  class="border-t-0 px-6 align-middle font-bold border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                >
+                {{du | currency:'AR'}}
+                </td>
             </tr>
-            
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
+      </ng-container>
+      
         </div>
 
         <div
@@ -60,4 +106,4 @@
 
     </div>
   </div>
-   -->
+  

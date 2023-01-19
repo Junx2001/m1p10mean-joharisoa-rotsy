@@ -1,6 +1,16 @@
 <div *ngIf="reparation$ | async as rep" class="flex flex-wrap">
   <div class="w-full lg:w-3/12 px-4">
-    <app-info-voiture [voiture]="rep[0].repair.voiture" [depot]="rep[0].repair.dateDepot"></app-info-voiture>
+    <ng-container *ngIf="car$ | async as car">
+
+      
+      <ng-container *ngIf="rep.length>0; else norep">
+          <app-info-voiture [voiture]="car[0]" [depot]="rep[0].repair.dateDepot"></app-info-voiture>
+      </ng-container>
+      <ng-template #norep>
+        <app-info-voiture [voiture]="car[0]" ></app-info-voiture>
+      </ng-template>
+
+    </ng-container>
   </div>
 
     <div class="w-full lg:w-9/12 px-4">
@@ -9,7 +19,7 @@
       >
       <div class="rounded-t bg-white mb-0 px-6 py-6">
         <div class="text-center flex justify-between">
-          <h3 class="font-semibold text-lg text-blueGray-700">{{title}}</h3>
+          <h3 class="font-semibold text-lg text-blueGray-700">Liste des réparations</h3>
           <a 
             [routerLink]="['/liste-voitures']"
             class="bg-red-600
@@ -22,8 +32,54 @@
         </div>
         
       </div>
-        <app-liste-layout [values]="values"></app-liste-layout>
+      
+      <ng-container *ngIf="rep.length>0">
+        <div class="block w-full overflow-x-auto">
+          <!-- Projects table -->
+          <table class="items-center w-full bg-transparent border-collapse">
+            <thead>
+              <tr >
+                <th
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                >
+                  intitulé
+                </th>
+                <th
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                >
+                  avancement
+                </th>
+                <th
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                >
+                  statut
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let repDet of rep[0].reparationDetail">
+                  <td 
+                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                  >
+                  {{repDet.intitule}}
+                  </td>
+                  <td 
+                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                  >
+                  {{repDet.avancement}}%
+                  </td>
+                  <td 
+                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                    [innerHTML]="repDet.avancement | avancementStatut" >
+                  </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-    </div>
+      </ng-container>
+ 
+       
+        </div>
+    </div>  
   </div>
   

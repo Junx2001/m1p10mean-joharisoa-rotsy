@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -44,6 +44,12 @@ export class VoitureService {
     getDepositCarsByUser(): Observable<any>{
         // headers is already set in auth.interceptors
         return this.http.get<any>(`${this.apiUrl}/cars/deposit`);
+    }
+    getCarByImmatriculation(imm : string): Observable<any>{
+        const params = {
+            "immatriculation": imm
+        }
+        return this.http.get<any>(`${this.apiUrl}/cars/search`,{params:params});
     }
     filterDepositCarsByUser(depot : number):Observable<any>{
         let retour : Observable<any>;

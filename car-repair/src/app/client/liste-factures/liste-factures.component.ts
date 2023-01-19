@@ -1,10 +1,6 @@
-import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Dict } from 'src/app/global/models/dict.interface';
-import { Reparation } from 'src/app/global/models/reparation.model';
-import { ReparationDetails } from 'src/app/global/models/reparationDetails.model';
-import { Voiture } from 'src/app/global/models/voiture.model';
+import { Observable } from 'rxjs';
 import { ReparationService } from 'src/app/global/services/reparation.service';
 import { ReparationDetailsService } from 'src/app/global/services/reparationDetails.service';
 import { VoitureService } from 'src/app/global/services/voiture.service';
@@ -15,33 +11,27 @@ import { VoitureService } from 'src/app/global/services/voiture.service';
   styleUrls: ['./liste-factures.component.css']
 })
 export class ListeFacturesComponent implements OnInit {
-  reparations! : ReparationDetails[];
-  reparationEnCours! : Reparation;
-  voiture! : Voiture;
-  values! : Dict[];
   du! : number;
+
+  reparation$! : Observable<any>;
+  car$! : Observable<any>;
 
   constructor(private reparationDetService : ReparationDetailsService,
     private route : ActivatedRoute,
     private voitureService : VoitureService,
-    private currency : CurrencyPipe,
     private reparationService : ReparationService) { }
 
   ngOnInit(): void {
     const immatriculation = this.route.snapshot.params['immatriculation'];
-    this.voiture = this.voitureService.getVoitureByImmatriculation(immatriculation);
-    this.reparationEnCours = this.reparationService.getReparationsEnCoursByCar(this.voiture.id);
-    this.reparations = this.reparationDetService.getReparationsDetByReparation(this.reparationEnCours.id);
-
-    this.values = [];
-    this.du = 0;
-    for (let rep of this.reparations){
-      const dict = {
-        'intitulé':rep.intitule,
-        'montant': this.currency.transform(rep.montant,'AR')
-      }
-      this.du += rep.montant;
-      this.values.push(dict);
-    }
+    this.car$ = this.voitureService.getCarByImmatriculation(immatriculation);
+    this.reparation$ = this.reparationService.getCarRepairInProcess(immatriculation);
+    this.reparation$.subscribe(
+      values =>{
+        let total = 0;
+        const repDets = values[0].reparationDetail;
+        repDets.forEach(element => total += element.montant);
+        this.du = total;
+      });
+ 
   }
 }

@@ -1,7 +1,7 @@
 <div class="flex flex-wrap">
     
-    <div class="w-full lg:w-3/12 px-4">
-        <app-info-voiture [voiture]="voiture" ></app-info-voiture>
+    <div *ngIf="car$ | async as car" class="w-full lg:w-3/12 px-4">
+        <app-info-voiture [voiture]="car[0]" ></app-info-voiture>
       </div>
     <div class="w-full lg:w-9/12 px-4">
         <div
@@ -24,19 +24,71 @@
       </div>
         </div>
 
-      <div *ngFor="let reparation of reparations; let i = index" [attr.data-index]="i" 
-        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
-      >
+        <ng-container *ngIf="reparations$ | async as object">
+          <div *ngFor="let rep of object.arrayFinal"
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+          >
+  
+              <div class="rounded-t bg-white mb-0 px-6 py-6">
+                <div class="text-center flex justify-between">
+                  <h3 class="font-semibold text-lg text-blueGray-700">Réparation du {{rep.repair.dateDepot | date:'longDate' }}
+                    <ng-container *ngIf="rep.repair.dateRecup"> au {{rep.repair.dateRecup | date:'longDate'}} </ng-container>
+                  </h3>
+                </div>
+                
+              </div>
+                <div class="block w-full overflow-x-auto">
+                  <!-- Projects table -->
+                  <table class="items-center w-full bg-transparent border-collapse">
+                    <thead>
+                      <tr >
+                        <th
+                          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                          intitulé
+                        </th>
+                        <th
+                          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                          montant
+                        </th>
+                        <th
+                          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                          avancement
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let repDet of rep.reparationDetail">
+                          <td 
+                            class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                          >
+                          {{repDet.intitule}}
+                          </td>
+                          <td 
+                            class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                          >
+                          {{repDet.montant}}
+                          </td>
+                          <td 
+                            class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                          >
+                          {{repDet.avancement}}%
+                          </td>
+                          <td 
+                            class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                          [innerHTML]="repDet.avancement | avancementStatut">
+                          </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+      
 
-        <div class="rounded-t bg-white mb-0 px-6 py-6">
-          <div class="text-center flex justify-between">
-            <h3 class="font-semibold text-lg text-blueGray-700">Réparation du {{reparations[i].dateDepot | date }}
-              <ng-container *ngIf="reparations[i].dateRecup"> au {{reparations[i].dateRecup | date}} </ng-container></h3>
           </div>
-          
-        </div>
-          <app-liste-layout [values]="values[i]"></app-liste-layout>
-      </div>
+      </ng-container>
+
     </div>
   </div>
   

@@ -57,7 +57,7 @@ export class ReparationService {
     }
     getCarRepairInProcess(imm: string):Observable<any>{
         return this.getCarReparationsByImmatriculation(imm).pipe(
-            map(object => object.arrayFinal.filter(reparations => reparations.repair.dateRecup == null))
+            map(object => object.arrayFinal.filter(reparations => reparations.repair.valide == 1))
         );
 
     }
