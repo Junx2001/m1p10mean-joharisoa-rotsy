@@ -17,6 +17,7 @@ export class ListeVoituresComponent implements OnInit {
   voitures! : Voiture[];
   searchGroup! : FormGroup;
   cars$! : Observable<any>;
+  results$ : Observable<any>;
 
   // resultCarsPreview$! : Observable<Voiture[]>;
   // notifier = new Subject();
@@ -35,18 +36,20 @@ export class ListeVoituresComponent implements OnInit {
       'marque':[null],
       'modele':[null],
       'depot':[null]
+    },{
+      updateOn:'blur'
     });
     
-    // this.resultCarsPreview$ = this.searchGroup.valueChanges.pipe(
-    //   map(formValue => this.voitureService.searchVoiture(formValue)),
-    //   takeUntil(this.notifier)
-    // )
+    this.searchGroup.valueChanges.subscribe(
+      value => {
+        this.results$ = this.voitureService.searchCar(value);
+        // this.results$.subscribe(v=>console.log(v));
+      }
+    )
+    
   }
   onFilterDepositCars(depot:number) {
     this.cars$ = this.voitureService.filterDepositCarsByUser(depot);
-  }
-  onSearchCar(){
-    this.voitures = this.voitureService.searchVoiture(this.searchGroup.value);
   }
 }
 

@@ -39,7 +39,7 @@
                 </div>
               </div>
               
-              <div class="w-full lg:w-6/12 px-4">
+              <div class="w-full lg:w-12/12 px-4">
                 <div class="relative w-full mb-3">
                   <label
                     class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -49,11 +49,11 @@
                   </label>
                   <select
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  formControlName="marque"
+                  formControlName="marque" [value]="'Audi'"
                   >
+                    <option default>Audi</option>
                     <option>Alfa Romeo</option>
                     <option>Alpine</option>
-                    <option>Audi</option>
                     <option>Bentley</option>
                     <option>BMW</option>
                     <option>Bugatti</option>
@@ -85,21 +85,21 @@
                   </select>
                 </div>
               </div>
-              <div class="w-full lg:w-6/12 px-4">
+              <!-- <div class="w-full lg:w-12/12 px-4">
                 <div class="relative w-full mb-3">
                   <label
                     class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
+                    htmlFor="grid-password" 
                   >
                     Marque
                   </label>
                   <input
                     type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Autre marque"
+                    placeholder="Marque" 
                   />
                 </div>
-              </div>
+              </div> -->
               <div class="w-full lg:w-12/12 px-4">
                 <div class="relative w-full mb-3">
                   <label
@@ -141,11 +141,32 @@
               </button>
               </div>
             </div>
-            
+            <div *ngIf="successMessage" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
+              <span class=" inline-block mr-5 align-middle">
+                <i class="fas fa-bell"></i> Ajout réussi! 
+              </span><br>
+              <span class="inline-block align-middle text-xs mr-8">
+                Une nouvelle voiture a été ajouté à la collection.
+              </span>
+              <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none" (click)="successMessage = false">
+                <span>×</span>
+              </button>
+            </div>
+            <div *ngIf="errorMessage" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+
+              <span class="inline-block align-middle mr-8">
+                Une voiture du même immatriculation existe déjà.
+              </span>
+              <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none" (click)="errorMessage = false">
+                <span>×</span>
+              </button>
+            </div>
+
           </form>
         </div>
       </div>
       
     </div>
+    
   </div>
   

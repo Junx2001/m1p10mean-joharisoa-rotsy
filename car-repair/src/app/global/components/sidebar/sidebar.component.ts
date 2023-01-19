@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../../models/user.model';
+import { Observable } from 'rxjs';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -8,12 +8,13 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  user! : User;
+  user$! : Observable<any>;
   collapseShow = "hidden";
   constructor(private userService : UserService) { }
 
   ngOnInit(): void {
-    this.user = this.userService.getUserByToken(localStorage.getItem("token"));
+    this.user$ = this.userService.getCurrentUser();
+
   }
   toggleCollapseShow(classes) {
     this.collapseShow = classes;

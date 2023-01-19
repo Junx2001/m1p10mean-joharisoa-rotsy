@@ -56,9 +56,7 @@ export class ReparationService {
         return this.http.get<any>(`${this.apiUrl}/reparations/${imm}`);
     }
     getCarRepairInProcess(imm: string):Observable<any>{
-        return this.getCarReparationsByImmatriculation(imm).pipe(
-            map(object => object.arrayFinal.filter(reparations => reparations.repair.valide == 1))
-        );
+        return this.http.get<any>(`${this.apiUrl}/reparations/actual/${imm}`);
 
     }
 

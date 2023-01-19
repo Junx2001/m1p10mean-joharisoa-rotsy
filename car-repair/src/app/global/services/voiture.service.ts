@@ -36,6 +36,7 @@ export class VoitureService {
 
     constructor (private reparationService : ReparationService,
         private http : HttpClient){}
+        
 
     getCarsByUser(): Observable<any>{
         // headers is already set in auth.interceptors
@@ -66,17 +67,44 @@ export class VoitureService {
         }
         return retour;
     }
-
     
+    addCar (formValue:{immatriculation: string,marque:string, modele:string }): Observable<any>{
+        const body = {
+            "immatriculation": formValue.immatriculation,
+            "marque": formValue.marque,
+            "modele": formValue.modele
+        }
+        return this.http.post<any>(`${this.apiUrl}/cars/add`, body );
+    }
+    
+    searchCar(formValue:{immatriculation: string, marque: string, modele:string , depot: Date}): Observable<any>{
+        let params = new HttpParams();
+        if (formValue.immatriculation != null) {
+            params = params.set('immatriculation', formValue.immatriculation);
+        }
+        if (formValue.marque != null) {
+            params = params.set('marque', formValue.marque);
+        }
+        if (formValue.modele != null) {
+            params = params.set('modele', formValue.modele);
+        }
+        if (formValue.depot != null) {
+            params = params.set('dateDepot', formValue.depot.toISOString());
+        }
+        return this.http.get<any>(`${this.apiUrl}/cars/search`,{params: params});
+    }
 
+    recoverCar(immatriculation : string): Observable<any>{
+        return this.http.post<any>(`${this.apiUrl}/cars/recover/${immatriculation}`,null );
+    }
+    depositCar(immatriculation : string): Observable<any>{
+        return this.http.post<any>(`${this.apiUrl}/cars/deposit/${immatriculation}`,null );
+    }
     getVoitures(): Voiture[] {
         return this.voitures;
     }
     getVoituresDepot(): Voiture[] {
         return this.voitures;
-    }
-    addCar (formValue:{id : number,immatriculation: string, clientId: number,marque:string, modele:string }): void{
-        this.voitures.push(formValue);
     }
     
     depotVoiture(formValue:{id : number,immatriculation: string, clientId: number,marque:string, modele:string }): Voiture{

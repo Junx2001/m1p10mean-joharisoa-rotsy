@@ -1,4 +1,4 @@
-<nav
+<nav *ngIf="user$ | async as user"
   class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6"
 >
   <div
@@ -60,14 +60,9 @@
       <!-- Divider -->
       <hr class="my-4 md:min-w-full" />
       <!-- Heading -->
-      <h6
-        class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
-      >
-        {{user.role}}
-      </h6>
 
       <!-- Navigation -->
-      <div *ngIf="user.role==='client'">
+      <div *ngIf="user.user.role==='ROLE_USER_CLIENT'">
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
           <li class="items-center">
             <a
@@ -179,7 +174,7 @@
             </li>
           </ul>
       </div>
-      <div *ngIf="user.role==='atelier'">
+      <div *ngIf="user.user.role==='ROLE_USER_ATELIER'">
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
             <li class="items-center">
               <a
@@ -226,7 +221,7 @@
             </li>
           </ul>
       </div>
-      <div *ngIf="user.role==='financier'">
+      <div *ngIf="user.user.role==='ROLE_USER_FINANCE'">
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
             <li class="items-center">
               <a

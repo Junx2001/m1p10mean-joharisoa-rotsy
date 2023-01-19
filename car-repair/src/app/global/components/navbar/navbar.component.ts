@@ -16,14 +16,19 @@ export class NavbarComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    const user = this.userService.getUserByToken(localStorage.getItem("token"));
-    if (user.role==='financier'){
-      this.pageTitle='Responsable financier';
-    }else if (user.role==='atelier'){
-      this.pageTitle='Responsable atelier';
-    }else{
-      this.pageTitle=`Application de ${user.name}`;
-    }
+    this.userService.getCurrentUser().subscribe(
+      response => {
+        if (response.user.role==='ROLE_USER_FINANCE'){
+          this.pageTitle=`Responsable financier`;
+        }else if (response.user.role==='ROLE_USER_ATELIER'){
+          this.pageTitle=`Responsable atelier`;
+        }else{
+          this.pageTitle=`Client`;
+        }
+      }
+      
+    );
+    
   }
   
 }

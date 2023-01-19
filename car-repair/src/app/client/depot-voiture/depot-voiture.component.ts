@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Dict } from 'src/app/global/models/dict.interface';
+import { Observable } from 'rxjs';
+import { concatMap, startWith, tap } from 'rxjs/operators';
 import { VoitureService } from 'src/app/global/services/voiture.service';
 
 @Component({
@@ -8,27 +9,18 @@ import { VoitureService } from 'src/app/global/services/voiture.service';
   styleUrls: ['./depot-voiture.component.css']
 })
 export class DepotVoitureComponent implements OnInit {
-  title!: string;
-  values! : Dict[];
+  cars$! : Observable<any>;
   constructor(private voitureService : VoitureService) { }
 
   ngOnInit(): void {
-    this.title = "Liste de mes voitures";
-    const cars = this.voitureService.getVoitures();
-    this.values = [];
-    for (let car of cars){
-      const dict = {
-        'image':'<img\
-        src="assets/img/2017_hyundai_santa_fe.jpg"\
-        class="h-12 w-12 bg-white rounded-full border"\
-        alt="image voiture"\
-      />',
-        'immatriculation':car.immatriculation,
-        'marque':car.marque,
-        'modèle':car.modele,
-        'statut':'<i class="fas fa-circle text-orange-500 mr-2"></i> non déposé'
-      }
-      this.values.push(dict);
-    }
+    this.cars$ = this.voitureService.filterDepositCarsByUser(0);
+  }
+  onDeposit(immatriculation:string){
+    this.cars$ = this.voitureService.depositCar(immatriculation).pipe(
+      startWith(''),
+      concatMap(()=> {
+        return this.voitureService.filterDepositCarsByUser(0); 
+      })
+    );
   }
 }

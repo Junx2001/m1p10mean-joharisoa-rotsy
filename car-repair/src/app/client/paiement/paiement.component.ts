@@ -15,6 +15,7 @@ export class PaiementComponent implements OnInit {
   reparationsEnCours! : Reparation[];
   numberRegex! : RegExp;
   submitted = false;
+  errorMessage = false;
 
   constructor(private formBuilder : FormBuilder,
     private reparationService : ReparationService,
@@ -35,8 +36,17 @@ export class PaiementComponent implements OnInit {
     return this.paiementForm.controls;
   }
   onPay(){
-    this.paiementService.addPaiement(this.paiementForm.value);
-    this.submitted = true;
+    this.paiementService.pay(this.paiementForm.value).subscribe(
+      (response) =>{ 
+        console.log("response received");
+        this.submitted = true;
+      },
+      (error)=>{
+        console.error('request failed with error');
+        this.errorMessage = true;
+      }
+    )
+    
     // console.log(this.paiementService.getPaiementsByReparation(this.paiementForm.value.reparationId));
   }
 

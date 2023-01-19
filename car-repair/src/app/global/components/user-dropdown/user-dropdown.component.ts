@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, OnInit } from "@angular/core";
 import { createPopper } from "@popperjs/core";
-import { User } from "../../models/user.model";
+import { Observable } from "rxjs";
 import { UserService } from "../../services/user.service";
 
 @Component({
@@ -13,7 +13,7 @@ export class UserDropdownComponent implements OnInit, AfterViewInit {
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef: ElementRef;
   @ViewChild("popoverDropdownRef", { static: false })
   popoverDropdownRef: ElementRef;
-  label! : string;
+  user$! : Observable<any>;
 
   constructor(private userService : UserService){}
   ngAfterViewInit() {
@@ -34,13 +34,6 @@ export class UserDropdownComponent implements OnInit, AfterViewInit {
     }
   }
   ngOnInit(): void {
-    const user = this.userService.getUserByToken(localStorage.getItem("token"));
-    if (user.role==='financier'){
-      this.label=`Responsable financier : ${user.name}`;
-    }else if (user.role==='atelier'){
-      this.label=`Responsable atelier : ${user.name}`;
-    }else{
-      this.label=`Client : ${user.name}`;
-    }
+    this.user$ = this.userService.getCurrentUser();
   }
 }

@@ -17,15 +17,21 @@
   </div>
 </a>
 <div class="min-w-48 z-50" #popoverDropdownRef>
-  <div
+  <div *ngIf="user$ | async as user" 
     class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1 min-w-48"
     [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'"
   >
-      <h6
-      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-500 uppercase "
+    <a
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
     >
-      {{label}}
-    </h6>
+      {{user.user.name}}
+    </a>
+    <a
+      class="text-sm py-2 px-4 block w-full text-xs whitespace-nowrap bg-transparent text-blueGray-700"
+    >
+    {{user.user.email}}
+    </a>
+
     <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
     
     <a

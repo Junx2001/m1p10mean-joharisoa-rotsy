@@ -12,7 +12,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserDropdownComponent } from './components/user-dropdown/user-dropdown.component';
 import { RouterModule } from '@angular/router';
 import { LogoutComponent } from './components/logout/logout.component';
-import { ListeLayoutComponent } from './components/liste-layout/liste-layout.component';
 import { InfoVoitureComponent } from './components/info-voiture/info-voiture.component';
 import * as fr from '@angular/common/locales/fr';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,7 +29,6 @@ import { AvancementPipe } from './pipes/avancement.pipe';
     HeaderComponent,
     UserDropdownComponent,
     LogoutComponent,
-    ListeLayoutComponent,
     InfoVoitureComponent,
     AvancementPipe
   ],
@@ -47,7 +45,6 @@ import { AvancementPipe } from './pipes/avancement.pipe';
   exports:[
     LoginComponent,
     FooterAuthComponent,
-    ListeLayoutComponent,
     InfoVoitureComponent,
     AvancementPipe
   ]

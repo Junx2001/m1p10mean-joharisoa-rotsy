@@ -30,7 +30,10 @@ export class UserService {
           active : 0
         },]
   }
-    
+    getCurrentUser():Observable<any>{
+      return this.http.get<any>(`${this.apiUrl}/users/me`);
+    }
+
     getUserByCredentials(formValue: { email:string, password:string }): User{
         return this.allUsers().find(user => user.email === formValue.email);
     }

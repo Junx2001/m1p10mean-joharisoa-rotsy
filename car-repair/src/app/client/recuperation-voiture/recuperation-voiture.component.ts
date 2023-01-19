@@ -30,8 +30,8 @@ export class RecuperationVoitureComponent implements OnInit {
       this.depositCars.push(dict);
     }
   }
-  onRecoverCar(){
-    console.log("recupéré");
+  onRecoverCar(immatriculation){
+    this.voitureService.recoverCar(immatriculation);
   }
 
 }

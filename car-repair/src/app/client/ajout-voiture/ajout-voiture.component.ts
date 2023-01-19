@@ -11,6 +11,9 @@ import { VoitureService } from 'src/app/global/services/voiture.service';
 })
 export class AjoutVoitureComponent implements OnInit {
   depotForm! : FormGroup;
+  successMessage : boolean = false; 
+  errorMessage : boolean = false;
+
   constructor(private formBuilder : FormBuilder,
     private voitureService : VoitureService,
     private userService : UserService,
@@ -24,11 +27,18 @@ export class AjoutVoitureComponent implements OnInit {
     })
   }
   onAddNewCar(){
-    const values = this.depotForm.value;
-    values['id']=3;
-    const user=this.userService.getUserByToken(localStorage.getItem("token"));
-    values['clientId'] = user.id;
-    this.voitureService.addCar(values);
+    this.voitureService.addCar(this.depotForm.value).subscribe(
+      (response) =>{ 
+        console.log("response received");
+        this.successMessage = true;
+      },
+      (error)=>{
+        console.error('request failed with error');
+        if (error.status === 409){
+          this.errorMessage = true;
+        }
+      }
+    )
   }
   onViewCars(){
     this.router.navigateByUrl('/liste-voitures-deposees');

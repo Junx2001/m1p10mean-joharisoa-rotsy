@@ -5,11 +5,79 @@
     >
         <div class="rounded-t bg-white mb-0 px-6 py-6">
             <div class="text-center flex justify-between">
-            <h3 class="font-semibold text-lg text-blueGray-700">{{title}}</h3>
+            <h3 class="font-semibold text-lg text-blueGray-700">Déposez vos voiture au garage</h3>
             </div>
         </div>
-            <app-liste-layout [title]="title"  [values]="values"></app-liste-layout>
-    </div>
+        <div class="block w-full overflow-x-auto">
+          <!-- Projects table -->
+          
+  
+          <table class="items-center w-full bg-transparent border-collapse">
+            <thead>
+              <tr >
+                  <th
+                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                   >
+                   </th>
+                   <th
+                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                   >
+                   Immatriculation</th>
+                   <th
+                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                   >
+                   Marque</th>
+                   <th
+                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                   >
+                   Modèle</th>
+                   <th
+                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                   >
+                   Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+                  <tr *ngFor="let car of cars$ | async ">
+                      <th 
+                          class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          >
+                          <img
+                              src="assets/img/2017_hyundai_santa_fe.jpg"
+                              class="h-12 w-12 bg-white rounded-full border"
+                              alt="image voiture"
+                            />
+                      </th>
+                      <td 
+                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      >
+                      {{car.car.immatriculation}}
+                      </td>
+                      <td 
+                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      >
+                      {{car.car.marque}}
+                      </td>
+                      <td 
+                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      >
+                      {{car.car.modele}}
+                      </td>
+                      <td 
+                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      >
+                      <ng-container *ngIf="car.state === 'INSIDE GARAGE'">
+                          <i  class="fas fa-circle text-emerald-500 mr-2"></i> déposé
+                      </ng-container> 
+                      <ng-container *ngIf="car.state === 'OUT OF GARAGE'">
+                          <i class="fas fa-circle text-orange-500 mr-2"></i> non déposé
+                      </ng-container>
+                      </td>
+                  </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
   </div>
   <div class="w-full mb-12 px-4">
       <label
