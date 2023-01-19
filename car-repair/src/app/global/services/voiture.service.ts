@@ -1,4 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Voiture } from '../models/voiture.model';
 import { ReparationService } from './reparation.service';
 
@@ -17,7 +20,7 @@ export class VoitureService {
         {
             clientId: 2,
             id: 2,
-            immatriculation: "TBG1325",​​
+            immatriculation: "4567TVE",​​
             marque: "Hyundai",​​
             modele: "Santa Fe"
         },
@@ -29,8 +32,37 @@ export class VoitureService {
             modele: "Corolla"
         }
     ];
-    constructor (private reparationService : ReparationService){}
+    private apiUrl = 'http://localhost:3000';
+
+    constructor (private reparationService : ReparationService,
+        private http : HttpClient){}
+
+    getCarsByUser(): Observable<any>{
+        // headers is already set in auth.interceptors
+        return this.http.get<any>(`${this.apiUrl}/cars`);
+    }
+    getDepositCarsByUser(): Observable<any>{
+        // headers is already set in auth.interceptors
+        return this.http.get<any>(`${this.apiUrl}/cars/deposit`);
+    }
+    filterDepositCarsByUser(depot : number):Observable<any>{
+        let retour : Observable<any>;
+        if (depot==1){
+        retour = this.getCarsByUser().pipe(
+            map(cars => cars.filter(car => car.state === 'INSIDE GARAGE'))
+        );
+        }else if(depot == 0){
+        retour = this.getCarsByUser().pipe(
+            map(cars => cars.filter(car => car.state === 'OUT OF GARAGE'))
+        );
+        }else{
+        retour = this.getCarsByUser();
+        }
+        return retour;
+    }
+
     
+
     getVoitures(): Voiture[] {
         return this.voitures;
     }

@@ -1,7 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Reparation } from '../../models/reparation.model';
-import { ReparationDetails } from '../../models/reparationDetails.model';
-import { Voiture } from '../../models/voiture.model';
 
 @Component({
   selector: 'app-info-voiture',
@@ -9,9 +6,8 @@ import { Voiture } from '../../models/voiture.model';
   styleUrls: ['./info-voiture.component.css']
 })
 export class InfoVoitureComponent implements OnInit {
-  @Input() voiture! : Voiture;
-  @Input() reparation! : Reparation;
-  
+  @Input() voiture! : any;
+  @Input() depot! : string;
   constructor() { }
 
   ngOnInit(): void {

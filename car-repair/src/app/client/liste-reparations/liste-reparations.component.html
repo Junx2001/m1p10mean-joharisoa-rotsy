@@ -1,7 +1,8 @@
-<div class="flex flex-wrap">
+<div *ngIf="reparation$ | async as rep" class="flex flex-wrap">
   <div class="w-full lg:w-3/12 px-4">
-    <app-info-voiture [voiture]="voiture" [reparation]="reparationEnCours"></app-info-voiture>
+    <app-info-voiture [voiture]="rep[0].repair.voiture" [depot]="rep[0].repair.dateDepot"></app-info-voiture>
   </div>
+
     <div class="w-full lg:w-9/12 px-4">
         <div
         class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"

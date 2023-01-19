@@ -11,11 +11,11 @@
              text-white 
              active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded 
              shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-             #statut (change)="onFilterDepositCar(statut.value)"
+             #statut (change)="onFilterDepositCars(statut.value)"
           >
-            <option [value]="-1" default >Tout afficher</option>
-            <option [value]="1" >Voitures déposées</option>
-            <option [value]="0" >Voitures non déposées</option>
+            <option [value]=-1 default >Tout afficher</option>
+            <option [value]=1 >Voitures déposées</option>
+            <option [value]=0 >Voitures non déposées</option>
         </select>
         </div>
         
@@ -132,7 +132,7 @@
             </tr>
           </thead>
           <tbody>
-                <tr *ngFor="let car of cars">
+                <tr *ngFor="let car of cars$ | async ">
                     <th 
                         class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                         >
@@ -145,22 +145,27 @@
                     <td 
                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                     >
-                    {{car.immatriculation}}
+                    {{car.car.immatriculation}}
                     </td>
                     <td 
                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                     >
-                    {{car.marque}}
+                    {{car.car.marque}}
                     </td>
                     <td 
                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                     >
-                    {{car.modele}}
+                    {{car.car.modele}}
                     </td>
                     <td 
                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                     >
-                    <i class="fas fa-circle text-emerald-500 mr-2"></i> déposé
+                    <ng-container *ngIf="car.state === 'INSIDE GARAGE'">
+                        <i  class="fas fa-circle text-emerald-500 mr-2"></i> déposé
+                    </ng-container> 
+                    <ng-container *ngIf="car.state === 'OUT OF GARAGE'">
+                        <i class="fas fa-circle text-orange-500 mr-2"></i> non déposé
+                    </ng-container>
                     </td>
                     
                   <td 
@@ -168,15 +173,15 @@
                   >
                     <button 
                     class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
-                    type="button" (click)="onViewCarReparations(car.immatriculation)">
+                    type="button" (click)="onViewCarReparations(car.car.immatriculation)">
                         Réparations
                       </button>
                       <button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button" (click)="onViewCarFactures(car.immatriculation)">
+                      type="button" (click)="onViewCarFactures(car.car.immatriculation)">
                         Factures
                       </button>
                         <button class="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
-                        type="button" (click)="onViewCarHistory(car.immatriculation)">
+                        type="button" (click)="onViewCarHistory(car.car.immatriculation)">
                         Historique
                         </button>
                   </td>

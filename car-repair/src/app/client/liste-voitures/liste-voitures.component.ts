@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import {  Observable, Subject } from 'rxjs';
-import {  map, takeUntil} from 'rxjs/operators';
+import {  filter, map, takeUntil} from 'rxjs/operators';
 import { Voiture } from 'src/app/global/models/voiture.model';
 import { VoitureService } from 'src/app/global/services/voiture.service';
 
@@ -14,9 +14,10 @@ import { VoitureService } from 'src/app/global/services/voiture.service';
 })
 export class ListeVoituresComponent implements OnInit {
   title!: string;
-  cars! : Voiture[];
-  selectedDevice! : string;
+  voitures! : Voiture[];
   searchGroup! : FormGroup;
+  cars$! : Observable<any>;
+
   // resultCarsPreview$! : Observable<Voiture[]>;
   // notifier = new Subject();
 
@@ -25,9 +26,9 @@ export class ListeVoituresComponent implements OnInit {
     private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
-    this.selectedDevice = 'Filtre des voitures';
     this.title = "Liste de mes voitures";
-    this.cars = this.voitureService.getVoitures();
+    this.voitures = this.voitureService.getVoitures();
+    this.cars$ = this.voitureService.getCarsByUser();
     
     this.searchGroup = this.formBuilder.group({
       'immatriculation':[null],
@@ -41,15 +42,9 @@ export class ListeVoituresComponent implements OnInit {
     //   takeUntil(this.notifier)
     // )
   }
-  onFilterDepositCar(deviceValue:string) {
-    this.selectedDevice = deviceValue;
-    if (deviceValue==='1'){
-      // car déposés
-    }else if(deviceValue === '0'){
-      //car non déposées 
-    }else{
-      this.cars = this.voitureService.getVoitures();
-    }
+  onFilterDepositCars(depot:number) {
+    console.log(depot);
+    this.cars$ = this.voitureService.filterDepositCarsByUser(depot);
   }
   onViewCarReparations(immatriculation){
     this.router.navigateByUrl(`/reparations/${immatriculation}`);
@@ -58,7 +53,7 @@ export class ListeVoituresComponent implements OnInit {
     this.router.navigateByUrl(`/factures/${immatriculation}`);
   }
   onSearchCar(){
-    this.cars = this.voitureService.searchVoiture(this.searchGroup.value);
+    this.voitures = this.voitureService.searchVoiture(this.searchGroup.value);
   }
   onViewCarHistory(immatriculation){
     this.router.navigateByUrl(`/historique-reparations/${immatriculation}`);

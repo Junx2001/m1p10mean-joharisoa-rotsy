@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Reparation } from '../models/reparation.model';
 import { User } from '../models/user.model';
 import { Voiture } from '../models/voiture.model';
@@ -45,7 +48,20 @@ export class ReparationService {
             responsableAtelierId : 5
         }
     ];
-    constructor ( ){}
+    private apiUrl = 'http://localhost:3000';
+
+    constructor ( private http : HttpClient){}
+
+    getCarReparationsByImmatriculation(imm : string):Observable<any>{
+        return this.http.get<any>(`${this.apiUrl}/reparations/${imm}`);
+    }
+    getCarRepairInProcess(imm: string):Observable<any>{
+        return this.getCarReparationsByImmatriculation(imm).pipe(
+            map(object => object.arrayFinal.filter(reparations => reparations.repair.dateRecup == null))
+        );
+
+    }
+
     addVoitureReparation(voiture : Voiture){
         this.reparations.push({
             id : 1,
