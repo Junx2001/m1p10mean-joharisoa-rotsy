@@ -22,8 +22,6 @@ export class ListeReparationsComponent implements OnInit {
     const immatriculation = this.route.snapshot.params['immatriculation'];
     this.car$ = this.voitureService.getCarByImmatriculation(immatriculation);
     this.reparation$ = this.reparationService.getCarRepairInProcess(immatriculation);
-    
-
   }
 
 }

@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe(
       (response) =>{ 
         console.log("response received");
-        console.log(response);
         // this.reponse = response;
         localStorage.setItem("token",response.token);
       },

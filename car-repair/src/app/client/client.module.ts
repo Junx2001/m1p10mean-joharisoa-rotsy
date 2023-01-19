@@ -13,7 +13,7 @@ import { ListeReparationsComponent } from './liste-reparations/liste-reparations
 import { ListeFacturesComponent } from './liste-factures/liste-factures.component';
 import { PaiementComponent } from './paiement/paiement.component';
 import { HistoriqueComponent } from './historique/historique.component';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -33,7 +33,8 @@ import { HistoriqueComponent } from './historique/historique.component';
     CommonModule,
     ClientRoutingModule,
     GlobalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DragDropModule
   ],
   providers:[
     CurrencyPipe

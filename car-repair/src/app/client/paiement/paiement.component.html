@@ -14,20 +14,20 @@
               Formulaire de paiement
             </h6>
             <div class="flex flex-wrap">
-              <div class="w-full lg:w-12/12 px-4">
+              <div *ngIf="unpaidReparations$ | async as reparations" class="w-full lg:w-12/12 px-4">
                 <div class="relative w-full mb-3">
                   <label
                     class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Numéro d'immatriculation
+                    Numéro d'immatriculation - date de dépôt
                   </label>
                   <select
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     formControlName="reparationId"
                     >
                     <option [value]="null" disabled>Immatriculation</option>
-                    <option *ngFor="let repar of reparationsEnCours" [value]="repar.id">{{repar.voitureId}}</option>
+                    <option *ngFor="let rep of reparations.arrayFinal" [value]="rep.repair._id">{{rep.repair.voiture.immatriculation}} - {{rep.repair.dateDepot | date : 'dd/MM/yyyy'}}</option>
                     </select>
                     <span class="text-danger"
                         *ngIf="(registerFormControl.reparationId.touched || submitted) && registerFormControl.reparationId.errors?.required">

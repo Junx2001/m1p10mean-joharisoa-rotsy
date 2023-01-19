@@ -1,13 +1,14 @@
-<div *ngIf="reparation$ | async as rep" class="flex flex-wrap">
+<ng-container  *ngIf="reparation$ | async as value" >
+<div *ngIf="value.arrayFinal as rep" class="flex flex-wrap">
   <div class="w-full lg:w-3/12 px-4">
     <ng-container *ngIf="car$ | async as car">
 
       
       <ng-container *ngIf="rep.length>0; else norep">
-          <app-info-voiture [voiture]="car[0]" [depot]="rep[0].repair.dateDepot"></app-info-voiture>
+          <app-info-voiture [voiture]="car[0].car" [depot]="rep[0].repair.dateDepot"></app-info-voiture>
       </ng-container>
       <ng-template #norep>
-        <app-info-voiture [voiture]="car[0]" ></app-info-voiture>
+        <app-info-voiture [voiture]="car[0].car" ></app-info-voiture>
       </ng-template>
 
     </ng-container>
@@ -83,3 +84,4 @@
     </div>  
   </div>
   
+</ng-container>

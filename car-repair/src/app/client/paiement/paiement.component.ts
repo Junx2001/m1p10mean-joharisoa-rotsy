@@ -4,6 +4,7 @@ import { Reparation } from 'src/app/global/models/reparation.model';
 import { PaiementService } from 'src/app/global/services/paiement.service';
 import { ReparationService } from 'src/app/global/services/reparation.service';
 import { UserService } from 'src/app/global/services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-paiement',
@@ -17,6 +18,9 @@ export class PaiementComponent implements OnInit {
   submitted = false;
   errorMessage = false;
 
+  unpaidReparations$! :  Observable<any>;
+
+
   constructor(private formBuilder : FormBuilder,
     private reparationService : ReparationService,
     private userService : UserService,
@@ -24,6 +28,9 @@ export class PaiementComponent implements OnInit {
 
   ngOnInit(): void {
     this.numberRegex = /^[1-9]\d*(\.\d+)?$/;
+    this.unpaidReparations$ = this.reparationService.getUnpaidReparations();
+
+    
     this.reparationsEnCours = this.reparationService.getReparationsEnCours(this.userService.getUserByToken(localStorage.getItem("token")));
     this.paiementForm = this.formBuilder.group({
       reparationId : [null, Validators.required],

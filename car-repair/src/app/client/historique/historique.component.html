@@ -1,7 +1,7 @@
 <div class="flex flex-wrap">
     
     <div *ngIf="car$ | async as car" class="w-full lg:w-3/12 px-4">
-        <app-info-voiture [voiture]="car[0]" ></app-info-voiture>
+        <app-info-voiture [voiture]="car[0].car" ></app-info-voiture>
       </div>
     <div class="w-full lg:w-9/12 px-4">
         <div

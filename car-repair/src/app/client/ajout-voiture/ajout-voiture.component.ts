@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/global/services/user.service';
 import { VoitureService } from 'src/app/global/services/voiture.service';
 
 @Component({
@@ -16,7 +15,6 @@ export class AjoutVoitureComponent implements OnInit {
 
   constructor(private formBuilder : FormBuilder,
     private voitureService : VoitureService,
-    private userService : UserService,
     private router : Router) { }
 
   ngOnInit(): void {

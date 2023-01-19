@@ -73,6 +73,15 @@
                           <i class="fas fa-circle text-orange-500 mr-2"></i> non déposé
                       </ng-container>
                       </td>
+                      <td
+                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      >
+                          <button 
+                           class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" 
+                           type="submit" (click)="onDeposit(car.car.immatriculation)">
+                             Déposer
+                          </button>
+                      </td>
                   </tr>
             </tbody>
           </table>
