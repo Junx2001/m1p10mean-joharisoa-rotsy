@@ -5,6 +5,8 @@ import { PaiementService } from 'src/app/global/services/paiement.service';
 import { ReparationService } from 'src/app/global/services/reparation.service';
 import { UserService } from 'src/app/global/services/user.service';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-paiement',
@@ -22,12 +24,23 @@ export class PaiementComponent implements OnInit {
 
   constructor(private formBuilder : FormBuilder,
     private reparationService : ReparationService,
-    private userService : UserService,
+    private route : ActivatedRoute,
     private paiementService : PaiementService) { }
 
   ngOnInit(): void {
+    
+    
     this.numberRegex = /^[1-9]\d*(\.\d+)?$/;
-    this.unpaidReparations$ = this.reparationService.getUnpaidReparations();
+    this.unpaidReparations$ = this.reparationService.getUnpaidReparations().pipe(
+      map(values=>values.arrayFinal)
+    );
+
+    if (this.route.snapshot.params['reparationId']){
+      const reparationId = this.route.snapshot.params['reparationId']
+      this.unpaidReparations$ = this.unpaidReparations$.pipe(
+        map(values=>values.filter(reps => reps.repair._id === reparationId))
+      );
+    }
 
     
     this.paiementForm = this.formBuilder.group({

@@ -27,7 +27,7 @@
                     formControlName="reparationId"
                     >
                     <option [value]="null" disabled>Immatriculation</option>
-                    <option *ngFor="let rep of reparations.arrayFinal" [value]="rep.repair._id">{{rep.repair.voiture.immatriculation}} - {{rep.repair.dateDepot | date : 'dd/MM/yyyy'}}</option>
+                    <option *ngFor="let rep of reparations" [value]="rep.repair._id">{{rep.repair.voiture.immatriculation}} - {{rep.repair.dateDepot | date : 'dd/MM/yyyy'}}</option>
                     </select>
                     <span class="text-danger"
                         *ngIf="(registerFormControl.reparationId.touched || submitted) && registerFormControl.reparationId.errors?.required">

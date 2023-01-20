@@ -22,14 +22,6 @@ export class DepotVoitureComponent implements OnInit {
       }
     );
   }
-  onDeposit(immatriculation:string){
-    this.cars$ = this.voitureService.depositCar(immatriculation).pipe(
-      startWith(''),
-      concatMap(()=> {
-        return this.voitureService.filterDepositCarsByUser(0); 
-      })
-    );
-  }
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {

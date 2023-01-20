@@ -27,7 +27,7 @@
               active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded 
               shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
             >
-            Retour
+            Retour 
           </a>
         </div>
       </div>
@@ -95,7 +95,7 @@
         <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Payé : {{ rep[0].totalPaid | currency : 'AR'}}</p>
         <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Reste : {{ rep[0].restToPay | currency : 'AR'}}</p>
         <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-5">
-          <a [routerLink]="['/paiement']" 
+          <a [routerLink]="['/paiement/',rep[0].repair._id]" 
           class="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold
            uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none 
            focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" >

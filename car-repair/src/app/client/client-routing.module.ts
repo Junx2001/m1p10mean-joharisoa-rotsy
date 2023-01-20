@@ -20,6 +20,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children:[
         { path: "paiement", component: PaiementComponent },
+        { path: "paiement/:reparationId", component: PaiementComponent },
         { path: "ajout-voiture", component: AjoutVoitureComponent },
         { path: "liste-voitures", component: ListeVoituresComponent },
         { path: 'historique-reparations/:immatriculation', component: HistoriqueComponent },
