@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { concatMap, startWith } from 'rxjs/operators';
@@ -10,10 +11,16 @@ import { VoitureService } from 'src/app/global/services/voiture.service';
 })
 export class DepotVoitureComponent implements OnInit {
   cars$! : Observable<any>;
+  cars ! : any[];
   constructor(private voitureService : VoitureService) { }
 
   ngOnInit(): void {
     this.cars$ = this.voitureService.filterDepositCarsByUser(0);
+    this.cars$.subscribe(
+      (response)=>{
+        this.cars = response;
+      }
+    );
   }
   onDeposit(immatriculation:string){
     this.cars$ = this.voitureService.depositCar(immatriculation).pipe(
@@ -23,4 +30,23 @@ export class DepotVoitureComponent implements OnInit {
       })
     );
   }
+
+  drop(event: CdkDragDrop<any[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      const car = event.previousContainer.data[event.previousIndex];
+      const immatriculation = car.car.immatriculation;
+      this.voitureService.depositCar(immatriculation).subscribe(
+        (response)=>{
+          this.voitureService.filterDepositCarsByUser(0).subscribe(
+            (response)=>{
+              this.cars = response;
+            }
+          )
+        }
+      );
+    }
+  }
+
 }

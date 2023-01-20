@@ -37,8 +37,13 @@
                    Statut</th>
               </tr>
             </thead>
-            <tbody>
-                  <tr *ngFor="let car of cars$ | async ">
+            <tbody 
+            cdkDropList
+            #notDeposit="cdkDropList"
+            [cdkDropListData]="cars"
+            [cdkDropListConnectedTo]="[depositList]"
+            (cdkDropListDropped)="drop($event)">
+                  <tr *ngFor="let car of cars " cdkDrag >
                       <th 
                           class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                           >
@@ -73,7 +78,7 @@
                           <i class="fas fa-circle text-orange-500 mr-2"></i> non déposé
                       </ng-container>
                       </td>
-                      <td
+                      <!-- <td
                       class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                       >
                           <button 
@@ -81,14 +86,17 @@
                            type="submit" (click)="onDeposit(car.car.immatriculation)">
                              Déposer
                           </button>
-                      </td>
+                      </td> -->
                   </tr>
             </tbody>
           </table>
         </div>
       </div>
   </div>
-  <div class="w-full mb-12 px-4">
+  <div class="w-full mb-12 px-4"  cdkDropList
+  #depositList="cdkDropList"
+  [cdkDropListConnectedTo]="[notDeposit]"
+  (cdkDropListDropped)="drop($event)">
       <label
           class="flex justify-center w-full h-32 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
           <span class="flex items-center space-x-2">
