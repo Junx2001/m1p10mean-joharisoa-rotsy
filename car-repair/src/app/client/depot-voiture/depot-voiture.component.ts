@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { concatMap, startWith, tap } from 'rxjs/operators';
+import { concatMap, startWith } from 'rxjs/operators';
 import { VoitureService } from 'src/app/global/services/voiture.service';
 
 @Component({

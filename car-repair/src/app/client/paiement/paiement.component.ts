@@ -13,7 +13,6 @@ import { Observable } from 'rxjs';
 })
 export class PaiementComponent implements OnInit {
   paiementForm! : FormGroup;
-  reparationsEnCours! : Reparation[];
   numberRegex! : RegExp;
   submitted = false;
   errorMessage = false;
@@ -31,7 +30,6 @@ export class PaiementComponent implements OnInit {
     this.unpaidReparations$ = this.reparationService.getUnpaidReparations();
 
     
-    this.reparationsEnCours = this.reparationService.getReparationsEnCours(this.userService.getUserByToken(localStorage.getItem("token")));
     this.paiementForm = this.formBuilder.group({
       reparationId : [null, Validators.required],
       montant :[0, [Validators.required, Validators.pattern(this.numberRegex)]],

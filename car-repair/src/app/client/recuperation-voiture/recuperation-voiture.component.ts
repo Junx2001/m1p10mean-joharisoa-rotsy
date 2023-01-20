@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Dict } from 'src/app/global/models/dict.interface';
 import { VoitureService } from 'src/app/global/services/voiture.service';
+import { concatMap, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recuperation-voiture',
@@ -10,6 +12,7 @@ import { VoitureService } from 'src/app/global/services/voiture.service';
 export class RecuperationVoitureComponent implements OnInit {
   title!: string;
   depositCars! : Dict[];
+  cars$! : Observable<any>;
   constructor(private voitureService : VoitureService) { }
 
   ngOnInit(): void {
@@ -31,7 +34,12 @@ export class RecuperationVoitureComponent implements OnInit {
     }
   }
   onRecoverCar(immatriculation){
-    this.voitureService.recoverCar(immatriculation);
+    this.cars$ = this.voitureService.recoverCar(immatriculation).pipe(
+      startWith(''),
+      concatMap(()=> {
+        return this.voitureService.filterDepositCarsByUser(0); 
+      })
+    );
   }
 
 }

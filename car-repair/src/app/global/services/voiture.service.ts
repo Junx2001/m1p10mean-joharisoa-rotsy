@@ -52,6 +52,10 @@ export class VoitureService {
         }
         return this.http.get<any>(`${this.apiUrl}/cars/search`,{params:params});
     }
+    getRecuperableCarsByUser(): Observable<any>{
+        return this.http.get<any>(`${this.apiUrl}/cars/deposit`);
+    }
+
     filterDepositCarsByUser(depot : number):Observable<any>{
         let retour : Observable<any>;
         if (depot==1){
@@ -103,20 +107,5 @@ export class VoitureService {
     getVoitures(): Voiture[] {
         return this.voitures;
     }
-    getVoituresDepot(): Voiture[] {
-        return this.voitures;
-    }
     
-    depotVoiture(formValue:{id : number,immatriculation: string, clientId: number,marque:string, modele:string }): Voiture{
-        this.voitures.push(formValue);
-        // insert into reparation
-        this.reparationService.addVoitureReparation(formValue);
-        return formValue;
-    }
-    getVoitureByImmatriculation(immatriculation : string): Voiture{
-        return this.voitures.find(voiture => voiture.immatriculation === immatriculation);
-    }
-    searchVoiture(formValue:{immatriculation: string, marque: string, modele:string , depot: Date}): Voiture[]{
-        return this.voitures.filter(car =>  car.marque.toLowerCase() === formValue.marque.toLowerCase());
-    }
 }

@@ -15,7 +15,6 @@ export class LogoutComponent implements OnInit {
     private userService : UserService) { }
 
   ngOnInit(): void {
-    // this.authService.logout(this.userService.getUserByToken(localStorage.getItem("token")));
     localStorage.clear();
     this.router.navigateByUrl('/login');
   }

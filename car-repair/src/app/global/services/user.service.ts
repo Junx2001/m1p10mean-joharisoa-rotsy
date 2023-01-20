@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../models/user.model';
-
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,38 +9,8 @@ export class UserService {
 
   constructor ( private http : HttpClient){}
 
-  
-  allUsers(): User [] {
-      return [{
-          id : '1',
-          email : "joh@gmail.com",
-          name : "Joharisoa",
-          password : "mdp123",
-          role : "client",
-          active : 0
-        },
-        {
-          id : '2',
-          email : "ro@gmail.com",
-          name : "Rotsy",
-          password : "mdp123",
-          role : "client",
-          active : 0
-        },]
-  }
     getCurrentUser():Observable<any>{
       return this.http.get<any>(`${this.apiUrl}/users/me`);
     }
-
-    getUserByCredentials(formValue: { email:string, password:string }): User{
-        return this.allUsers().find(user => user.email === formValue.email);
-    }
-
-    
-
-    getUserByToken(token: string): User{
-        return this.allUsers()[1];
-    }
-
     
 }
