@@ -1,109 +1,103 @@
-<div *ngIf="reparation$ | async as rep" class="flex flex-wrap">
-  <div class="w-full lg:w-3/12 px-4">
-    <ng-container *ngIf="car$ | async as car">
-
-      
-      <ng-container *ngIf="rep.length>0; else norep">
-          <app-info-voiture [voiture]="car[0].car" [depot]="rep[0].repair.dateDepot"></app-info-voiture>
-      </ng-container>
-      <ng-template #norep>
-        <app-info-voiture [voiture]="car[0].car" ></app-info-voiture>
-      </ng-template>
-
-    </ng-container>
-
-  </div>
-    <div class="w-full lg:w-9/12 px-4">
-        <div
-        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
-      >
-      <div class="rounded-t bg-white mb-0 px-6 py-6">
-        <div class="text-center flex justify-between">
-          <h3 class="font-semibold text-lg text-blueGray-700">Factures</h3>
-          <a 
-              [routerLink]="['/liste-voitures']"
-              class="bg-red-600
-              text-white 
-              active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded 
-              shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-            >
-            Retour 
-          </a>
-        </div>
-      </div>
-        
-      <ng-container *ngIf="rep.length>0">
-        <div class="block w-full overflow-x-auto">
-          <!-- Projects table -->
-          <table class="items-center w-full bg-transparent border-collapse">
-            <thead>
-              <tr >
-                <th
-                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                >
-                  intitulé
-                </th>
-                <th
-                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                >
-                  montant
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let repDet of rep[0].reparationDetail">
-                  <td 
-                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                  >
-                  {{repDet.intitule}}
-                  </td>
-                  <td 
-                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                  >
-                  {{repDet.montant | currency:'AR'}}
-                  </td>
-              </tr>
-              
-              <tr >
-                <td 
-                  class="border-t-0 px-6 align-middle font-bold border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                >
-                TOTAL
-                </td>
-                <td 
-                  class="border-t-0 px-6 align-middle font-bold border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                >
-                {{rep[0].montantTotal | currency:'AR'}}
-                </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </ng-container>
-
-        </div>
-
-        <div
-        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
-      >
-      <div class="rounded-t bg-white mb-0 px-6 py-6">
-        <div class="text-center flex justify-between">
-          <h3 class="font-semibold text-lg text-blueGray-700">Etat de paiement</h3>
-        </div>
-      </div>
-        <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Dû : {{ rep[0].montantTotal | currency : 'AR'}}</p>
-        <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Payé : {{ rep[0].totalPaid | currency : 'AR'}}</p>
-        <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Reste : {{ rep[0].restToPay | currency : 'AR'}}</p>
-        <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-5">
-          <a [routerLink]="['/paiement/',rep[0].repair._id]" 
-          class="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold
-           uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none 
-           focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" >
-            Payer
-          </a>
-        </p>
-      </div>
-
+<ng-container *ngIf="reparation$ | async as value">
+  <div  class="flex flex-wrap">
+    <div class="w-full lg:w-3/12 px-4">
+        <ng-container *ngIf="value.arrayFinal[0] as rep ; else norep">
+            <app-info-voiture [voiture]="rep.repair.voiture" [depot]="rep.repair.dateDepot"></app-info-voiture>
+        </ng-container>
+        <ng-template #norep>
+          <app-info-voiture *ngIf="car$ | async as car" [voiture]="car[0].car" ></app-info-voiture>
+        </ng-template>
     </div>
-  </div>
+      <div class="w-full lg:w-9/12 px-4">
+        <div
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+        >
+        <div class="rounded-t bg-white mb-0 px-6 py-6">
+          <div class="text-center flex justify-between">
+            <h3 class="font-semibold text-lg text-blueGray-700">Factures</h3>
+            <a 
+                [routerLink]="['/liste-voitures']"
+                class="bg-red-600
+                text-white 
+                active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded 
+                shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+              >
+              Retour 
+            </a>
+          </div>
+        </div>
+          <ng-container *ngIf="value.arrayFinal[0] as rep" >
+          <div class="block w-full overflow-x-auto">
+            <!-- Projects table -->
+            <table class="items-center w-full bg-transparent border-collapse">
+              <thead>
+                <tr >
+                  <th
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                  >
+                    intitulé
+                  </th>
+                  <th
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                  >
+                    montant
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let repDet of rep.reparationDetail">
+                    <td 
+                      class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                    >
+                    {{repDet.intitule}}
+                    </td>
+                    <td 
+                      class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                    >
+                    {{repDet.montant | currency:'AR'}}
+                    </td>
+                </tr>
+                
+                <tr >
+                  <td 
+                    class="border-t-0 px-6 align-middle font-bold border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                  >
+                  TOTAL
+                  </td>
+                  <td 
+                    class="border-t-0 px-6 align-middle font-bold border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                  >
+                  {{rep.montantTotal | currency:'AR'}}
+                  </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-container>
+        </div>
+  
+        <div *ngIf="value.arrayFinal[0] as rep"
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+        >
+        <div class="rounded-t bg-white mb-0 px-6 py-6">
+          <div class="text-center flex justify-between">
+            <h3 class="font-semibold text-lg text-blueGray-700">Etat de paiement</h3>
+          </div>
+        </div>
+          <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Dû : {{ rep.montantTotal | currency : 'AR'}}</p>
+          <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Payé : {{ rep.totalPaid | currency : 'AR'}}</p>
+          <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Reste : {{ rep.restToPay | currency : 'AR'}}</p>
+          <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-5">
+            <a [routerLink]="['/paiement/',rep.repair._id]" 
+            class="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold
+             uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none 
+             focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" >
+              Payer
+            </a>
+          </p>
+        </div>
+  
+      </div>
+    </div>
+  </ng-container>
   

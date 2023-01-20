@@ -2,40 +2,15 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Voiture } from '../models/voiture.model';
-import { ReparationService } from './reparation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VoitureService {
-    voitures : Voiture[] = [
-        {
-            clientId: 2,
-            id: 1,
-            immatriculation: "TAB1254",
-            marque: "Hyundai",
-            modele: "Starex"
-        },
-        {
-            clientId: 2,
-            id: 2,
-            immatriculation: "4567TVE",​​
-            marque: "Hyundai",​​
-            modele: "Santa Fe"
-        },
-        {
-            clientId: 2,
-            id: 3,
-            immatriculation: "TAL1115",​​
-            marque: "Toyota",​​
-            modele: "Corolla"
-        }
-    ];
+    
     private apiUrl = 'http://localhost:3000';
 
-    constructor (private reparationService : ReparationService,
-        private http : HttpClient){}
+    constructor (private http : HttpClient){}
         
 
     getCarsByUser(): Observable<any>{
@@ -81,7 +56,7 @@ export class VoitureService {
         return this.http.post<any>(`${this.apiUrl}/cars/add`, body );
     }
     
-    searchCar(formValue:{immatriculation: string, marque: string, modele:string , depot: Date}): Observable<any>{
+    searchCar(formValue:{immatriculation: string, marque: string, modele:string , depot: string}): Observable<any>{
         let params = new HttpParams();
         if (formValue.immatriculation != null) {
             params = params.set('immatriculation', formValue.immatriculation);
@@ -93,7 +68,7 @@ export class VoitureService {
             params = params.set('modele', formValue.modele);
         }
         if (formValue.depot != null) {
-            params = params.set('dateDepot', formValue.depot.toISOString());
+            params = params.set('dateDepot', formValue.depot);
         }
         return this.http.get<any>(`${this.apiUrl}/cars/search`,{params: params});
     }
@@ -104,8 +79,10 @@ export class VoitureService {
     depositCar(immatriculation : string): Observable<any>{
         return this.http.post<any>(`${this.apiUrl}/cars/deposit/${immatriculation}`,null );
     }
-    getVoitures(): Voiture[] {
-        return this.voitures;
+    
+    getRecoverableCars(): Observable<any>{
+        return this.http.get<any>(`${this.apiUrl}/cars/recoverable`);
     }
+
     
 }

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Reparation } from 'src/app/global/models/reparation.model';
 import { PaiementService } from 'src/app/global/services/paiement.service';
 import { ReparationService } from 'src/app/global/services/reparation.service';
-import { UserService } from 'src/app/global/services/user.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';

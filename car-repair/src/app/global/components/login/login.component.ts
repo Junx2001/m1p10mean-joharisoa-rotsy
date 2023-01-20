@@ -1,10 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
-import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
-import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +12,11 @@ export class LoginComponent implements OnInit {
   @Input() role! : string;
   @Input() landingPage! : string;
   loginForm! : FormGroup;
-  user! : User;
   errorMessage! : string;
   showAlert! : boolean;
 
   constructor(private formBuilder : FormBuilder,
     private router : Router,
-    private userService : UserService,
     private authService : AuthService) { }
 
   ngOnInit(): void {

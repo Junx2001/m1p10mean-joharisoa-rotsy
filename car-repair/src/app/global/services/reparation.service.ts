@@ -21,11 +21,6 @@ export class ReparationService {
     getAllReparationsWithDetails():Observable<any>{
         return this.http.get<any>(`${this.apiUrl}/reparations/details`);
     }
-    getDetailsByReparation(reparationId : string): Observable<any>{
-        return this.getAllReparationsWithDetails().pipe(
-            map(values=>values.arrayFinal.filter(object=>object.repair._id===reparationId))
-        );
-    }
     getUnpaidReparations():Observable<any>{
         return this.http.get<any>(`${this.apiUrl}/reparations/unpaid`);
     }

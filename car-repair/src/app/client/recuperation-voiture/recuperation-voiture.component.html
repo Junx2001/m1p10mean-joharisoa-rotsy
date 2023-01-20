@@ -29,37 +29,40 @@
                 <th
                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                 >
-                  IMMATRICULATION
+                  immatriculation
                 </th>
                 <th
                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                 >
-                  MARQUE
+                  marque
                 </th>
                 <th
                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                 >
-                {{"modèle"|titlecase}}
+                modèle
                 </th>
                 <th
                   class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                 >
-                  {{"dépôt"|titlecase}}
-                </th>
-                <th
-                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                >
-                  ACTIONS
+                  
                 </th>
               </tr>
             </thead>
-            <tbody>
-              <tr *ngFor="let depositCar of depositCars">
-
+            <tbody
+            cdkDropList
+            #notRecover="cdkDropList"
+            [cdkDropListData]="cars"
+            [cdkDropListConnectedTo]="[recoverList]"
+            (cdkDropListDropped)="drop($event)">
+              <tr *ngFor="let depositCar of cars " cdkDrag>
                 <td 
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                  [innerHTML]="depositCar.image">
-                  
+                  >
+                  <img
+                      src="assets/img/2017_hyundai_santa_fe.jpg"
+                      class="h-12 w-12 bg-white rounded-full border"
+                      alt="image voiture"
+                    />
                 </td>
                 <td 
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -73,19 +76,6 @@
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   {{depositCar.modele}}
                 </td>
-                <td 
-                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  {{depositCar.depot | date }}
-                </td>
-                <td
-                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    <button 
-                     class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" 
-                     type="submit" (click)="onRecoverCar(depositCar.immatriculation)">
-                       Récupérer
-                    </button>
-                </td>
-                
               </tr>
             </tbody>
           </table>
@@ -94,7 +84,10 @@
       
     </div>
 
-    <div class="w-full mb-12 px-4" >
+    <div class="w-full mb-12 px-4" cdkDropList
+    #recoverList="cdkDropList"
+    [cdkDropListConnectedTo]="[notRecover]"
+    (cdkDropListDropped)="drop($event)">
       <label
           class="flex justify-center w-full h-32 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
           <span class="flex items-center space-x-2">

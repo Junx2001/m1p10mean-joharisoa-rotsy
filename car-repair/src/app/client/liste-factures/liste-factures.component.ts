@@ -21,12 +21,8 @@ export class ListeFacturesComponent implements OnInit {
   ngOnInit(): void {
     const immatriculation = this.route.snapshot.params['immatriculation'];
     this.car$ = this.voitureService.getCarByImmatriculation(immatriculation);
-    this.reparationService.getCarRepairInProcess(immatriculation).subscribe(
-      value =>{
-        const currentReparationId=value.arrayFinal[0].repair._id;
-        this.reparation$ = this.reparationService.getDetailsByReparation(currentReparationId);
-      }
-    )
+    this.reparation$ = this.reparationService.getCarRepairInProcess(immatriculation);
+
     
   }
 }

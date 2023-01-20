@@ -26,7 +26,6 @@ export class ListeVoituresComponent implements OnInit {
       'immatriculation':[null],
       'marque':[null],
       'modele':[null],
-      'depot':[null]
     });
     this.searchGroup.valueChanges.subscribe(
       value => {

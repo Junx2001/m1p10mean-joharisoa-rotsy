@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Dict } from 'src/app/global/models/dict.interface';
 import { VoitureService } from 'src/app/global/services/voiture.service';
-import { concatMap, startWith } from 'rxjs/operators';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-recuperation-voiture',
@@ -10,36 +8,33 @@ import { concatMap, startWith } from 'rxjs/operators';
   styleUrls: ['./recuperation-voiture.component.css']
 })
 export class RecuperationVoitureComponent implements OnInit {
-  title!: string;
-  depositCars! : Dict[];
-  cars$! : Observable<any>;
+  cars : any[];
   constructor(private voitureService : VoitureService) { }
 
   ngOnInit(): void {
-    const cars = this.voitureService.getVoitures(); //Voitures avec bon de sortie
-    this.depositCars = [];
-    for (let car of cars){
-      const dict = {
-        'image':'<img\
-        src="assets/img/2017_hyundai_santa_fe.jpg"\
-        class="h-12 w-12 bg-white rounded-full border"\
-        alt="image voiture"\
-      />',
-        'immatriculation':car.immatriculation,
-        'marque':car.marque,
-        'modele':car.modele,
-        'depot':new Date()
+    this.voitureService.getRecoverableCars().subscribe(
+      (response)=>{
+        this.cars = response;
       }
-      this.depositCars.push(dict);
-    }
-  }
-  onRecoverCar(immatriculation){
-    this.cars$ = this.voitureService.recoverCar(immatriculation).pipe(
-      startWith(''),
-      concatMap(()=> {
-        return this.voitureService.filterDepositCarsByUser(0); 
-      })
     );
+ 
+  }
+  drop(event: CdkDragDrop<any[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      const car = event.previousContainer.data[event.previousIndex];
+      const immatriculation = car.immatriculation;
+      this.voitureService.recoverCar(immatriculation).subscribe(
+        (response)=>{
+          this.voitureService.getRecoverableCars().subscribe(
+            (response)=>{
+              this.cars = response;
+            }
+          )
+        }
+      );
+    }
   }
 
 }
