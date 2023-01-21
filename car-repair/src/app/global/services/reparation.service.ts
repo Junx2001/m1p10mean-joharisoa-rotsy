@@ -16,7 +16,6 @@ export class ReparationService {
     }
     getCarRepairInProcess(imm: string):Observable<any>{
         return this.http.get<any>(`${this.apiUrl}/reparations/actual/${imm}`);
-
     }
     getAllReparationsWithDetails():Observable<any>{
         return this.http.get<any>(`${this.apiUrl}/reparations/details`);
@@ -27,7 +26,25 @@ export class ReparationService {
     getNotAffectedReparations():Observable<any>{
         return this.http.get<any>(`${this.apiUrl}/reparations/notAffected`);
     }
+   
+    affectReparation(reparationId: string): Observable<any>{
+        return this.http.post<any>(`${this.apiUrl}/reparations/allocate/${reparationId}`,null);
+    }
+    validateReparation(reparationId: string): Observable<any>{
+        return this.http.post<any>(`${this.apiUrl}/reparations/validate/${reparationId}`,null);
+    }
+    addReparationDetails (formValue:{intitule: string,montant:string }, reparationId){
+        // CHANGEMENT
+        const body = {
+            "reparation":reparationId,
+            "intitule": formValue.intitule,
+            "montant": formValue.montant,
+        }
+        console.log(body);
+        // return this.http.post<any>(`${this.apiUrl}/cars/add`, body );
+    }
     searchNotAffectedReparations(formValue:{immatriculation: string, marque: string, modele:string ,  client:string,dateDepot: string}): Observable<any>{
+        //  CHANGEMENT
         let params = new HttpParams();
         if (formValue.immatriculation != null) {
             params = params.set('immatriculation', formValue.immatriculation);
@@ -46,17 +63,11 @@ export class ReparationService {
         }
         return this.http.get<any>(`${this.apiUrl}/reparations/notAffected`,{params: params});
     }
-    affectReparation(reparationId: string): Observable<any>{
-        return this.http.post<any>(`${this.apiUrl}/reparations/allocate/${reparationId}`,null);
-    }
-    addReparationDetails (formValue:{intitule: string,montant:string }, reparationId){
-        const body = {
-            "reparation":reparationId,
-            "intitule": formValue.intitule,
-            "montant": formValue.montant,
-        }
-        console.log(body);
-        // return this.http.post<any>(`${this.apiUrl}/cars/add`, body );
+    getReparationDetailsByReparationId(reparationId: string): Observable<any>{
+        // CHANGEMENT
+        return this.getAllReparationsWithDetails().pipe(
+            map(v => v.arrayFinal.filter(rep => rep.repair._id === reparationId))
+        );
     }
 
 }

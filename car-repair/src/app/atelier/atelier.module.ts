@@ -8,6 +8,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReceptionComponent } from './reception/reception.component';
 import { VoituresAtelierComponent } from './voitures-atelier/voitures-atelier.component';
 import { ReparerVoitureComponent } from './reparer-voiture/reparer-voiture.component';
+import { ReparationDetailsComponent } from './reparation-details/reparation-details.component';
 
 
 
@@ -16,7 +17,8 @@ import { ReparerVoitureComponent } from './reparer-voiture/reparer-voiture.compo
     LoginAtelierComponent,
     ReceptionComponent,
     VoituresAtelierComponent,
-    ReparerVoitureComponent
+    ReparerVoitureComponent,
+    ReparationDetailsComponent
   ],
   imports: [
     CommonModule,

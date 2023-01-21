@@ -4,6 +4,7 @@ import { LayoutComponent } from "../global/components/layout/layout.component";
 import { AuthGuard } from "../global/guards/auth.guard";
 import { LoginAtelierComponent } from "./login-atelier/login-atelier.component";
 import { ReceptionComponent } from "./reception/reception.component";
+import { ReparationDetailsComponent } from "./reparation-details/reparation-details.component";
 import { ReparerVoitureComponent } from "./reparer-voiture/reparer-voiture.component";
 import { VoituresAtelierComponent } from "./voitures-atelier/voitures-atelier.component";
 
@@ -15,6 +16,7 @@ const routes: Routes = [
         { path: "voitures-dans-le-garage", component: VoituresAtelierComponent },
         { path: "reparer-voiture/:reparationId", component: ReparerVoitureComponent },
         { path: "reception-voiture", component: ReceptionComponent },
+        { path: "reparation-details/:reparationId", component: ReparationDetailsComponent },
         { path: "", redirectTo: "reception-voiture", pathMatch: "full" },
     ],
     canActivate:[AuthGuard]},
