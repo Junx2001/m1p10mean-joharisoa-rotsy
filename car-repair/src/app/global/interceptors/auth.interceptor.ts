@@ -7,6 +7,7 @@ export class AuthInterceptor implements HttpInterceptor{
     constructor (){}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        
         let headers = new HttpHeaders()
         .set('Access-Control-Allow-Credentials','true')
         .set('Access-Control-Allow-Origin','*');
