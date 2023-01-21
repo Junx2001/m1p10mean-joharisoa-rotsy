@@ -1,0 +1,88 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+      <div
+      class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+      >
+          <div class="rounded-t bg-white mb-0 px-6 py-6">
+              <div class="text-center flex justify-between">
+              <h3 class="font-semibold text-lg text-blueGray-700">Liste des voitures avec bon de sortie non encore recupérées</h3>
+              </div>
+          </div>
+          <div class="block w-full overflow-x-auto">
+            <!-- Projects table -->
+            
+    
+            <table class="items-center w-full bg-transparent border-collapse">
+              <thead>
+                <tr >
+                    <th
+                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                     >
+                     </th>
+                     <th
+                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                     >
+                     Immatriculation</th>
+                     <th
+                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                     >
+                     Marque</th>
+                     <th
+                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                     >
+                     Modèle</th>
+                     <th
+                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                     >
+                     Client</th>
+                     <th
+                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                     >
+                     Date de dépôt</th>
+                </tr>
+              </thead>
+              <tbody>
+                    <tr *ngFor="let car of cars$ | async "  >
+                        <th 
+                            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                            >
+                            <img
+                                src="assets/img/2017_hyundai_santa_fe.jpg"
+                                class="h-12 w-12 bg-white rounded-full border"
+                                alt="image voiture"
+                              />
+                        </th>
+                        <td 
+                        class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                        {{car.voiture.immatriculation}}
+                        </td>
+                        <td 
+                        class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                        {{car.voiture.marque}}
+                        </td>
+                        <td 
+                        class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                        {{car.voiture.modele}}
+                        </td>
+                        <td 
+                        class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                        {{car.client.name}}
+                        </td>
+                        
+                        <td 
+                        class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                        {{car.repair.dateDepot | date}}
+                        </td>
+                    </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+    
+  </div>

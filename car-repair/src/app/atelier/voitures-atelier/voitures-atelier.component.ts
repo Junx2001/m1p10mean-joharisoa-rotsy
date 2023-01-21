@@ -17,7 +17,7 @@ export class VoituresAtelierComponent implements OnInit {
     private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
-    this.cars$ = this.reparationService.getNotAffectedReparations();
+    this.cars$ = this.reparationService.getAffectedReparations();
 
     this.searchGroup = this.formBuilder.group({
       'immatriculation':[null],
@@ -30,7 +30,7 @@ export class VoituresAtelierComponent implements OnInit {
     });
     this.searchGroup.valueChanges.subscribe(
       value => {
-        this.cars$ =this.reparationService.searchNotAffectedReparations(value);
+        this.cars$ =this.reparationService.searchAffectedReparations(value);
       } 
     );
   }

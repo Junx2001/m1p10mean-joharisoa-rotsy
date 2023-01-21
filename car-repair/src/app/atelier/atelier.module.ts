@@ -9,7 +9,7 @@ import { ReceptionComponent } from './reception/reception.component';
 import { VoituresAtelierComponent } from './voitures-atelier/voitures-atelier.component';
 import { ReparerVoitureComponent } from './reparer-voiture/reparer-voiture.component';
 import { ReparationDetailsComponent } from './reparation-details/reparation-details.component';
-
+import { NonRecupereComponent } from './non-recupere/non-recupere.component';
 
 
 @NgModule({
@@ -18,7 +18,8 @@ import { ReparationDetailsComponent } from './reparation-details/reparation-deta
     ReceptionComponent,
     VoituresAtelierComponent,
     ReparerVoitureComponent,
-    ReparationDetailsComponent
+    ReparationDetailsComponent,
+    NonRecupereComponent
   ],
   imports: [
     CommonModule,

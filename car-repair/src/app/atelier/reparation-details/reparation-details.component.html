@@ -1,126 +1,127 @@
-    <div class="flex flex-wrap">
-      <div class="w-full lg:w-3/12 px-4">
-          <!-- <ng-container *ngIf="rep.length>0; else norep">
-              <app-info-voiture [voiture]="car[0].car" [depot]="rep[0].repair.dateDepot"></app-info-voiture>
-          </ng-container>
-          <ng-template #norep>
-            <app-info-voiture [voiture]="car[0].car" ></app-info-voiture>
-          </ng-template> -->
+<ng-container *ngIf="reparation$ |async as rep">
+  <div  class="flex flex-wrap">
+    <div class="w-full lg:w-12/12 px-4">
+        <app-info-voiture [voiture]="rep.repair.voiture" [depot]="rep.repair.dateDepot"></app-info-voiture>
+        
+    </div>
+  
+      <div class="w-full lg:w-12/12 px-4">
+          <div
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+        >
+        <div class="rounded-t bg-white mb-0 px-6 py-6">
+          <div class="text-center flex justify-between">
+            <h3 class="font-semibold text-lg text-blueGray-700">Liste des réparations</h3>
+            <a 
+            [routerLink]="['/atelier/voitures-dans-le-garage']"
+              class="bg-red-600
+               text-white 
+               active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded 
+               shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+            >
+            Retour
+          </a>
+          </div>
           
-      </div>
+        </div>
+        
+          <div class="block w-full overflow-x-auto">
+            <!-- Projects table -->
+            <table class="items-center w-full bg-transparent border-collapse">
+              <thead>
+                <tr >
+                  <th
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                  >
+                    intitulé
+                  </th>
+                  <th
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                  >
+                    montant
+                  </th>
+                  <th
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                  >
+                    début de réparation
+                  </th>
+                  <th
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                  >
+                    avancement
+                  </th>
+                  <th
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                  >
+                    fin de réparation
+                  </th>
+                  <th
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                  >
+                    
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let details of rep.reparationDetail" >
+                    <td 
+                      class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                    >
+                    {{details.intitule}}
+                    </td>
+                    <td
+                      class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                    >
+                    {{ details.montant | currency:'AR'}}
+                    </td>
+                    <td 
+                      class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                    >
+                    {{details.dateDebut | date: 'dd/MM/yy, à HH:mm' }}
+                    </td>
+                    <td 
+                      class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                    >
+                    {{details.avancement}}%
+                    </td>
+                    <td 
+                      class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                       >
+                       <span *ngIf="!details.dateFin"> -- </span>
+                      {{details.dateFin | date: 'dd/MM/yy, à HH:mm' }}
+                    </td>
+                    <td 
+                      class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      >
+                      <button  *ngIf="!recup" (click)="onUpdate(details._id)"
+                          class="bg-orange-500 text-white active:bg-orange-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+                      >
+                          Modifier
+                      </button>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>     
+
+          </div>
+        <button *ngIf="!recup" (click)="onValidateReparation()" class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+          Valider le bon de sortie
+        </button>
+
+        <div *ngIf="recup" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
+          <span class="text-xl inline-block mr-5 align-middle">
+            <i class="fas fa-check"></i>
+          </span>
+          <span class="inline-block align-middle mr-8"  style="margin-left : 1rem;">
+             Cette voiture est maintenant récupérable
+          </span>
+        </div>
+
+        
+
+      </div>  
+    </div>
     
-        <div class="w-full lg:w-9/12 px-4">
-            <div
-            class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
-          >
-          <div class="rounded-t bg-white mb-0 px-6 py-6">
-            <div class="text-center flex justify-between">
-              <h3 class="font-semibold text-lg text-blueGray-700">Liste des réparations</h3>
-              <a 
-              [routerLink]="['/atelier/voitures-dans-le-garage']"
-                class="bg-red-600
-                 text-white 
-                 active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded 
-                 shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-              >
-              Retour
-            </a>
-            </div>
-            
-          </div>
-          
-            <div class="block w-full overflow-x-auto">
-              <!-- Projects table -->
-              <table class="items-center w-full bg-transparent border-collapse">
-                <thead>
-                  <tr >
-                    <th
-                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                    >
-                      intitulé
-                    </th>
-                    <th
-                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                    >
-                      montant
-                    </th>
-                    <th
-                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                    >
-                      début de réparation
-                    </th>
-                    <th
-                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                    >
-                      avancement
-                    </th>
-                    <th
-                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                    >
-                      fin de réparation
-                    </th>
-                    <th
-                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                    >
-                      
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr >
-                      <td 
-                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                      >
-                      piece 1
-                      </td>
-                      <td 
-                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                      >
-                      {{ 150000 | currency:'AR'}}
-                      </td>
-                      <td 
-                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                      >
-                      15/01/2023
-                      </td>
-                      <td 
-                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                      >
-                      50%
-                      </td>
-                      <td 
-                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-                         >
-                         --
-                      </td>
-                      <td 
-                        class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        >
-                        <a  *ngIf="!recup"
-                            class="bg-orange-500 text-white active:bg-orange-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
-                        >
-                            Modifier
-                        </a>
-                        </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>     
 
-            </div>
-          <button *ngIf="!recup" (click)="onValidateReparation()" class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
-            Valider le bon de sortie
-          </button>
-
-          <div *ngIf="recup" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
-            <span class="text-xl inline-block mr-5 align-middle">
-              <i class="fas fa-check"></i>
-            </span>
-            <span class="inline-block align-middle mr-8"  style="margin-left : 1rem;">
-               Cette voiture est maintenant récupérable
-            </span>
-          </div>
-
-        </div>  
-      </div>
-      
+</ng-container>   

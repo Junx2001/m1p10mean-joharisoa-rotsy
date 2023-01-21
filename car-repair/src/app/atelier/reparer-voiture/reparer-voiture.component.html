@@ -13,32 +13,32 @@
                 Informations sur la voiture
               </h6>
               <div class="flex flex-wrap">
-                <div class="w-full lg:w-6/12 px-4">
+                <div class="w-full lg:w-6/12 px-4" *ngIf="reparation$ | async as reparation">
                     <p
                       class="block  text-blueGray-600 font-bold mb-2"
                     >
-                      Client : Jean ROBERT
+                      Client : {{reparation.repair.voiture.client.name}}
                     </p>
                     <p
                       class="block  text-blueGray-600 font-bold mb-2"
                     >
-                      Immatriculation : 1212TAB
+                      Immatriculation : {{reparation.repair.voiture.immatriculation}}
                     </p>
                     <p
                       class="block  text-blueGray-600 font-bold mb-2"
                     >
-                      Marque : marque
+                      Marque : {{reparation.repair.voiture.marque}}
                     </p>
                     <p
                       class="block  text-blueGray-600 font-bold mb-2"
                     >
-                      Modèle : modèle
+                      Modèle : {{reparation.repair.voiture.modele}}
                     </p>
                     
                     <p
                       class="block  text-blueGray-600 font-bold mb-2"
                     >
-                      Date de dépôt : 12 Janv. 2023
+                      Date de dépôt : {{reparation.repair.dateDepot |date : 'dd/MM/yy, à HH:mm'}}
                     </p>
                 </div>
             </div>

@@ -220,6 +220,27 @@
                 Garage
               </a>
             </li>
+            <li class="items-center">
+              <a
+                [routerLink]="['/atelier/sortie-non-recuperees']"
+                class="text-xs uppercase py-3 font-bold block"
+                routerLinkActive
+                #sortienonrecupere="routerLinkActive"
+                [ngClass]="
+                  sortienonrecupere.isActive
+                    ? 'text-red-600 hover:text-red-700'
+                    : 'text-blueGray-700 hover:text-blueGray-500'
+                "
+              >
+                <i
+                  class="fas fa-list mr-2 text-sm"
+                  [ngClass]="
+                    sortienonrecupere.isActive ? 'opacity-75' : 'text-blueGray-300'
+                  "
+                ></i>
+                Voitures non récupérées
+              </a>
+            </li>
           </ul>
       </div>
       <div *ngIf="user.user.role==='ROLE_USER_FINANCE'">

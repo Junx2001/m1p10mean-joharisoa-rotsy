@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ReparationService } from 'src/app/global/services/reparation.service';
 
 @Component({
@@ -13,14 +14,16 @@ export class ReparerVoitureComponent implements OnInit {
   submitted = false;
   errorMessage = false;
   reparationId : string;
+  reparation$ : Observable<any>;
 
   constructor(private route : ActivatedRoute,
     private reparationService : ReparationService,
     private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
-
     this.reparationId = this.route.snapshot.params['reparationId'];
+    this.reparation$ = this.reparationService.getReparationDetailsByReparationId(this.reparationId);
+
     let numberRegex = /^[1-9]\d*(\.\d+)?$/
     this.repairForm = this.formBuilder.group({
       intitule : [null, Validators.required],
@@ -33,8 +36,18 @@ export class ReparerVoitureComponent implements OnInit {
     return this.repairForm.controls;
   }
   onRepair(){    
-    this.reparationService.addReparationDetails(this.repairForm.value, this.reparationId);
-    this.submitted = true;
+    this.reparationService.addReparationDetails(this.repairForm.value, this.reparationId).subscribe(
+      (response) =>{ 
+        console.log("response received");
+        this.submitted = true;
+      },
+      (error)=>{
+        console.error('request failed with error');
+        if (error.status === 409){
+          this.errorMessage = true;
+        }
+      }
+    );
   }
 
 }

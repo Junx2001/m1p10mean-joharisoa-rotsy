@@ -12,7 +12,7 @@ export class ReparationService {
     constructor ( private http : HttpClient){}
 
     getCarReparationsByImmatriculation(imm : string):Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/reparations/${imm}`);
+        return this.http.get<any>(`${this.apiUrl}/reparations/findByCar/${imm}`);
     }
     getCarRepairInProcess(imm: string):Observable<any>{
         return this.http.get<any>(`${this.apiUrl}/reparations/actual/${imm}`);
@@ -26,6 +26,15 @@ export class ReparationService {
     getNotAffectedReparations():Observable<any>{
         return this.http.get<any>(`${this.apiUrl}/reparations/notAffected`);
     }
+    getAffectedReparations():Observable<any>{
+        return this.http.get<any>(`${this.apiUrl}/reparations/affected`);
+    }
+    getRecuperableReparationsNotRecovered():Observable<any>{
+        return this.getAffectedReparations().pipe(
+            map(value=>value.filter(rep => rep.repair.dateRecup == null)),
+            map(value=>value.filter(rep => rep.repair.valide == 1))
+        );
+    }
    
     affectReparation(reparationId: string): Observable<any>{
         return this.http.post<any>(`${this.apiUrl}/reparations/allocate/${reparationId}`,null);
@@ -34,16 +43,14 @@ export class ReparationService {
         return this.http.post<any>(`${this.apiUrl}/reparations/validate/${reparationId}`,null);
     }
     addReparationDetails (formValue:{intitule: string,montant:string }, reparationId){
-        // CHANGEMENT
         const body = {
             "reparation":reparationId,
             "intitule": formValue.intitule,
             "montant": formValue.montant,
         }
-        console.log(body);
-        // return this.http.post<any>(`${this.apiUrl}/cars/add`, body );
+        return this.http.post<any>(`${this.apiUrl}/reparationDetails/add`, body );
     }
-    searchNotAffectedReparations(formValue:{immatriculation: string, marque: string, modele:string ,  client:string,dateDepot: string}): Observable<any>{
+    searchAffectedReparations(formValue:{immatriculation: string, marque: string, modele:string ,  client:string,dateDepot: string}): Observable<any>{
         //  CHANGEMENT
         let params = new HttpParams();
         if (formValue.immatriculation != null) {
@@ -61,13 +68,13 @@ export class ReparationService {
         if (formValue.dateDepot != null) {
             params = params.set('dateDepot', formValue.dateDepot);
         }
-        return this.http.get<any>(`${this.apiUrl}/reparations/notAffected`,{params: params});
+        return this.http.get<any>(`${this.apiUrl}/reparations/affected`,{params: params});
     }
     getReparationDetailsByReparationId(reparationId: string): Observable<any>{
-        // CHANGEMENT
-        return this.getAllReparationsWithDetails().pipe(
-            map(v => v.arrayFinal.filter(rep => rep.repair._id === reparationId))
-        );
+        return this.http.get<any>(`${this.apiUrl}/reparations/${reparationId}`);
+    }
+    getReparationsDetailsByUser():Observable<any>{
+        return this.http.get<any>(`${this.apiUrl}/reparations`);
     }
 
 }

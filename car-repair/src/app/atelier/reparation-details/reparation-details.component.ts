@@ -9,7 +9,7 @@ import { ReparationService } from 'src/app/global/services/reparation.service';
   styleUrls: ['./reparation-details.component.css']
 })
 export class ReparationDetailsComponent implements OnInit {
-  reparations$! : Observable<any>;
+  reparation$! : Observable<any>;
   reparationId! : string;
   recup : boolean = false;
 
@@ -18,10 +18,20 @@ export class ReparationDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.reparationId = this.route.snapshot.params['reparationId'];
-    this.reparations$ = this.reparationService.getReparationDetailsByReparationId(this.reparationId);
+    this.reparation$ = this.reparationService.getReparationDetailsByReparationId(this.reparationId);
+    this.reparation$.subscribe(
+      response =>{
+        if (response.repair.valide == 1 ){
+          this.recup = true;
+        }
+      }
+    );
   }
-
+  onUpdate(detailsId){
+    console.log(detailsId);
+  }
   onValidateReparation(){
+    
     // this.reparationService.validateReparation(this.reparationId).subscribe(
     //   (response)=>{
         this.recup = true;

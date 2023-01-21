@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { LayoutComponent } from "../global/components/layout/layout.component";
 import { AuthGuard } from "../global/guards/auth.guard";
 import { LoginAtelierComponent } from "./login-atelier/login-atelier.component";
+import { NonRecupereComponent } from "./non-recupere/non-recupere.component";
 import { ReceptionComponent } from "./reception/reception.component";
 import { ReparationDetailsComponent } from "./reparation-details/reparation-details.component";
 import { ReparerVoitureComponent } from "./reparer-voiture/reparer-voiture.component";
@@ -14,6 +15,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children:[
         { path: "voitures-dans-le-garage", component: VoituresAtelierComponent },
+        { path: "sortie-non-recuperees", component: NonRecupereComponent },
         { path: "reparer-voiture/:reparationId", component: ReparerVoitureComponent },
         { path: "reception-voiture", component: ReceptionComponent },
         { path: "reparation-details/:reparationId", component: ReparationDetailsComponent },
