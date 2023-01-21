@@ -5,12 +5,18 @@ import { AtelierRoutingModule } from './atelier-route.module';
 import { GlobalModule } from '../global/global.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ReceptionComponent } from './reception/reception.component';
+import { VoituresAtelierComponent } from './voitures-atelier/voitures-atelier.component';
+import { ReparerVoitureComponent } from './reparer-voiture/reparer-voiture.component';
 
 
 
 @NgModule({
   declarations: [
-    LoginAtelierComponent
+    LoginAtelierComponent,
+    ReceptionComponent,
+    VoituresAtelierComponent,
+    ReparerVoitureComponent
   ],
   imports: [
     CommonModule,

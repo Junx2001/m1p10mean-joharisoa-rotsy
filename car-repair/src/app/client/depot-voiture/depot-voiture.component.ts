@@ -12,6 +12,9 @@ import { VoitureService } from 'src/app/global/services/voiture.service';
 export class DepotVoitureComponent implements OnInit {
   cars$! : Observable<any>;
   cars ! : any[];
+  success: boolean = false;
+  error : boolean = false;
+
   constructor(private voitureService : VoitureService) { }
 
   ngOnInit(): void {
@@ -36,6 +39,11 @@ export class DepotVoitureComponent implements OnInit {
               this.cars = response;
             }
           )
+        },
+        (error)=>{
+          console.error('request failed with error ');
+          console.error(error);
+          this.error = true;
         }
       );
     }

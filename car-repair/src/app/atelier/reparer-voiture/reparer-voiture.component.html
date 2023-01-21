@@ -5,33 +5,64 @@
       >
         <div class="rounded-t bg-white mb-0 px-6 py-6">
           <div class="text-center flex justify-between">
-            <h6 class="text-blueGray-700 text-xl font-bold">Payer mes réparations</h6>
+            <h6 class="text-blueGray-700 text-xl font-bold">Réparer la voiture</h6>
           </div>
         </div>
         <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-          <form [formGroup]="paiementForm">
             <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-              Formulaire de paiement
+                Informations sur la voiture
+              </h6>
+              <div class="flex flex-wrap">
+                <div class="w-full lg:w-6/12 px-4">
+                    <p
+                      class="block  text-blueGray-600 font-bold mb-2"
+                    >
+                      Client : Jean ROBERT
+                    </p>
+                    <p
+                      class="block  text-blueGray-600 font-bold mb-2"
+                    >
+                      Immatriculation : 1212TAB
+                    </p>
+                    <p
+                      class="block  text-blueGray-600 font-bold mb-2"
+                    >
+                      Marque : marque
+                    </p>
+                    <p
+                      class="block  text-blueGray-600 font-bold mb-2"
+                    >
+                      Modèle : modèle
+                    </p>
+                    
+                    <p
+                      class="block  text-blueGray-600 font-bold mb-2"
+                    >
+                      Date de dépôt : 12 Janv. 2023
+                    </p>
+                </div>
+            </div>
+          <form [formGroup]="repairForm">
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              Ajouter une réparation
             </h6>
             <div class="flex flex-wrap">
-              <div *ngIf="unpaidReparations$ | async as reparations" class="w-full lg:w-12/12 px-4">
+              <div class="w-full lg:w-12/12 px-4">
                 <div class="relative w-full mb-3">
                   <label
                     class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Numéro d'immatriculation - date de dépôt
+                    Pièce à réparer
                   </label>
-                  <select
+                  <input 
+                    type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    formControlName="reparationId"
-                    >
-                    <option [value]="null" disabled>Immatriculation</option>
-                    <option *ngFor="let rep of reparations" [value]="rep.repair._id">{{rep.repair.voiture.immatriculation}} - {{rep.repair.dateDepot | date : 'dd/MM/yyyy'}}</option>
-                    </select>
+                    placeholder="Intitulé" formControlName="intitule" 
+                  />
                     <span class="text-danger"
-                        *ngIf="(registerFormControl.reparationId.touched || submitted) && registerFormControl.reparationId.errors?.required">
-                        Immatriculation requise
+                        *ngIf="(repairFormControl.intitule.touched || submitted) && repairFormControl.intitule.errors?.required">
+                        Intitulé des pièces à réparer requis.
                     </span>
                 </div>
               </div>
@@ -49,7 +80,7 @@
                     placeholder="Montant" formControlName="montant" 
                   />
                   <span class="text-danger"
-                      *ngIf="registerFormControl.montant.touched && registerFormControl.montant.errors?.required">
+                      *ngIf="repairFormControl.montant.touched && repairFormControl.montant.errors?.required">
                       Vérifiez le format de votre montant
                   </span>
                 </div>
@@ -60,7 +91,7 @@
               <div class="relative w-full mb-3">
                 <button
                 class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                type="submit" (click)="onPay()" [disabled]="paiementForm.invalid"
+                type="submit" (click)="onRepair()" [disabled]="repairForm.invalid"
               >
                 Valider
               </button>
@@ -72,8 +103,8 @@
             <span class="text-xl inline-block mr-5 align-middle">
               <i class="fas fa-bell"></i>
             </span>
-            <span class="inline-block align-middle mr-8">
-              <b class="capitalize">Merci!</b> Votre paiement a été pris en charge
+            <span class="inline-block align-middle mr-8"  style="margin-left : 1rem;">
+               Réparation insérée.
             </span>
             <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="submitted = false">
               <span>×</span>
@@ -84,7 +115,7 @@
             <span class="text-xl inline-block mr-5 align-middle">
               <i class="fas fa-bell"></i>
             </span>
-            <span class="inline-block align-middle mr-8">
+            <span class="inline-block align-middle mr-8" style="margin-left : 1rem;">
               <b class="capitalize">Erreur!</b> Il y a eu un problème dans la transaction
             </span>
             <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="errorMessage = false">

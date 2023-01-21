@@ -11,7 +11,7 @@ export class LoginAtelierComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.roleUser = "Responsable atelier";
-    this.landingPage = '';
+    this.roleUser = "responsable atelier";
+    this.landingPage = '/atelier/reception-voiture';
   }
 }

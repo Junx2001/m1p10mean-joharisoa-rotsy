@@ -178,7 +178,7 @@
         <ul class="md:flex-col md:min-w-full flex flex-col list-none">
             <li class="items-center">
               <a
-                [routerLink]="['/login']"
+                [routerLink]="['/atelier/reception']"
                 class="text-xs uppercase py-3 font-bold block"
                 routerLinkActive
                 #reception="routerLinkActive"
@@ -189,7 +189,7 @@
                 "
               >
                 <i
-                  class="fas fa-tv mr-2 text-sm"
+                  class="fas fa-car mr-2 text-sm"
                   [ngClass]="
                     reception.isActive ? 'opacity-75' : 'text-blueGray-300'
                   "
@@ -197,10 +197,11 @@
                 Réception des voitures
               </a>
             </li>
+            
     
             <li class="items-center">
               <a
-                [routerLink]="['/login']"
+                [routerLink]="['/atelier/voitures-dans-le-garage']"
                 class="text-xs uppercase py-3 font-bold block"
                 routerLinkActive
                 #listeresencours="routerLinkActive"

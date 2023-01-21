@@ -1,40 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { VoitureService } from 'src/app/global/services/voiture.service';
+import { ReparationService } from 'src/app/global/services/reparation.service';
+import { Observable } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-recuperation-voiture',
-  templateUrl: './recuperation-voiture.component.html',
-  styleUrls: ['./recuperation-voiture.component.css']
+  selector: 'app-reception',
+  templateUrl: './reception.component.html',
+  styleUrls: ['./reception.component.css']
 })
-export class RecuperationVoitureComponent implements OnInit {
+export class ReceptionComponent implements OnInit {
   cars : any[];
   success: boolean = false;
   error : boolean = false;
 
-  constructor(private voitureService : VoitureService) { }
+  constructor(private reparationService : ReparationService) { }
 
   ngOnInit(): void {
-    this.voitureService.getRecoverableCars().subscribe(
+    this.reparationService.getNotAffectedReparations().subscribe(
       (response)=>{
         this.cars = response;
       }
     );
- 
   }
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      const car = event.previousContainer.data[event.previousIndex];
-      const immatriculation = car.immatriculation;
-      this.voitureService.recoverCar(immatriculation).subscribe(
+      const reparation = event.previousContainer.data[event.previousIndex];
+      this.reparationService.affectReparation(reparation.repair._id).subscribe(
         (response)=>{
-          this.voitureService.getRecoverableCars().subscribe(
+          this.reparationService.getNotAffectedReparations().subscribe(
             (response)=>{
               this.cars = response;
             }
-          )
+          );
+          this.success = true;
         },
         (error)=>{
           console.error('request failed with error ');
@@ -42,6 +42,7 @@ export class RecuperationVoitureComponent implements OnInit {
           this.error = true;
         }
       );
+      
     }
   }
 

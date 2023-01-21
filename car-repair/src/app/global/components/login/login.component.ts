@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
       },
       ()=>{
         console.log('Request completed')
-        // this.loading = false;
         this.router.navigateByUrl(this.landingPage);
       }
     );

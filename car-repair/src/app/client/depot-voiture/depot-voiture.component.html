@@ -78,21 +78,33 @@
                           <i class="fas fa-circle text-orange-500 mr-2"></i> non déposé
                       </ng-container>
                       </td>
-                      <!-- <td
-                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      >
-                          <button 
-                           class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" 
-                           type="submit" (click)="onDeposit(car.car.immatriculation)">
-                             Déposer
-                          </button>
-                      </td> -->
                   </tr>
             </tbody>
           </table>
         </div>
       </div>
   </div>
+
+  <div *ngIf="success" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
+    <span class=" inline-block mr-5 align-middle">
+      <i class="fas fa-bell"></i> Dépôt réussi! 
+    </span><br>
+    <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="success = false">
+      <span>×</span>
+    </button>
+  </div>
+  <div *ngIf="error" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+    <span class=" inline-block mr-5 align-middle">
+        <i class="fas fa-bell"></i> Erreur! 
+      </span><br>
+    <span class="inline-block align-middle mr-8">
+      Il y a eu un erreur au dépôt de votre voiture.
+    </span>
+    <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="error = false">
+      <span>×</span>
+    </button>
+  </div>
+
   <div class="w-full mb-12 px-4"  cdkDropList
   #depositList="cdkDropList"
   [cdkDropListConnectedTo]="[notDeposit]"

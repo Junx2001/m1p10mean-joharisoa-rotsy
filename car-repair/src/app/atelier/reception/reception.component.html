@@ -1,0 +1,140 @@
+<div class="flex flex-wrap mt-4">
+    <div class="w-full mb-12 px-4">
+      <div
+      class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+      >
+          <div class="rounded-t bg-white mb-0 px-6 py-6">
+              <div class="text-center flex justify-between">
+              <h3 class="font-semibold text-lg text-blueGray-700">Liste des voitures non encore receptionnées</h3>
+              </div>
+          </div>
+          <div class="block w-full overflow-x-auto">
+            <!-- Projects table -->
+            
+    
+            <table class="items-center w-full bg-transparent border-collapse">
+              <thead>
+                <tr >
+                    <th
+                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                     >
+                     </th>
+                     <th
+                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                     >
+                     Immatriculation</th>
+                     <th
+                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                     >
+                     Marque</th>
+                     <th
+                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                     >
+                     Modèle</th>
+                     <th
+                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                     >
+                     Client</th>
+                     <th
+                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                     >
+                     Date de dépôt</th>
+                </tr>
+              </thead>
+              <tbody 
+              cdkDropList
+              #notAffected="cdkDropList"
+              [cdkDropListData]="cars"
+              [cdkDropListConnectedTo]="[affectationList]"
+              (cdkDropListDropped)="drop($event)">
+                    <tr *ngFor="let car of cars " cdkDrag >
+                        <th 
+                            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                            >
+                            <img
+                                src="assets/img/2017_hyundai_santa_fe.jpg"
+                                class="h-12 w-12 bg-white rounded-full border"
+                                alt="image voiture"
+                              />
+                        </th>
+                        <td 
+                        class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                        {{car.voiture.immatriculation}}
+                        </td>
+                        <td 
+                        class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                        {{car.voiture.marque}}
+                        </td>
+                        <td 
+                        class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                        {{car.voiture.modele}}
+                        </td>
+                        <td 
+                        class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                        {{car.client.name}}
+                        </td>
+                        
+                        <td 
+                        class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        >
+                        {{car.repair.dateDepot | date}}
+                        </td>
+                    </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+    
+    <div class="w-full lg:w-4/12 px-4"></div>
+    <div class="w-full lg:w-4/12 px-4">
+        <div *ngIf="success" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
+            <span class=" inline-block mr-5 align-middle">
+              <i class="fas fa-bell"></i> Reception réussi! 
+            </span><br>
+            <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="success = false">
+              <span>×</span>
+            </button>
+          </div>
+          <div *ngIf="error" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+            <span class=" inline-block mr-5 align-middle">
+                <i class="fas fa-bell"></i> Erreur! 
+              </span><br>
+            <span class="inline-block align-middle mr-8">
+              Il y a eu un erreur eu réception de votre voiture.
+            </span>
+            <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="error = false">
+              <span>×</span>
+            </button>
+        </div>
+    </div>
+    <div class="w-full lg:w-4/12 px-4"></div>
+
+      
+    
+
+    <div class="w-full mb-12 px-4"  cdkDropList
+    #affectationList="cdkDropList"
+    [cdkDropListConnectedTo]="[notAffected]"
+    (cdkDropListDropped)="drop($event)">
+        <label
+            class="flex justify-center w-full h-32 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
+            <span class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+                <span class="font-medium text-gray-600">
+                  <span class="text-blue-600 underline">Glissez ici</span> 
+                  pour receptionner la voiture
+  
+                </span>
+            </span>
+        </label>
+    </div>
+  </div>
