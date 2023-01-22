@@ -2,33 +2,33 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { apiUrl } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VoitureService {
     
-    private apiUrl = 'https://m1p10mean-joharisoa-rotsyapi-production.up.railway.app';
 
     constructor (private http : HttpClient){}
         
 
     getCarsByUser(): Observable<any>{
         // headers is already set in auth.interceptors
-        return this.http.get<any>(`${this.apiUrl}/cars`);
+        return this.http.get<any>(`${apiUrl.key}/cars`);
     }
     getDepositCarsByUser(): Observable<any>{
         // headers is already set in auth.interceptors
-        return this.http.get<any>(`${this.apiUrl}/cars/deposit`);
+        return this.http.get<any>(`${apiUrl.key}/cars/deposit`);
     }
     getCarByImmatriculation(imm : string): Observable<any>{
         const params = {
             "immatriculation": imm
         }
-        return this.http.get<any>(`${this.apiUrl}/cars/search`,{params:params});
+        return this.http.get<any>(`${apiUrl.key}/cars/search`,{params:params});
     }
     getRecuperableCarsByUser(): Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/cars/deposit`);
+        return this.http.get<any>(`${apiUrl.key}/cars/deposit`);
     }
 
     filterDepositCarsByUser(depot : number):Observable<any>{
@@ -53,7 +53,7 @@ export class VoitureService {
             "marque": formValue.marque,
             "modele": formValue.modele
         }
-        return this.http.post<any>(`${this.apiUrl}/cars/add`, body );
+        return this.http.post<any>(`${apiUrl.key}/cars/add`, body );
     }
     
     searchCar(formValue:{immatriculation: string, marque: string, modele:string , depot: string}): Observable<any>{
@@ -70,18 +70,21 @@ export class VoitureService {
         if (formValue.depot != null) {
             params = params.set('dateDepot', formValue.depot);
         }
-        return this.http.get<any>(`${this.apiUrl}/cars/search`,{params: params});
+        return this.http.get<any>(`${apiUrl.key}/cars/search`,{params: params});
     }
 
     recoverCar(immatriculation : string): Observable<any>{
-        return this.http.post<any>(`${this.apiUrl}/cars/recover/${immatriculation}`,null );
+        return this.http.post<any>(`${apiUrl.key}/cars/recover/${immatriculation}`,null );
     }
     depositCar(immatriculation : string): Observable<any>{
-        return this.http.post<any>(`${this.apiUrl}/cars/deposit/${immatriculation}`,null );
+        return this.http.post<any>(`${apiUrl.key}/cars/deposit/${immatriculation}`,null );
     }
     
     getRecoverableCars(): Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/cars/recoverable`);
+        return this.http.get<any>(`${apiUrl.key}/cars/recoverable`);
+    }
+    getAllCars(): Observable<any>{
+        return this.http.get<any>(`${apiUrl.key}/cars/all`);
     }
 
     

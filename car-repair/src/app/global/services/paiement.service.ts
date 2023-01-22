@@ -2,12 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { apiUrl } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaiementService {
-    private apiUrl = 'https://m1p10mean-joharisoa-rotsyapi-production.up.railway.app';
 
     constructor ( private http : HttpClient){}
 
@@ -16,10 +16,10 @@ export class PaiementService {
             'reparation' : formValue.reparationId,
             'montant' : formValue.montant,
         }
-        return this.http.post<any>(`${this.apiUrl}/payments`, body);
+        return this.http.post<any>(`${apiUrl.key}/payments`, body);
     }
     getAllPayements(): Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/payments`);
+        return this.http.get<any>(`${apiUrl.key}/payments`);
     }
     getPayementsByReparationId(reparationId: string):Observable<any>{
         return this.getAllPayements().pipe(
@@ -27,13 +27,13 @@ export class PaiementService {
         );
     }
     validatePayement(paymentId: string):Observable<any>{
-        return this.http.post<any>(`${this.apiUrl}/payments/validate/${paymentId}`, null);
+        return this.http.post<any>(`${apiUrl.key}/payments/validate/${paymentId}`, null);
     }
     addDepense(formValue:{intitule: string, montant: number}){
         const body={
             'intitule':formValue.intitule,
             'montant':formValue.montant
         }
-        return this.http.post<any>(`${this.apiUrl}/depenses/add`, body);
+        return this.http.post<any>(`${apiUrl.key}/depenses/add`, body);
     }
 }

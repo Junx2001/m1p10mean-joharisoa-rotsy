@@ -2,29 +2,28 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { apiUrl } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ReparationService {
    
-    private apiUrl = 'https://m1p10mean-joharisoa-rotsyapi-production.up.railway.app';
-
     constructor ( private http : HttpClient){}
 
     getCarReparationsByImmatriculation(imm : string):Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/reparations/findByCar/${imm}`);
+        return this.http.get<any>(`${apiUrl.key}/reparations/findByCar/${imm}`);
     }
     getCarRepairInProcess(imm: string):Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/reparations/actual/${imm}`);
+        return this.http.get<any>(`${apiUrl.key}/reparations/actual/${imm}`);
     }
     getAllReparationsWithDetails():Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/reparations/details`);
+        return this.http.get<any>(`${apiUrl.key}/reparations/details`);
     }
     getUnpaidReparationsByUser():Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/reparations/unpaidByUser`);
+        return this.http.get<any>(`${apiUrl.key}/reparations/unpaidByUser`);
     }
     getNotAffectedReparations():Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/reparations/notAffected`);
+        return this.http.get<any>(`${apiUrl.key}/reparations/notAffected`);
     }
     getRecuperableReparationsNotRecovered():Observable<any>{
         return this.getAffectedReparations(null).pipe(
@@ -33,10 +32,10 @@ export class ReparationService {
     }
    
     affectReparation(reparationId: string): Observable<any>{
-        return this.http.post<any>(`${this.apiUrl}/reparations/allocate/${reparationId}`,null);
+        return this.http.post<any>(`${apiUrl.key}/reparations/allocate/${reparationId}`,null);
     }
     validateReparation(reparationId: string): Observable<any>{
-        return this.http.post<any>(`${this.apiUrl}/reparations/validate/${reparationId}`,null);
+        return this.http.post<any>(`${apiUrl.key}/reparations/validate/${reparationId}`,null);
     }
    
     getAffectedReparations(formValue:{immatriculation: string, marque: string, modele:string ,  client:string,dateDepot: string}): Observable<any>{
@@ -61,18 +60,22 @@ export class ReparationService {
             }
         }
         
-        return this.http.get<any>(`${this.apiUrl}/reparations/affected`,{params: params});
+        return this.http.get<any>(`${apiUrl.key}/reparations/affected`,{params: params});
     }
     getReparationDetailsByReparationId(reparationId: string): Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/reparations/${reparationId}`);
+        return this.http.get<any>(`${apiUrl.key}/reparations/${reparationId}`);
     }
     getReparationsDetailsByUser():Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/reparations`);
+        return this.http.get<any>(`${apiUrl.key}/reparations`);
     }
     getAllUnpaidReparations(): Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/reparations/unpaid`);
+        return this.http.get<any>(`${apiUrl.key}/reparations/unpaid`);
     }
     getUnpaidReparationsById(reparationId: string):Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/reparations/unpaidById/${reparationId}`);
+        return this.http.get<any>(`${apiUrl.key}/reparations/unpaidById/${reparationId}`);
+    }
+
+    getAvgReparationDurationByCar(immatriculation : string){
+        return this.http.get<any>(`${apiUrl.key}/reparations/avgRepair/${immatriculation}`);
     }
 }

@@ -1,1 +1,89 @@
-<p>statistiques works!</p>
+<div class="flex flex-wrap">
+    <div class="w-full xl:w-12/12 mb-12 xl:mb-0 px-4">
+        <div
+        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
+      >
+        <div class="rounded-t mb-0 px-4 py-3 border-0">
+          <div class="flex flex-wrap items-center">
+            <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                <h3 class="text-4xl font-normal leading-normal mt-0 mb-2 text-red-800">
+                    Statistiques
+                  </h3>
+                                  
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="w-full xl:w-12/12 mb-12 xl:mb-0 px-4">
+        <div
+        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
+      >
+        <div class="rounded-t mb-0 px-4 py-3 border-0">
+          <div class="flex flex-wrap items-center">
+            <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+              <h3 class="font-semibold text-base text-blueGray-700">Temps de réparation moyenne par voiture</h3>
+            </div>
+            <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                <select
+                class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    #immatriculation (change)="onFilterCars(immatriculation.value)"
+                >
+                    <option [value]="defaultCar"
+                    [selected]="defaultCar">{{defaultCar}}</option>
+                    <ng-container *ngFor="let car of cars$ | async ">
+                        <option *ngIf="car.immatriculation!=defaultCar" [value]="car.immatriculation"
+                        >{{car.immatriculation}}</option>
+                    </ng-container>
+                    
+                </select>
+            </div>
+          </div>
+        </div>
+        <div class="block w-full overflow-x-auto">
+          <!-- Projects table -->
+          <table class="items-center w-full bg-transparent border-collapse">
+            <thead>
+              <tr>
+                <th
+                  class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Date de réparation
+                </th>
+                <th
+                  class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                >
+                  Durée moyenne
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngIf="avg$ | async as cars">
+              <tr *ngFor="let car of cars.arrayFinal; let i = index" [attr.data-index]="i">
+                <th
+                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left"
+                >
+                  {{car.repair.dateDepot | date}}
+                </th>
+                <td
+                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                >
+                    <i *ngIf="i == 0 " class="fas fa-arrow-up text-emerald-500 mr-4"></i> 
+                    <ng-container *ngIf="i > 0 ">
+                        <i *ngIf="cars.arrayFinal[i-1].avgDuration<=car.avgDuration" class="fas fa-arrow-up text-emerald-500 mr-4"></i>
+                        <i *ngIf="cars.arrayFinal[i-1].avgDuration>car.avgDuration" class="fas fa-arrow-down text-red-500 mr-4"></i>
+                    </ng-container>
+                    
+                    <span *ngIf="car.avgDuration == null">0</span>
+                    <span *ngIf="car.avgDuration != null">{{car.avgDuration}}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+    </div>
+</div>
+  

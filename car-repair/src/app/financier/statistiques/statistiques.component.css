@@ -1,0 +1,4 @@
+.text-red-800 {
+    --tw-text-opacity: 1;
+    color: rgba(153,27,27,var(--tw-text-opacity));
+  }

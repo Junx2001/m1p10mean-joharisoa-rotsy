@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { apiUrl } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-    private apiUrl = 'https://m1p10mean-joharisoa-rotsyapi-production.up.railway.app';
 
     constructor (private http : HttpClient){}
 
     setHeaders (){
         let header = new HttpHeaders();
         header = header.append('Access-Control-Allow-Credentials','true');
-        header = header.append('Access-Control-Allow-Origin',this.apiUrl);
+        header = header.append('Access-Control-Allow-Origin',apiUrl.key);
         return header;
     }
     login(formValue: { email:string, password:string }): Observable<any>{
@@ -20,7 +20,7 @@ export class AuthService {
             "email": formValue.email,
             "password": formValue.password
         }
-        return this.http.post<any>(`${this.apiUrl}/users/login`, body ,{headers:this.setHeaders()});
+        return this.http.post<any>(`${apiUrl.key}/users/login`, body ,{headers:this.setHeaders()});
       }
     registerUser(formValue: { name:string, email: string, password:string }): Observable<any>{
         const body = {
@@ -28,7 +28,7 @@ export class AuthService {
             "email": formValue.email,
             "password": formValue.password
         }
-        return this.http.post<any>(`${this.apiUrl}/users/signup`, body ,{headers:this.setHeaders()});
+        return this.http.post<any>(`${apiUrl.key}/users/signup`, body ,{headers:this.setHeaders()});
     }
 
 }

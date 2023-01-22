@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ReparationService } from 'src/app/global/services/reparation.service';
+import { Observable } from 'rxjs';
+import { VoitureService } from 'src/app/global/services/voiture.service';
 
 @Component({
   selector: 'app-statistiques',
@@ -6,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./statistiques.component.css']
 })
 export class StatistiquesComponent implements OnInit {
+  avg$ : Observable<any>;
+  cars$ : Observable<any>;
+  defaultCar ! : string;
 
-  constructor() { }
+  constructor(private reparationService : ReparationService,
+    private voitureService : VoitureService) { }
 
   ngOnInit(): void {
+    this.defaultCar = '4567TVE';
+    this.cars$ = this.voitureService.getAllCars();
+    this.avg$ = this.reparationService.getAvgReparationDurationByCar(this.defaultCar);    
+  }
+  onFilterCars(immatriculation:string) {
+    console.log(immatriculation);
+    this.avg$ = this.reparationService.getAvgReparationDurationByCar(immatriculation);    
   }
 
 }
