@@ -27,7 +27,7 @@ export class ReparationDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.reparationId = this.route.snapshot.params['reparationId'];
-    // console.log(this.reparationId)
+    console.log(this.reparationId)
     this.reparation$ = this.reparationService.getReparationDetailsByReparationId(this.reparationId);
     this.reparation$.subscribe(
       response =>{
@@ -69,7 +69,7 @@ export class ReparationDetailsComponent implements OnInit {
         this.showModal = false;
       },
       (error)=>{
-        console.error('request failed with error');
+        console.error(error);
         this.errorMessage = 'La modification des informations a echoué';
       }
     );
