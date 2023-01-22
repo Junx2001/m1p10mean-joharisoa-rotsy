@@ -29,7 +29,7 @@ export class PaiementComponent implements OnInit {
     
     
     this.numberRegex = /^[1-9]\d*(\.\d+)?$/;
-    this.unpaidReparations$ = this.reparationService.getUnpaidReparations().pipe(
+    this.unpaidReparations$ = this.reparationService.getUnpaidReparationsByUser().pipe(
       map(values=>values.arrayFinal)
     );
 
