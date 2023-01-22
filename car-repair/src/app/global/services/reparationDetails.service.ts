@@ -32,10 +32,10 @@ export class ReparationDetailsService {
             "dateDebut": formValue.dateDebut,
             "dateFin": formValue.dateFin,
         }
-        return this.http.post<any>(`${this.apiUrl}/reparationDetails/update/${formValue.id}`, body );
+        return this.http.put<any>(`${this.apiUrl}/reparationDetails/${formValue.id}`, body );
     }
     deleteReparationDetails(repDetId : string){
-        return this.http.post<any>(`${this.apiUrl}/reparationDetails/delete/${repDetId}`, null );
+        return this.http.delete<any>(`${this.apiUrl}/reparationDetails/${repDetId}`, null );
     }
 
 }
