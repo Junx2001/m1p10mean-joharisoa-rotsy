@@ -1,1 +1,100 @@
-<p>depenses works!</p>
+<div class="flex flex-wrap">
+    <div class="w-full lg:w-12/12 px-4">
+        <div
+        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
+      >
+        <div class="rounded-t bg-white mb-0 px-6 py-6">
+          <div class="text-center flex justify-between">
+            <h6 class="text-blueGray-700 text-xl font-bold">Insertion des dépenses</h6>
+          </div>
+        </div>
+        <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+            
+          <form [formGroup]="depenseForm">
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              Formulaire d'ajout
+            </h6>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-12/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    Intitulé
+                  </label>
+                  <input 
+                    type="text"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Intitulé" formControlName="intitule" 
+                  />
+                    <span class="text-danger"
+                        *ngIf="(depenseFormControl.intitule.touched || submitted) && depenseFormControl.intitule.errors?.required">
+                        Intitulé de la dépense requis.
+                    </span>
+                </div>
+              </div>
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    Montant
+                  </label>
+                  <input 
+                    type="number"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Montant" formControlName="montant" 
+                  />
+                  <span class="text-danger"
+                      *ngIf="depenseFormControl.montant.touched && depenseFormControl.montant.errors?.required">
+                      Vérifiez le format de votre montant
+                  </span>
+                </div>
+              </div>
+            
+              
+            <div class="w-full lg:w-12/12 px-4">
+              <div class="relative w-full mb-3">
+                <button
+                class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                type="submit" (click)="onAddDepense()" [disabled]="depenseForm.invalid"
+              >
+                Valider
+              </button>
+              </div>
+            </div>
+            </div>
+          </form>
+
+          <div *ngIf="submitted" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
+            <span class="text-xl inline-block mr-5 align-middle">
+              <i class="fas fa-bell"></i>
+            </span>
+            <span class="inline-block align-middle mr-8"  style="margin-left : 1rem;">
+               Dépense insérée.
+            </span>
+            <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="submitted = false">
+              <span>×</span>
+            </button>
+          </div>
+
+          <div *ngIf="errorMessage" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+            <span class="text-xl inline-block mr-5 align-middle">
+              <i class="fas fa-bell"></i>
+            </span>
+            <span class="inline-block align-middle mr-8" style="margin-left : 1rem;">
+              <b class="capitalize">Erreur!</b> Il y a eu un problème dans la transaction
+            </span>
+            <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="errorMessage = false">
+              <span>×</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  

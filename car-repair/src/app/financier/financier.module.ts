@@ -7,6 +7,7 @@ import { DepensesComponent } from './depenses/depenses.component';
 import { FacturesNonPayeesComponent } from './factures-non-payees/factures-non-payees.component';
 import { DetailsFactureComponent } from './details-facture/details-facture.component';
 import { StatistiquesComponent } from './statistiques/statistiques.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,7 +22,8 @@ import { StatistiquesComponent } from './statistiques/statistiques.component';
   imports: [
     CommonModule,
     FinancierRoutingModule,
-    GlobalModule
+    GlobalModule,
+    ReactiveFormsModule
   ]
 })
 export class FinancierModule { }

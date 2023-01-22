@@ -13,7 +13,7 @@ export class FacturesNonPayeesComponent implements OnInit {
   constructor(private reparationService : ReparationService) { }
 
   ngOnInit(): void {
-    this.unpaidReparations$ = this.reparationService.getUnpaidReparationsByUser();
+    this.unpaidReparations$ = this.reparationService.getAllUnpaidReparations();
   }
 
 }

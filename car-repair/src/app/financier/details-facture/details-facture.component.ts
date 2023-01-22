@@ -23,6 +23,8 @@ export class DetailsFactureComponent implements OnInit {
   ngOnInit(): void {
     this.reparationId = this.route.snapshot.params['reparationId'];
     this.reparation$ = this.reparationService.getUnpaidReparationsById(this.reparationId);
+    this.reparation$.subscribe(v=>console.log(v));
+    
     this.payements$ = this.paiementService.getPayementsByReparationId(this.reparationId);    
   }
   onValidPay(paymentId){

@@ -21,7 +21,7 @@ export class ReparationService {
         return this.http.get<any>(`${this.apiUrl}/reparations/details`);
     }
     getUnpaidReparationsByUser():Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/reparations/unpaid`);
+        return this.http.get<any>(`${this.apiUrl}/reparations/unpaidByUser`);
     }
     getNotAffectedReparations():Observable<any>{
         return this.http.get<any>(`${this.apiUrl}/reparations/notAffected`);
@@ -69,10 +69,10 @@ export class ReparationService {
     getReparationsDetailsByUser():Observable<any>{
         return this.http.get<any>(`${this.apiUrl}/reparations`);
     }
-
+    getAllUnpaidReparations(): Observable<any>{
+        return this.http.get<any>(`${this.apiUrl}/reparations/unpaid`);
+    }
     getUnpaidReparationsById(reparationId: string):Observable<any>{
-        return this.getUnpaidReparationsByUser().pipe(
-            map(value=>value.arrayFinal.filter(rep => rep.repair._id === reparationId))
-        );
+        return this.http.get<any>(`${this.apiUrl}/reparations/unpaidById/${reparationId}`);
     }
 }

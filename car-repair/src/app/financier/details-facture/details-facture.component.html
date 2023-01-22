@@ -1,5 +1,5 @@
 <ng-container *ngIf="reparation$ | async as array">
-    <div *ngIf="array[0] as rep"  class="flex flex-wrap">
+    <div *ngIf="array.arrayFinal[0] as rep"  class="flex flex-wrap">
       <div class="w-full lg:w-12/12 px-4">
             <app-info-voiture [voiture]="rep.repair.voiture" [depot]="rep.repair.dateDepot" [client]="rep.repair.voiture.client"></app-info-voiture>
       </div>
@@ -61,7 +61,7 @@
                     <td 
                       class="border-t-0 px-6 align-middle font-bold border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                     >
-                    {{250000 | currency:'AR'}}
+                    {{rep.montantTotal | currency:'AR'}}
                     </td>
                 </tr>
                 </tbody>
@@ -161,9 +161,9 @@
               <h3 class="font-semibold text-lg text-blueGray-700">Etat de paiement</h3>
             </div>
           </div>
-            <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Dû : {{ 250000 | currency : 'AR'}}</p>
-            <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Payé : {{ 0 | currency : 'AR'}}</p>
-            <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Reste : {{ 250000 | currency : 'AR'}}</p>
+            <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Dû : {{ rep.montantTotal | currency : 'AR'}}</p>
+            <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Payé : {{ rep.restToPay | currency : 'AR'}}</p>
+            <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Reste : {{ rep.totalPaid | currency : 'AR'}}</p>
           </div>
     
         </div>

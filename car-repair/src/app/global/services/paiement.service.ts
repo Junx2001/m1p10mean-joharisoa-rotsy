@@ -29,4 +29,11 @@ export class PaiementService {
     validatePayement(paymentId: string):Observable<any>{
         return this.http.post<any>(`${this.apiUrl}/payments/validate/${paymentId}`, null);
     }
+    addDepense(formValue:{intitule: string, montant: number}){
+        const body={
+            'intitule':formValue.intitule,
+            'montant':formValue.montant
+        }
+        return this.http.post<any>(`${this.apiUrl}/depenses/add`, body);
+    }
 }
