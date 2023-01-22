@@ -26,7 +26,7 @@ import { NonRecupereComponent } from './non-recupere/non-recupere.component';
     AtelierRoutingModule,
     GlobalModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
   ]
 })
 export class AtelierModule { }

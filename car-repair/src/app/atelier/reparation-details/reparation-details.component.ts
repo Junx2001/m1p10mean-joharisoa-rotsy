@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ReparationService } from 'src/app/global/services/reparation.service';
@@ -12,6 +13,9 @@ export class ReparationDetailsComponent implements OnInit {
   reparation$! : Observable<any>;
   reparationId! : string;
   recup : boolean = false;
+  showModal = false;
+
+  reparationDetailsId! : string;
 
   constructor(private reparationService : ReparationService,
     private route : ActivatedRoute) { }
@@ -27,8 +31,10 @@ export class ReparationDetailsComponent implements OnInit {
       }
     );
   }
-  onUpdate(detailsId){
+  onUpdate(detailsId : string){
     console.log(detailsId);
+    this.showModal = !this.showModal;
+    this.reparationDetailsId = detailsId;
   }
   onValidateReparation(){
     

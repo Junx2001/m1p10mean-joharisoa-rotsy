@@ -5,8 +5,7 @@ import { LogoutComponent } from './global/components/logout/logout.component';
 const routes: Routes = [
       { path: '', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) },
       { path: 'atelier', loadChildren: () => import('./atelier/atelier.module').then(m => m.AtelierModule) },
-      { path: 'logout', component : LogoutComponent }
-
+      { path: 'logout', component : LogoutComponent },
 ];
 
 @NgModule({

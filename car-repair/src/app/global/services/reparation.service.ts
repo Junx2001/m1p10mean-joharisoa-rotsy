@@ -31,7 +31,6 @@ export class ReparationService {
     }
     getRecuperableReparationsNotRecovered():Observable<any>{
         return this.getAffectedReparations().pipe(
-            map(value=>value.filter(rep => rep.repair.dateRecup == null)),
             map(value=>value.filter(rep => rep.repair.valide == 1))
         );
     }
