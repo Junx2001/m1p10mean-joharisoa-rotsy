@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class InfoVoitureComponent implements OnInit {
   @Input() voiture! : any;
   @Input() depot! : string;
+  @Input() client! : any;
   constructor() { }
 
   ngOnInit(): void {

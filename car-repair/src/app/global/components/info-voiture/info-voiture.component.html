@@ -29,6 +29,12 @@
       <div class="mb-2 text-blueGray-600">
         {{ voiture.modele }}
       </div>
+      <div class="mb-2 text-blueGray-600">
+        Propriétaire : {{ client.name }}
+      </div>
+      <div class="mb-2 text-blueGray-600">
+        Email : {{ client.email }}
+      </div>
       <div *ngIf="depot" class="mb-2 text-blueGray-600">
         <i class="fas fa-calendar mr-2 text-lg text-blueGray-400"></i>
         Déposée le {{ depot| date : 'longDate'}} 

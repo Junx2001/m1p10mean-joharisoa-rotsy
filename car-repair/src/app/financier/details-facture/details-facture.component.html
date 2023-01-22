@@ -1,0 +1,172 @@
+<ng-container *ngIf="reparation$ | async as array">
+    <div *ngIf="array[0] as rep"  class="flex flex-wrap">
+      <div class="w-full lg:w-12/12 px-4">
+            <app-info-voiture [voiture]="rep.repair.voiture" [depot]="rep.repair.dateDepot" [client]="rep.repair.voiture.client"></app-info-voiture>
+      </div>
+        <div class="w-full lg:w-12/12 px-4">
+          <div
+            class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+          >
+          <div class="rounded-t bg-white mb-0 px-6 py-6">
+            <div class="text-center flex justify-between">
+              <h3 class="font-semibold text-lg text-blueGray-700">Factures</h3>
+              <a 
+                  [routerLink]="['/finance/factures-non-payees']"
+                  class="bg-red-600
+                  text-white 
+                  active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded 
+                  shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                >
+                Retour 
+              </a>
+            </div>
+          </div>
+            <div class="block w-full overflow-x-auto">
+              <!-- Projects table -->
+              <table class="items-center w-full bg-transparent border-collapse">
+                <thead>
+                  <tr >
+                    <th
+                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                    >
+                      intitulé
+                    </th>
+                    <th
+                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                    >
+                      montant
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let repDet of rep.reparationDetail">
+                      <td 
+                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                      >
+                      {{repDet.intitule}}
+                      </td>
+                      <td 
+                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                      >
+                      {{repDet.montant | currency:'AR'}}
+                      </td>
+                  </tr>
+                  
+                  <tr >
+                    <td 
+                      class="border-t-0 px-6 align-middle font-bold border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                    >
+                    TOTAL
+                    </td>
+                    <td 
+                      class="border-t-0 px-6 align-middle font-bold border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                    >
+                    {{250000 | currency:'AR'}}
+                    </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div
+            class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+          >
+          <div class="rounded-t bg-white mb-0 px-6 py-6">
+            <div class="text-center flex justify-between">
+              <h3 class="font-semibold text-lg text-blueGray-700">Etat de paiement</h3>
+            </div>
+          </div>
+            <div class="block w-full overflow-x-auto">
+              <!-- Projects table -->
+              <table class="items-center w-full bg-transparent border-collapse">
+                <thead>
+                  <tr >
+                    <th
+                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                    >
+                      Date
+                    </th>
+                    <th
+                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                    >
+                      Montant
+                    </th>
+                    <th
+                      class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                    >
+                      
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pay of payements$ | async">
+                      <td 
+                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                      >
+                      {{pay.date | date: 'yyyy-MM-dd, à HH:mm'}}
+                      </td>
+                      <td 
+                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                      >
+                      {{pay.montant | currency:'AR'}}
+                      </td>
+                      <td>
+                        <span *ngIf="pay.valide == 1" class="text-xlinline-block mr-5 align-middle" >
+                            <i style="color: green;" class="fas fa-check"></i>
+                          </span>
+                        <button *ngIf="pay.valide == 0" (click)="onValidPay(pay._id)" 
+                        class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+                        type="button"
+                        >
+                            Valider le paiement
+                        </button>
+                      </td>
+                  </tr>
+                  
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="w-full items-center  px-4">
+              <div *ngIf="validatePay" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
+                  <span class=" inline-block mr-5 align-middle">
+                    <i class="fas fa-bell"></i> Paiement validé! 
+                  </span><br>
+                  <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="validatePay = false">
+                    <span>×</span>
+                  </button>
+                </div>
+                <div *ngIf="error" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+                  <span class=" inline-block mr-5 align-middle">
+                      <i class="fas fa-bell"></i> Erreur! 
+                    </span><br>
+                  <span class="inline-block align-middle mr-8">
+                    Il y a eu un erreur à la validation du paiement.
+                  </span>
+                  <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="error = false">
+                    <span>×</span>
+                  </button>
+              </div>
+          </div>
+    
+          <div 
+            class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+          >
+          <div class="rounded-t bg-white mb-0 px-6 py-6">
+            <div class="text-center flex justify-between">
+              <h3 class="font-semibold text-lg text-blueGray-700">Etat de paiement</h3>
+            </div>
+          </div>
+            <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Dû : {{ 250000 | currency : 'AR'}}</p>
+            <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Payé : {{ 0 | currency : 'AR'}}</p>
+            <p class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-2">Reste : {{ 250000 | currency : 'AR'}}</p>
+          </div>
+    
+        </div>
+      </div>
+    </ng-container>
+    
