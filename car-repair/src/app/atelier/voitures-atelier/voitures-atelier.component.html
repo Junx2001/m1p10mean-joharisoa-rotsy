@@ -158,30 +158,30 @@
                         <td 
                         class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                         >
-                        {{car.client.name}}
+                        {{car.voiture.client.name}}
                         </td>
                         
                         <td 
                         class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                         >
-                        {{car.repair.dateDepot | date}}
+                        {{car.dateDepot | date}}
                         </td>
                         <td 
                         class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                         >
-                        <span *ngIf="car.repair.valide == 1" class="text-xlinline-block mr-5 align-middle" >
+                        <span *ngIf="car.valide == 1" class="text-xlinline-block mr-5 align-middle" >
                             <i style="color: green;" class="fas fa-check"></i>
                           </span>
                         </td>
                         <td 
                         class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                         >
-                        <a [routerLink]="['/atelier/reparer-voiture/',car.repair._id]"
+                        <a [routerLink]="['/atelier/reparer-voiture/',car._id]"
                             class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
                         >
                             Réparer
                         </a>
-                        <a [routerLink]="['/atelier/reparation-details/',car.repair._id]" 
+                        <a [routerLink]="['/atelier/reparation-details/',car._id]" 
                         class="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
                             >
                             Voir les réparations

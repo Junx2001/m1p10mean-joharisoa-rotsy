@@ -24,45 +24,184 @@
           </div>
           
         </div>
-        <div *ngIf="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
-          <div class="relative w-auto my-6 mx-auto max-w-sm">
-            <!--content-->
-            <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-              <!--header-->
-              <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                <h3 class="text-3xl font-semibold">
-                  {{reparationDetailsId}}
-                </h3>
-                <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" 
-                (click)="showModal = false">
-                  <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                    ×
+
+        <!-- Modal -->
+        <div *ngIf="showModal && reparationDetails$ | async as repDet">
+          <div class="details-modal">
+            <button class="details-modal-close" (click)="showModal = false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.7071 1.70711C14.0976 1.31658 14.0976 0.683417 13.7071 0.292893C13.3166 -0.0976311 12.6834 -0.0976311 12.2929 0.292893L7 5.58579L1.70711 0.292893C1.31658 -0.0976311 0.683417 -0.0976311 0.292893 0.292893C-0.0976311 0.683417 -0.0976311 1.31658 0.292893 1.70711L5.58579 7L0.292893 12.2929C-0.0976311 12.6834 -0.0976311 13.3166 0.292893 13.7071C0.683417 14.0976 1.31658 14.0976 1.70711 13.7071L7 8.41421L12.2929 13.7071C12.6834 14.0976 13.3166 14.0976 13.7071 13.7071C14.0976 13.3166 14.0976 12.6834 13.7071 12.2929L8.41421 7L13.7071 1.70711Z" fill="black" />
+              </svg>
+            </button>
+            <div class="details-modal-title">
+              <h1>Modifier les informations</h1>
+            </div>
+            <div class="details-modal-content">
+              <form #updateForm="ngForm" (ngSubmit)="onSubmitForm(updateForm)">
+                <input
+                type="hidden"
+                [(ngModel)]="repDet._id" name="id" 
+              />
+                <div class="w-full lg:w-12/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Intitulé
+                    </label>
+                    <input
+                      type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      [(ngModel)]="repDet.intitule" name="intitule"
+                    />
+                  </div>
+                </div>
+                <div class="w-full lg:w-12/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Avancement
+                    </label>
+                    <input
+                      type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      [(ngModel)]="repDet.avancement" name="avancement" 
+                    />
+                  </div>
+                </div>
+                <div class="w-full lg:w-12/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Montant
+                    </label>
+                    <input
+                      type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      [(ngModel)]="repDet.montant" name="montant" 
+                    />
+                  </div>
+                </div>
+                <div class="w-full lg:w-6/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Début de réparation
+                    </label>
+                    <input
+                      type="text" datetime="yyyy-MM-dd HH:mm:ss"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      [(ngModel)]="repDet.dateDebut" name="dateDebut" 
+                    />
+                  </div>
+                </div>
+                
+                <div class="w-full lg:w-6/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Fin de réparation
+                    </label>
+                    <input
+                      type="text" datetime="yyyy-MM-dd HH:mm:ss"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      [(ngModel)]="repDet.dateFin" name="dateFin" 
+                    />
+                  </div>
+                </div>
+
+                <div *ngIf="errorMessage" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+                  <span class="text-xl inline-block mr-5 align-middle">
+                    <i class="fas fa-bell"></i>
                   </span>
-                </button>
-              </div>
-              <!--body-->
-              <div class="relative p-6 flex-auto">
-                <p class="my-4 text-blueGray-500 text-lg leading-relaxed">
-                  I always felt like I could do anything. That’s the main
-                  thing people are controlled by! Thoughts- their perception
-                  of themselves! They're slowed down by their perception of
-                  themselves. If you're taught you can’t do anything, you
-                  won’t do anything. I was taught I could do everything.
-                </p>
-              </div>
-              <!--footer-->
-              <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="toggleModal()">
-                  Close
-                </button>
-                <button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="toggleModal()">
-                  Save Changes
-                </button>
-              </div>
+                  <span class="inline-block align-middle mr-8" style="margin-left : 1rem;">
+                    {{errorMessage}}
+                  </span>
+                  <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="errorMessage = null">
+                    <span>×</span>
+                  </button>
+                </div>
+
+                <div class="w-full lg:w-12/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <button
+                    class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+                    type="submit"
+                  >
+                    Valider
+                  </button>
+                  <button (click)="showModal = false"
+                    class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                  >
+                    Annuler
+                  </button>
+                  </div>
+                </div>
+              </form>
+              
             </div>
           </div>
+      </div>
+<!-- Modal end -->
+<!-- Modal for confirm delete -->
+<div *ngIf="showModalDelete && reparationDetails$ | async as repDetDelete">
+  <div class="details-modal" style="top:20%">
+    <button class="details-modal-close" (click)="showModalDelete = false">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.7071 1.70711C14.0976 1.31658 14.0976 0.683417 13.7071 0.292893C13.3166 -0.0976311 12.6834 -0.0976311 12.2929 0.292893L7 5.58579L1.70711 0.292893C1.31658 -0.0976311 0.683417 -0.0976311 0.292893 0.292893C-0.0976311 0.683417 -0.0976311 1.31658 0.292893 1.70711L5.58579 7L0.292893 12.2929C-0.0976311 12.6834 -0.0976311 13.3166 0.292893 13.7071C0.683417 14.0976 1.31658 14.0976 1.70711 13.7071L7 8.41421L12.2929 13.7071C12.6834 14.0976 13.3166 14.0976 13.7071 13.7071C14.0976 13.3166 14.0976 12.6834 13.7071 12.2929L8.41421 7L13.7071 1.70711Z" fill="black" />
+      </svg>
+    </button>
+    <div class="details-modal-title">
+      <h1>Suppression de la réparation</h1>
+    </div>
+    <div class="details-modal-content">
+      <div class="w-full lg:w-12/12 px-4">
+        <div class="relative w-full mb-3">
+          <p>Voulez-vous vraiment supprimer la réparation de la pièce : <b>{{repDetDelete.intitule}}</b> ? </p>
         </div>
-        <div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+      </div>
+      
+        <div *ngIf="errorMessage" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+          <span class="text-xl inline-block mr-5 align-middle">
+            <i class="fas fa-bell"></i>
+          </span>
+          <span class="inline-block align-middle mr-8" style="margin-left : 1rem;">
+            {{errorMessage}}
+          </span>
+          <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="errorMessage = null">
+            <span>×</span>
+          </button>
+        </div>
+        <div class="w-full lg:w-12/12 px-4">
+          <div class="relative w-full mb-3">
+            <button (click)="confirmDelete(repDetDelete._id)"
+            class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+            type="submit"
+          >
+            Supprimer
+          </button>
+          <button (click)="showModalDelete = false"
+            class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+          >
+            Annuler
+          </button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->
+
+
           <div class="block w-full overflow-x-auto">
             <!-- Projects table -->
             <table class="items-center w-full bg-transparent border-collapse">
@@ -135,7 +274,12 @@
                       <button  *ngIf="!recup" (click)="onUpdate(details._id)"
                           class="bg-orange-500 text-white active:bg-orange-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
                       >
-                          Modifier
+                      <i class="fas fa-pen"></i>
+                      </button>
+                      <button  *ngIf="!recup" (click)="onDelete(details._id)"
+                          class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+                      >
+                      <i class="fas fa-trash"></i>
                       </button>
                     </td>
                 </tr>

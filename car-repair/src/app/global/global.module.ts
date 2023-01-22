@@ -17,7 +17,6 @@ import * as fr from '@angular/common/locales/fr';
 import { HttpClientModule } from '@angular/common/http';
 import { AvancementPipe } from './pipes/avancement.pipe';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { ModalComponent } from './components/modal/modal.component';
 
 
 @NgModule({
@@ -34,7 +33,6 @@ import { ModalComponent } from './components/modal/modal.component';
     InfoVoitureComponent,
     AvancementPipe,
     SpinnerComponent,
-    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +50,6 @@ import { ModalComponent } from './components/modal/modal.component';
     InfoVoitureComponent,
     AvancementPipe,
     SpinnerComponent,
-    ModalComponent
   ]
 })
 export class GlobalModule { 

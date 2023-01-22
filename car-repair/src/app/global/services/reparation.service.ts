@@ -26,12 +26,9 @@ export class ReparationService {
     getNotAffectedReparations():Observable<any>{
         return this.http.get<any>(`${this.apiUrl}/reparations/notAffected`);
     }
-    getAffectedReparations():Observable<any>{
-        return this.http.get<any>(`${this.apiUrl}/reparations/affected`);
-    }
     getRecuperableReparationsNotRecovered():Observable<any>{
-        return this.getAffectedReparations().pipe(
-            map(value=>value.filter(rep => rep.repair.valide == 1))
+        return this.getAffectedReparations(null).pipe(
+            map(value=>value.filter(rep => rep.valide == 1))
         );
     }
    
@@ -41,32 +38,29 @@ export class ReparationService {
     validateReparation(reparationId: string): Observable<any>{
         return this.http.post<any>(`${this.apiUrl}/reparations/validate/${reparationId}`,null);
     }
-    addReparationDetails (formValue:{intitule: string,montant:string }, reparationId){
-        const body = {
-            "reparation":reparationId,
-            "intitule": formValue.intitule,
-            "montant": formValue.montant,
-        }
-        return this.http.post<any>(`${this.apiUrl}/reparationDetails/add`, body );
-    }
-    searchAffectedReparations(formValue:{immatriculation: string, marque: string, modele:string ,  client:string,dateDepot: string}): Observable<any>{
-        //  CHANGEMENT
+   
+    getAffectedReparations(formValue:{immatriculation: string, marque: string, modele:string ,  client:string,dateDepot: string}): Observable<any>{
         let params = new HttpParams();
-        if (formValue.immatriculation != null) {
-            params = params.set('immatriculation', formValue.immatriculation);
+        if (formValue != null){
+            if (formValue.immatriculation != null) {
+                params = params.set('immatriculation', formValue.immatriculation);
+            }
+            if (formValue.marque != null) {
+                params = params.set('marque', formValue.marque);
+            }
+            if (formValue.modele != null) {
+                params = params.set('modele', formValue.modele);
+            }
+            if (formValue.client != null) {
+                params = params.set('client', formValue.client);
+            }
+            if (formValue.dateDepot != null) {
+                console.log(formValue.dateDepot);
+                
+                params = params.set('dateDepot', formValue.dateDepot);
+            }
         }
-        if (formValue.marque != null) {
-            params = params.set('marque', formValue.marque);
-        }
-        if (formValue.modele != null) {
-            params = params.set('modele', formValue.modele);
-        }
-        if (formValue.client != null) {
-            params = params.set('client', formValue.client);
-        }
-        if (formValue.dateDepot != null) {
-            params = params.set('dateDepot', formValue.dateDepot);
-        }
+        
         return this.http.get<any>(`${this.apiUrl}/reparations/affected`,{params: params});
     }
     getReparationDetailsByReparationId(reparationId: string): Observable<any>{

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ReparationDetailsService } from 'src/app/global/services/reparation-details.service';
 import { ReparationService } from 'src/app/global/services/reparation.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class ReparerVoitureComponent implements OnInit {
 
   constructor(private route : ActivatedRoute,
     private reparationService : ReparationService,
-    private formBuilder : FormBuilder) { }
+    private formBuilder : FormBuilder,
+    private reparationDetService : ReparationDetailsService) { }
 
   ngOnInit(): void {
     this.reparationId = this.route.snapshot.params['reparationId'];
@@ -36,7 +38,7 @@ export class ReparerVoitureComponent implements OnInit {
     return this.repairForm.controls;
   }
   onRepair(){    
-    this.reparationService.addReparationDetails(this.repairForm.value, this.reparationId).subscribe(
+    this.reparationDetService.addReparationDetails(this.repairForm.value, this.reparationId).subscribe(
       (response) =>{ 
         console.log("response received");
         this.submitted = true;

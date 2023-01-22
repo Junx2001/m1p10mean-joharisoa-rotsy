@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginAtelierComponent } from './login-atelier/login-atelier.component';
 import { AtelierRoutingModule } from './atelier-route.module';
 import { GlobalModule } from '../global/global.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReceptionComponent } from './reception/reception.component';
 import { VoituresAtelierComponent } from './voitures-atelier/voitures-atelier.component';
@@ -27,6 +27,7 @@ import { NonRecupereComponent } from './non-recupere/non-recupere.component';
     GlobalModule,
     ReactiveFormsModule,
     DragDropModule,
+    FormsModule
   ]
 })
 export class AtelierModule { }
