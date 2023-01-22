@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ReparationDetailsService } from 'src/app/global/services/reparation-details.service';
+import { ReparationDetailsService } from 'src/app/global/services/reparationDetails.service';
 import { ReparationService } from 'src/app/global/services/reparation.service';
 
 @Component({
