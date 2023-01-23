@@ -8,6 +8,9 @@ import { FacturesNonPayeesComponent } from './factures-non-payees/factures-non-p
 import { DetailsFactureComponent } from './details-facture/details-facture.component';
 import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { LineChartJourComponent } from './line-chart-jour/line-chart-jour.component';
+import { StatDepensesComponent } from './stat-depenses/stat-depenses.component';
 
 
 
@@ -17,7 +20,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     DepensesComponent,
     FacturesNonPayeesComponent,
     DetailsFactureComponent,
-    StatistiquesComponent
+    StatistiquesComponent,
+    LineChartComponent,
+    LineChartJourComponent,
+    StatDepensesComponent
   ],
   imports: [
     CommonModule,

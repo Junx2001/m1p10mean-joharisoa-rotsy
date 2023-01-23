@@ -9,7 +9,6 @@
                 <h3 class="text-4xl font-normal leading-normal mt-0 mb-2 text-red-800">
                     Statistiques
                   </h3>
-                                  
             </div>
           </div>
         </div>
@@ -19,12 +18,12 @@
 
     <div class="w-full xl:w-12/12 mb-12 xl:mb-0 px-4">
         <div
-        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
+        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700 text-white"
       >
         <div class="rounded-t mb-0 px-4 py-3 border-0">
           <div class="flex flex-wrap items-center">
             <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 class="font-semibold text-base text-blueGray-700">Temps de réparation moyenne par voiture</h3>
+              <h3 class="font-semibold text-base text-white">Temps de réparation moyenne par voiture</h3>
             </div>
             <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                 <select
@@ -48,12 +47,12 @@
             <thead>
               <tr>
                 <th
-                  class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-600 text-blueGray-400 border-blueGray-400 "
                 >
                   Date de réparation
                 </th>
                 <th
-                  class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-600 text-blueGray-400 border-blueGray-400 "
                 >
                   Durée moyenne
                 </th>
@@ -84,6 +83,15 @@
         </div>
       </div>
       
+    </div>
+    <div class="w-full xl:w-6/12 px-4">
+      <app-line-chart ></app-line-chart>
+    </div>
+    <div class="w-full xl:w-6/12 px-4">
+      <app-line-chart-jour ></app-line-chart-jour>
+    </div>
+    <div class="w-full xl:w-12/12 px-4">
+      <app-stat-depenses ></app-stat-depenses>
     </div>
 </div>
   

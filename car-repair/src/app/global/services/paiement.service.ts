@@ -36,4 +36,13 @@ export class PaiementService {
         }
         return this.http.post<any>(`${apiUrl.key}/depenses/add`, body);
     }
+    getStatsCAPerMonth(year): Observable<any>{
+        return this.http.get<any>(`${apiUrl.key}/payments/statsCAPerMonth/${year}`);
+    }
+    getStatsCAPerDay(year,month): Observable<any>{
+        return this.http.get<any>(`${apiUrl.key}/payments/statsCAPerDay/${year}/${month}`);
+    }
+    getStatsBeneficePerMonth(year):Observable<any>{
+        return this.http.get<any>(`${apiUrl.key}/payments/statsBeneficesPerMonth/${year}`);
+    }
 }
