@@ -56,8 +56,8 @@ export class StatDepensesComponent implements OnInit {
           {
             label: year,
             fill: false,
-            backgroundColor: "#fff",
-            borderColor: "#fff",
+            backgroundColor: "rgba(33, 37, 41, 0.6)",
+            borderColor: "rgba(33, 37, 41, 0.6)",
             data: data
           },
         ],
@@ -85,11 +85,10 @@ export class StatDepensesComponent implements OnInit {
         title: {
           display: true,
           text: "Bénéfice ou perte par mois",
-          fontColor: "white",
         },
         legend: {
           labels: {
-            fontColor: "white",
+            fontColor: "rgba(0,0,0,.4)",
           },
           align: "end",
           position: "bottom",
@@ -105,9 +104,6 @@ export class StatDepensesComponent implements OnInit {
         scales: {
           xAxes: [
             {
-              ticks: {
-                fontColor: "rgba(255,255,255,.7)",
-              },
               display: true,
               scaleLabel: {
                 display: true,
@@ -119,7 +115,7 @@ export class StatDepensesComponent implements OnInit {
                 borderDash: [2],
                 borderDashOffset: [2],
                 color: "rgba(33, 37, 41, 0.3)",
-                zeroLineColor: "rgba(0, 0, 0, 0)",
+                zeroLineColor: "rgba(33, 37, 41, 0.3)",
                 zeroLineBorderDash: [2],
                 zeroLineBorderDashOffset: [2],
               },
@@ -127,9 +123,6 @@ export class StatDepensesComponent implements OnInit {
           ],
           yAxes: [
             {
-              ticks: {
-                fontColor: "rgba(255,255,255,.7)",
-              },
               display: true,
               scaleLabel: {
                 display: true,
@@ -140,8 +133,8 @@ export class StatDepensesComponent implements OnInit {
                 borderDash: [3],
                 borderDashOffset: [3],
                 drawBorder: false,
-                color: "rgba(255, 255, 255, 0.15)",
-                zeroLineColor: "#fff",
+                color: "rgba(33, 37, 41, 0.2)",
+                zeroLineColor: "rgba(33, 37, 41, 1)",
                 zeroLineBorderDash: [2],
                 zeroLineBorderDashOffset: [2],
               },

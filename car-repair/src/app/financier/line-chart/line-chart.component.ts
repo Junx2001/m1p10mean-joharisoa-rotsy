@@ -76,7 +76,7 @@ export class LineChartComponent implements OnInit {
           {
             label: year,
             backgroundColor: "#ed64a6",
-            borderColor: "#fff",
+            borderColor: "#ed64a6",
             data: data,
             fill: false,
             barThickness: 10,
@@ -89,7 +89,6 @@ export class LineChartComponent implements OnInit {
         title: {
           display: true,
           text: "Chiffre d'affaires par mois",
-          fontColor: "white",
         },
         tooltips: {
           mode: "index",
@@ -101,7 +100,7 @@ export class LineChartComponent implements OnInit {
         },
         legend: {
           labels: {
-            fontColor: "#fff",
+            fontColor: "rgba(0,0,0,.4)",
           },
           align: "end",
           position: "bottom",
@@ -135,8 +134,8 @@ export class LineChartComponent implements OnInit {
                 borderDash: [2],
                 drawBorder: false,
                 borderDashOffset: [2],
-                color: "rgba(255, 255, 255, 0.15)",
-                zeroLineColor: "rgba(33, 37, 41, 0)",
+                color: "rgba(33, 37, 41, 0.2)",
+                zeroLineColor: "rgba(33, 37, 41, 0.15)",
                 zeroLineBorderDash: [2],
                 zeroLineBorderDashOffset: [2],
               },
