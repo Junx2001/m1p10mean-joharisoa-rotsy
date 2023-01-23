@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { LayoutComponent } from "../global/components/layout/layout.component";
 import { AuthGuard } from "../global/guards/auth.guard";
+import { ActivateUserAccountComponent } from "./activate-user-account/activate-user-account.component";
 import { AjoutVoitureComponent } from "./ajout-voiture/ajout-voiture.component";
 import { DepotVoitureComponent } from "./depot-voiture/depot-voiture.component";
 import { HistoriqueComponent } from "./historique/historique.component";
@@ -15,6 +16,8 @@ import { RegisterComponent } from "./register/register.component";
 
 const routes: Routes = [
     { path: 'login', component: LoginClientComponent},
+    { path: 'login/:activatedAccount', component: LoginClientComponent},
+    { path: 'activateAccount/:userId/:secretEmailToken', component: ActivateUserAccountComponent },
     { path: 'register', component: RegisterComponent},
     { path: '',
     component: LayoutComponent,

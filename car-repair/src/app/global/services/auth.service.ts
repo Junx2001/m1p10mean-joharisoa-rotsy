@@ -30,5 +30,8 @@ export class AuthService {
         }
         return this.http.post<any>(`${apiUrl.key}/users/signup`, body ,{headers:this.setHeaders()});
     }
+    activateAccount(userId : string, secretToken : string): Observable<any>{
+        return this.http.post<any>(`${apiUrl.key}/users/verify/${userId}/${secretToken}`, null ,{headers:this.setHeaders()});
+    }
 
 }

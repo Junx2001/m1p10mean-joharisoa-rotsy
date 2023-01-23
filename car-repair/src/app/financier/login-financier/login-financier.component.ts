@@ -8,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class LoginFinancierComponent implements OnInit {
   roleUser! : string;
   landingPage! : string;
+  defaultLogin! : any;
   constructor() { }
 
   ngOnInit(): void {
+    this.defaultLogin={
+      'email':'finance@carrepair.com',
+      'password':'motdepasse'
+    };
     this.roleUser = "responsable financier";
     this.landingPage = '/finance/factures-non-payees';
   }

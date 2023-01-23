@@ -22,7 +22,6 @@ export class StatistiquesComponent implements OnInit {
     this.avg$ = this.reparationService.getAvgReparationDurationByCar(this.defaultCar);    
   }
   onFilterCars(immatriculation:string) {
-    console.log(immatriculation);
     this.avg$ = this.reparationService.getAvgReparationDurationByCar(immatriculation);    
   }
 

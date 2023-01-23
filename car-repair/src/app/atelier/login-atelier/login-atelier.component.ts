@@ -8,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class LoginAtelierComponent implements OnInit {
   roleUser! : string;
   landingPage! : string;
+  defaultLogin! : any;
   constructor() { }
 
   ngOnInit(): void {
+    this.defaultLogin={
+      'email':'rafa.rotsy@gmail.com',
+      'password':'motdepasse'
+    };
     this.roleUser = "responsable atelier";
     this.landingPage = '/atelier/reception-voiture';
   }

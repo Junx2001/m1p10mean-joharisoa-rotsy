@@ -11,8 +11,11 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
   @Input() role! : string;
   @Input() landingPage! : string;
+  @Input() activatedAccount! : number;
+  @Input() defaultLogin ! : any;
   loginForm! : FormGroup;
   errorMessage! : string;
+  success! : string;
   showAlert! : boolean;
 
   constructor(private formBuilder : FormBuilder,
@@ -22,9 +25,19 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.showAlert = false;
     this.loginForm = this.formBuilder.group({
-      email : [null, [Validators.required, Validators.email]],
-      password : [null, Validators.required]
+      email : [this.defaultLogin.email, [Validators.required, Validators.email]],
+      password : [this.defaultLogin.password, Validators.required]
     })
+    if (this.activatedAccount){
+      if (this.activatedAccount == 1){
+        this.showAlert = true;
+        this.success = "Votre compte a été activé."
+      }else{
+        this.showAlert = true;
+        this.errorMessage = "L'activation de votre compte a echoué. Veuillez vous re inscrire."
+      }
+    }
+    
   }
   onSubmitLoginForm(){
     // login from API

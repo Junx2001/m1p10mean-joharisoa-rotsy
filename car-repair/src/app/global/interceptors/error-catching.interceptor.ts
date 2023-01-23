@@ -16,15 +16,15 @@ export class ErrorCatchingInterceptor implements HttpInterceptor{
                if (error.error instanceof ErrorEvent) {
                   // console.log('This is client side error');
                } else {
-                  console.log('This is server side error');
-                  console.log(error)
+                  // console.log('This is server side error');
+
                   errorMsg = `Error Code: ${error.status},  Message: ${error.error.error}`;
                   if (error.status==400 && error.error.error === 'auth failed, check auth-token222'){
                      this.router.navigateByUrl('/login');
                   }
                }
                // console.log(errorMsg);
-               return throwError(errorMsg);
+               return throwError(error);
             })
       )
    }

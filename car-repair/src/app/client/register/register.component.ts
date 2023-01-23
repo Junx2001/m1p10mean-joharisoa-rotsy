@@ -24,10 +24,11 @@ export class RegisterComponent implements OnInit {
   onSubmitRegisterForm(){
     this.authService.registerUser(this.registerForm.value).subscribe(
       (response) =>{ 
+        console.log(response);
         console.log("response received");
         this.successMessage = true;
       },
-      (error)=>{
+      (error)=>{        
         console.error('request failed with error');
         if (error.status === 409){
           this.errorMessage = true;
