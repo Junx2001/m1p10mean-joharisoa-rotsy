@@ -15,6 +15,7 @@ import { PaiementComponent } from './paiement/paiement.component';
 import { HistoriqueComponent } from './historique/historique.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivateUserAccountComponent } from './activate-user-account/activate-user-account.component';
+import { PdfFactureComponent } from './pdf-facture/pdf-facture.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { ActivateUserAccountComponent } from './activate-user-account/activate-u
     PaiementComponent,
     HistoriqueComponent,
     ActivateUserAccountComponent,
+    PdfFactureComponent,
   ],
   imports: [
     CommonModule,

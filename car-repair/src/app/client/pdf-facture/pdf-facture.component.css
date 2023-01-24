@@ -1,4 +1,7 @@
-.clearfix:after {
+ #facture{
+    display: none;
+ }
+ .clearfix:after {
     content: "";
     display: table;
     clear: both;

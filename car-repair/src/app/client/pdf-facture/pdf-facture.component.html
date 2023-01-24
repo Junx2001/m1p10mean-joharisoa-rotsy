@@ -1,0 +1,76 @@
+<div  class="flex flex-wrap">
+    <div class="w-full lg:w-3/12 px-4"></div>
+    <div class="w-full lg:w-9/12 px-4">
+            <button (click)="onPrint()"
+            class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 
+            rounded shadow hover:shadow-lg 
+            outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+            <i class="fas fa-print"></i>
+            Imprimer la facture
+            </button>
+        
+    </div>
+</div>
+<div  class="body" id="facture" #facture>
+  <div *ngIf="user$ | async as client" class="header">
+      <div class=" uppercase clearfix">
+          <h1 class="h1">FACTURE</h1>
+          <div id="company" class="clearfix" style="margin-right: 20px;">
+            <div>Garage Mean Joharisoa Rotsy</div>
+            <div>Andoharanofotsy,<br /> Antananarivo, MG</div>
+            <div>(101) 519-0450</div>
+            <div><a class="a" href="mailto:garageMean@mean.io">garageMean@mean.io</a></div>
+          </div>
+          <div id="project" style="margin-left:20px;" *ngIf="car$ | async as car">
+            <div><span>DESTINATAIRE</span>{{client.user.name}}</div>
+            <div><span>EMAIL</span> <a class="a" href="mailto:{{client.user.email}}">{{client.user.email}}</a></div>
+            <br><hr><br>
+            <div><span>immatriculation</span>{{car[0].car.immatriculation}}</div>
+            <div><span>marque</span>{{car[0].car.marque}}</div>
+            <div><span>modele</span>{{car[0].car.modele}}</div>
+            <br><hr><br>
+            <div><span>DATE DE FACTURE</span>{{date | date : 'longDate'}}</div>
+            <div><span>DATE D'échéance</span> {{dateFin | date : 'longDate'}}</div>
+          </div>
+        </div>
+  </div>
+  <ng-container  *ngIf="reparation$ | async as value">
+    <main *ngIf="value.arrayFinal[0] as rep">
+      <table  class="table uppercase">
+        <thead>
+          <tr >
+            <th>Intitulé</th>
+            <th>quantité</th>
+            <th>prix</th>
+            <th>montant</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let det of rep.reparationDetail">
+            <td class="desc">{{det.intitule}}</td>
+            <td class="qty">1</td>
+            <td class="unit">{{det.montant | currency : 'AR'}}</td>
+            <td class="total">{{det.montant | currency : 'AR'}}</td>
+          <tr>
+          <tr class="font-bold">
+            <td colspan="3" class="grand ">Total</td>
+            <td class="grand total">{{rep.montantTotal | currency:'AR'}}</td>
+          </tr>
+          <tr>
+            <td colspan="3">Montant payé</td>
+            <td class="total">{{rep.totalPaid | currency:'AR'}}</td>
+          </tr>
+          <tr class="font-bold">
+            <td colspan="3" >Reste à payer</td>
+            <td class="total">{{rep.restToPay | currency:'AR'}}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </main>
+  </ng-container>
+    <footer class="footer">
+      RATSIRARSON Joharisoa - RAFAMANTANANTSOA Rotsy Vonimanitra - Projet Mean Janvier 2023
+    </footer>
+
+</div>

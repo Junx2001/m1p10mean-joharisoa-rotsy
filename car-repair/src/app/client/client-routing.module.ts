@@ -11,6 +11,7 @@ import { ListeReparationsComponent } from "./liste-reparations/liste-reparations
 import { ListeVoituresComponent } from "./liste-voitures/liste-voitures.component";
 import { LoginClientComponent } from "./login-client/login-client.component";
 import { PaiementComponent } from "./paiement/paiement.component";
+import { PdfFactureComponent } from "./pdf-facture/pdf-facture.component";
 import { RecuperationVoitureComponent } from "./recuperation-voiture/recuperation-voiture.component";
 import { RegisterComponent } from "./register/register.component";
 
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'login/:activatedAccount', component: LoginClientComponent},
     { path: 'activateAccount/:userId/:secretEmailToken', component: ActivateUserAccountComponent },
     { path: 'register', component: RegisterComponent},
+    { path: 'exportFacturePDF/:immatriculation', component: PdfFactureComponent,canActivate:[AuthGuard] },
     { path: '',
     component: LayoutComponent,
     children:[
