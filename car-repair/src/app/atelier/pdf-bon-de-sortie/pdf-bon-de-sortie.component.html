@@ -1,0 +1,52 @@
+<button *ngIf="!recup" (click)="onValidateReparation()" class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+    Valider le bon de sortie
+  </button>
+
+  <div *ngIf="recup" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
+    <span class="text-xl inline-block mr-5 align-middle">
+      <i class="fas fa-check"></i>
+    </span>
+    <span class="inline-block align-middle mr-8"  style="margin-left : 1rem;">
+       Cette voiture est maintenant récupérable
+    </span>
+  </div>
+
+    <div  class="body" id="facture"  *ngIf="reparation$ | async as rep" [ngStyle]="recup && {'display':'block'}  " #facture>
+        <div class="header">
+            <div >
+                <h1 class="h1">BON DE SORTIE</h1>
+                <div style="margin: 2rem;">
+                  <div>Garage Mean Joharisoa Rotsy</div>
+                  <div>Andoharanofotsy,<br /> Antananarivo, MG</div>
+                  <div>(101) 519-0450</div>
+                  <div><a class="a" href="mailto:garageMean@mean.io">garageMean@mean.io</a></div>
+                </div>
+                <div style="margin: 2rem;" *ngIf="user$ | async as atelier" >
+                    <p>Je soussigné Mr/Mme : {{atelier.user.name}}, Email : <a class="a" href="mailto:{{atelier.user.email}}">{{atelier.user.email}}</a></p>
+                    <p>Avoir autorisé Mr/Mme : {{rep.repair.voiture.client.name}}, Email : <a class="a" href="mailto:{{rep.repair.voiture.client.email}}">{{rep.repair.voiture.client.email}}</a> </p>
+                    <br>
+                    <p>A faire sortir de garage ce <span style="font-weight: bolder; font-size: 13x;">{{date | date: 'longDate'}}</span> </p>
+                    <div>La voiture suivante : 
+                        <ul style="font-weight: bold; margin-left: 1rem; list-style: revert;">
+                            <li>Immatriculation : {{rep.repair.voiture.immatriculation}} </li>
+                            <li>Marque : {{rep.repair.voiture.marque}} </li>
+                            <li>Modèle : {{rep.repair.voiture.modele}} </li>
+                        </ul>
+                    </div>
+                    <p>Déposée le {{rep.repair.dateDepot | date: 'longDate'}} </p>
+                    <br>
+                    <div>Les pièces suivantes ont été réparées : 
+                        <ul style="font-weight: bold; margin-left: 1rem; list-style: revert;">
+                            <li *ngFor="let repDet of rep.reparationDetail">{{repDet.intitule}}</li>
+                        </ul>
+                    </div>
+                </div>
+              </div>
+        </div>
+            
+          <footer class="footer">
+            RATSIRARSON Joharisoa - RAFAMANTANANTSOA Rotsy Vonimanitra - Projet Mean Janvier 2023
+          </footer>
+      
+      </div>
+  

@@ -1,0 +1,49 @@
+#facture{
+    display: none;
+ }
+  
+   .a {
+    color: #5D6975;
+    text-decoration: underline;
+  }
+  
+  .body {
+    position: relative;
+    width: 15cm;  
+    height: 15cm; 
+    margin: 0 auto; 
+    color: #001028;
+    background: #FFFFFF; 
+    font-family: Arial, sans-serif; 
+    font-size: 12px; 
+    font-family: Arial;
+  }
+  
+   .header {
+    padding: 10px 0;
+    margin-bottom: 30px;
+  }
+  
+  
+   .h1 {
+    border-top: 1px solid  #5D6975;
+    border-bottom: 1px solid  #5D6975;
+    color: #5D6975;
+    font-size: 2.4em;
+    line-height: 1.4em;
+    font-weight: normal;
+    text-align: center;
+    margin: 0 0 20px 0;
+  }
+  
+  
+   .footer {
+    color: #5D6975;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid #C1CED9;
+    padding: 8px 0;
+    text-align: center;
+  }

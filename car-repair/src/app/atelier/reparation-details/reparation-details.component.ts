@@ -27,7 +27,6 @@ export class ReparationDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.reparationId = this.route.snapshot.params['reparationId'];
-    console.log(this.reparationId)
     this.reparation$ = this.reparationService.getReparationDetailsByReparationId(this.reparationId);
     this.reparation$.subscribe(
       response =>{
@@ -75,13 +74,6 @@ export class ReparationDetailsComponent implements OnInit {
     );
   }
 
-  onValidateReparation(){
-    this.reparationService.validateReparation(this.reparationId).subscribe(
-      (response)=>{
-        this.recup = true;
-      }
-    );
-
-  }
+  
 
 }

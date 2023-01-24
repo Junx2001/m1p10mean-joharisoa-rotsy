@@ -10,6 +10,7 @@ import { VoituresAtelierComponent } from './voitures-atelier/voitures-atelier.co
 import { ReparerVoitureComponent } from './reparer-voiture/reparer-voiture.component';
 import { ReparationDetailsComponent } from './reparation-details/reparation-details.component';
 import { NonRecupereComponent } from './non-recupere/non-recupere.component';
+import { PdfBonDeSortieComponent } from './pdf-bon-de-sortie/pdf-bon-de-sortie.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NonRecupereComponent } from './non-recupere/non-recupere.component';
     VoituresAtelierComponent,
     ReparerVoitureComponent,
     ReparationDetailsComponent,
-    NonRecupereComponent
+    NonRecupereComponent,
+    PdfBonDeSortieComponent
   ],
   imports: [
     CommonModule,

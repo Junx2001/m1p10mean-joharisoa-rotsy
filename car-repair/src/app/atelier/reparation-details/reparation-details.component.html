@@ -96,9 +96,10 @@
                       Début de réparation
                     </label>
                     <input
-                      type="text" datetime="yyyy-MM-dd HH:mm:ss"
+                      type="date" 
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      [(ngModel)]="repDet.dateDebut" name="dateDebut" 
+                      name="dateDebut" 
+                      [ngModel] ="repDet.dateDebut | date:'yyyy-MM-dd'" (ngModelChange)="repDet.dateDebut = $event"
                     />
                   </div>
                 </div>
@@ -112,9 +113,10 @@
                       Fin de réparation
                     </label>
                     <input
-                      type="text" datetime="yyyy-MM-dd HH:mm:ss"
+                      type="date"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      [(ngModel)]="repDet.dateFin" name="dateFin" 
+                      name="dateFin" 
+                      [ngModel] ="repDet.dateFin | date:'yyyy-MM-dd'" (ngModelChange)="repDet.dateFin = $event"
                     />
                   </div>
                 </div>
@@ -255,7 +257,7 @@
                     <td 
                       class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                     >
-                    {{details.dateDebut | date: 'dd/MM/yy, à HH:mm' }}
+                    {{details.dateDebut | date }}
                     </td>
                     <td 
                       class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
@@ -266,7 +268,7 @@
                       class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                        >
                        <span *ngIf="!details.dateFin"> -- </span>
-                      {{details.dateFin | date: 'dd/MM/yy, à HH:mm' }}
+                      {{details.dateFin | date }}
                     </td>
                     <td 
                       class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
@@ -291,18 +293,7 @@
 
         
           </div>
-        <button *ngIf="!recup" (click)="onValidateReparation()" class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
-          Valider le bon de sortie
-        </button>
-
-        <div *ngIf="recup" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
-          <span class="text-xl inline-block mr-5 align-middle">
-            <i class="fas fa-check"></i>
-          </span>
-          <span class="inline-block align-middle mr-8"  style="margin-left : 1rem;">
-             Cette voiture est maintenant récupérable
-          </span>
-        </div>
+        <app-pdf-bon-de-sortie></app-pdf-bon-de-sortie>
 
         
 
