@@ -17,6 +17,7 @@ import * as fr from '@angular/common/locales/fr';
 import { HttpClientModule } from '@angular/common/http';
 import { AvancementPipe } from './pipes/avancement.pipe';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     InfoVoitureComponent,
     AvancementPipe,
     SpinnerComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,
