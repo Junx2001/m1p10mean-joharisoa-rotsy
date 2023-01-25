@@ -22,6 +22,7 @@ export class ListeFacturesComponent implements OnInit {
     this.immatriculation = this.route.snapshot.params['immatriculation'];
     this.car$ = this.voitureService.getCarByImmatriculation(this.immatriculation);
     this.reparation$ = this.reparationService.getCarRepairInProcess(this.immatriculation);
+    // this.reparation$ = this.reparationService.getCarReparationsByImmatriculation(this.immatriculation);
 
     
   }

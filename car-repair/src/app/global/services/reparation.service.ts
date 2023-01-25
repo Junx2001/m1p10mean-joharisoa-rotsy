@@ -54,7 +54,6 @@ export class ReparationService {
                 params = params.set('client', formValue.client);
             }
             if (formValue.dateDepot != null) {
-                console.log(formValue.dateDepot);
                 
                 params = params.set('dateDepot', formValue.dateDepot);
             }

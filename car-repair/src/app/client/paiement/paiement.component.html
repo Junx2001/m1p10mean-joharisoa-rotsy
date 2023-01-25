@@ -1,11 +1,94 @@
 <div class="flex flex-wrap">
+  <div class="w-full mb-12 px-4">
+    <div
+    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+  >
+  <div class="rounded-t bg-white mb-0 px-6 py-6">
+    <div class="text-center flex justify-between">
+      <h3 class="font-semibold text-lg text-blueGray-700">Liste des réparations non payés</h3>
+    </div>
+  <div class="block w-full overflow-x-auto">
+    <!-- Projects table -->
+    
+
+    <table class="items-center w-full bg-transparent border-collapse">
+      <thead>
+        <tr >
+            <th
+             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+             >
+             </th>
+             <th
+             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+             >
+             Immatriculation</th>
+             <th
+             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+             >
+             Marque</th>
+             <th
+             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+             >
+             Modèle</th>
+             <th
+             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+             >
+             </th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr *ngFor="let car of unpaidReparations$ | async ">
+                <th 
+                    class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                    >
+                    <img
+                        src="assets/img/2017_hyundai_santa_fe.jpg"
+                        class="h-12 w-12 bg-white rounded-full border"
+                        alt="image voiture"
+                      />
+                </th>
+                <td 
+                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                >
+                {{car.repair.voiture.immatriculation}}
+                </td>
+                <td 
+                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                >
+                {{car.repair.voiture.marque}}
+                </td>
+                <td 
+                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                >
+                {{car.repair.voiture.modele}}
+                </td>
+                
+              <td 
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+              >
+                
+                <button (click)="onPayReparation(car.repair._id)"
+                class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+                >
+                    Payer
+                </button>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+  </div>
+
+    </div>
+</div>
+
+
     <div class="w-full lg:w-12/12 px-4">
         <div
         class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
       >
         <div class="rounded-t bg-white mb-0 px-6 py-6">
           <div class="text-center flex justify-between">
-            <h6 class="text-blueGray-700 text-xl font-bold">Payer mes réparations</h6>
+            <h6 class="text-blueGray-700 text-xl font-bold">Formulaire de paiement</h6>
           </div>
         </div>
         <div class="flex-auto px-4 lg:px-10 py-10 pt-0">

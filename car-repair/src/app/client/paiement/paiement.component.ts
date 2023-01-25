@@ -18,7 +18,7 @@ export class PaiementComponent implements OnInit {
   errorMessage = false;
 
   unpaidReparations$! :  Observable<any>;
-
+  reparationId : string = null;
 
   constructor(private formBuilder : FormBuilder,
     private reparationService : ReparationService,
@@ -26,23 +26,22 @@ export class PaiementComponent implements OnInit {
     private paiementService : PaiementService) { }
 
   ngOnInit(): void {
-    
+     
     
     this.numberRegex = /^[1-9]\d*(\.\d+)?$/;
     this.unpaidReparations$ = this.reparationService.getUnpaidReparationsByUser().pipe(
       map(values=>values.arrayFinal)
     );
+    this.unpaidReparations$.subscribe(v=>console.log(v)
+    )
 
     if (this.route.snapshot.params['reparationId']){
-      const reparationId = this.route.snapshot.params['reparationId']
-      this.unpaidReparations$ = this.unpaidReparations$.pipe(
-        map(values=>values.filter(reps => reps.repair._id === reparationId))
-      );
+      this.reparationId = this.route.snapshot.params['reparationId']
     }
 
     
     this.paiementForm = this.formBuilder.group({
-      reparationId : [null, Validators.required],
+      reparationId : [this.reparationId, Validators.required],
       montant :[0, [Validators.required, Validators.pattern(this.numberRegex)]],
     },{
       updateOn: 'blur'
@@ -64,6 +63,11 @@ export class PaiementComponent implements OnInit {
     )
     
     // console.log(this.paiementService.getPaiementsByReparation(this.paiementForm.value.reparationId));
+  }
+
+  onPayReparation(reparationId){
+    this.reparationId = reparationId;
+    this.paiementForm.setValue({reparationId:this.reparationId, montant : 0});
   }
 
 }
