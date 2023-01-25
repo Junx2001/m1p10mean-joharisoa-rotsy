@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/global/services/auth.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { AuthService } from 'src/app/global/services/auth.service';
 export class RegisterComponent implements OnInit {
   registerForm! : FormGroup;
   constructor(private formBuilder : FormBuilder,
-    private authService : AuthService) { }
+    private authService : AuthService,
+    private router : Router) { }
     successMessage : boolean = false;
     errorMessage : boolean = false;
 
@@ -27,14 +29,19 @@ export class RegisterComponent implements OnInit {
         console.log(response);
         console.log("response received");
         this.successMessage = true;
+        this.errorMessage = false;
       },
       (error)=>{        
         console.error('request failed with error');
         if (error.status === 409){
           this.errorMessage = true;
+          this.successMessage = false;
         }
       }
     )
+  }
+  onLogin(){
+    this.router.navigateByUrl('/login');
   }
 
 }

@@ -1,4 +1,4 @@
-
+<!-- 
 <div>
     <main>
       <section class="relative w-full h-full py-40 min-h-screen">
@@ -24,4 +24,51 @@
       </section>
     </main>
   </div>
-  
+   -->
+
+     <body>
+       <div class="main">
+         
+         <div class="container b-container" id="a-container">
+           <form class="form" id="b-form" [formGroup]="loginForm">
+             <h2 class="form_title title">LOGIN</h2>
+             <input class="form__input" type="text" placeholder="Email" formControlName="email">
+             <input class="form__input" type="password" placeholder="Mot de passe" formControlName="password">
+             <button class="form__button button submit" (click)="onSubmitLoginForm()">CONNEXION</button>
+
+             <div *ngIf="showAlert && errorMessage" class="text-white px-6 py-4 border-0 rounded relative m-4 bg-red-500">
+              <span class="inline-block align-middle mr-4" [innerHTML]="errorMessage">
+              </span>
+              <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="showAlert = false">
+                <span>×</span>
+              </button>
+            </div>
+
+            
+              <div *ngIf="showAlert && success" class="text-white px-6 py-4 border-0 rounded relative m-4 bg-emerald-500">
+                <span class="inline-block align-middle mr-4" [innerHTML]="success">
+                </span>
+                <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="showAlert = false">
+                  <span>×</span>
+                </button>
+              </div>
+           </form>
+          
+
+         </div>
+         <div class="switch" id="switch-cnt">
+           <div class="switch__circle"></div>
+           <div class="switch__circle switch__circle--t"></div>
+          
+           <div class="switch__container" id="switch-c1">
+             <h2 class="switch__title title">Bonjour !</h2>
+             <p class="switch__description description">Entrez vos données personnelles et commencez votre voyage avec nous.</p>
+             <button (click)="onRegister()"
+              class="switch__button button switch-btn"
+              >INSCRIPTION</button>
+           </div>
+         </div>
+       </div>
+    </body>
+    
+    <p class="text-center">RATSIRARSON Joharisoa - RAFAMANTANANTSOA Rotsy Vonimanitra</p>
