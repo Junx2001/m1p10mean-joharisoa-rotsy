@@ -58,11 +58,16 @@
                 <td 
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
                   >
-                  <img
-                      src="assets/img/2017_hyundai_santa_fe.jpg"
-                      class="h-12 w-12 bg-white rounded-full border"
-                      alt="image voiture"
-                    />
+                  <img *ngIf="!depositCar.imageUrl"
+                  src="assets/img/2017_hyundai_santa_fe.jpg"
+                  class="h-12 w-12 bg-white rounded-full border"
+                  alt="image voiture"
+                />
+                <img *ngIf="depositCar.imageUrl"
+                  src="{{depositCar.imageUrl}}"
+                  class="h-12 w-12 bg-white rounded-full border"
+                  alt="image voiture"
+                />
                 </td>
                 <td 
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">

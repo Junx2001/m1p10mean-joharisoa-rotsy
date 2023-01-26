@@ -18,6 +18,8 @@ export class ReceptionComponent implements OnInit {
   ngOnInit(): void {
     this.reparationService.getNotAffectedReparations().subscribe(
       (response)=>{
+        console.log(response);
+        
         this.cars = response;
       }
     );

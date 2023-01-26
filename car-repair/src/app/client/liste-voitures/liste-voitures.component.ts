@@ -21,6 +21,8 @@ export class ListeVoituresComponent implements OnInit {
   ngOnInit(): void {
     this.title = "Liste de mes voitures";
     this.cars$ = this.voitureService.getCarsByUser();
+    this.cars$.subscribe(v=>console.log(v)
+    )
     
     this.searchGroup = this.formBuilder.group({
       'immatriculation':[null],

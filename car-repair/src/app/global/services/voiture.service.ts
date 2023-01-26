@@ -47,13 +47,13 @@ export class VoitureService {
         return retour;
     }
     
-    addCar (formValue:{immatriculation: string,marque:string, modele:string }): Observable<any>{
-        const body = {
-            "immatriculation": formValue.immatriculation,
-            "marque": formValue.marque,
-            "modele": formValue.modele
-        }
-        return this.http.post<any>(`${apiUrl.key}/cars/add`, body );
+    addCar (formValue:{immatriculation: string,marque:string, modele:string, image: File }): Observable<any>{
+        var formData : any = new FormData();
+        formData.append("immatriculation", formValue.immatriculation);
+        formData.append("marque", formValue.marque);
+        formData.append("modele", formValue.modele);
+        formData.append("file", formValue.image);
+        return this.http.post<any>(`${apiUrl.key}/cars/add`, formData );
     }
     
     searchCar(formValue:{immatriculation: string, marque: string, modele:string , depot: string}): Observable<any>{

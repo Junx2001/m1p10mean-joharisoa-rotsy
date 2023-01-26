@@ -14,7 +14,6 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user$ = this.userService.getCurrentUser();
-
   }
   toggleCollapseShow(classes) {
     this.collapseShow = classes;

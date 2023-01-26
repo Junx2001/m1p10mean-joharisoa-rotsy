@@ -12,6 +12,8 @@ export class AjoutVoitureComponent implements OnInit {
   depotForm! : FormGroup;
   successMessage : boolean = false; 
   errorMessage : boolean = false;
+  imageURL! : string;
+  file ! : any;
 
   constructor(private formBuilder : FormBuilder,
     private voitureService : VoitureService,
@@ -22,8 +24,23 @@ export class AjoutVoitureComponent implements OnInit {
       immatriculation : [null, Validators.required],
       marque :[null, Validators.required],
       modele : [null, Validators.required],
+      image : [null]
     })
   }
+  showPreview(event) {
+    this.file = (event.target as HTMLInputElement).files[0];
+    this.depotForm.patchValue({
+      image: this.file
+    });
+    this.depotForm.get('image').updateValueAndValidity()
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageURL = reader.result as string;
+    }
+    reader.readAsDataURL(this.file)
+  }
+
   onAddNewCar(){
     this.voitureService.addCar(this.depotForm.value).subscribe(
       (response) =>{ 
@@ -37,6 +54,19 @@ export class AjoutVoitureComponent implements OnInit {
         }
       }
     )
+
+    // console.log(this.depotForm.value);
+    // this.fileUploadService.upload(this.file).subscribe(
+    //   (event: any) => {
+    //     if (typeof (event) === 'object') {
+
+    //           // Short link via api response
+    //           console.log(event.link);
+ 
+    //       }
+    //   }
+    // )
+    
   }
   onViewCars(){
     this.router.navigateByUrl('/liste-voitures-deposees');
