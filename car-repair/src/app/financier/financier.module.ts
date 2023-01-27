@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { LineChartJourComponent } from './line-chart-jour/line-chart-jour.component';
 import { StatDepensesComponent } from './stat-depenses/stat-depenses.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -29,7 +30,8 @@ import { StatDepensesComponent } from './stat-depenses/stat-depenses.component';
     CommonModule,
     FinancierRoutingModule,
     GlobalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ]
 })
 export class FinancierModule { }

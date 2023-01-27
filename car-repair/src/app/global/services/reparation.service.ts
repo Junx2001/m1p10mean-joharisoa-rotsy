@@ -77,4 +77,9 @@ export class ReparationService {
     getAvgReparationDurationByCar(immatriculation : string){
         return this.http.get<any>(`${apiUrl.key}/reparations/avgRepair/${immatriculation}`);
     }
+    getUnpaidReparationByIdReparation(id):Observable<any>{        
+        return this.getAllUnpaidReparations().pipe(
+            map(value=>value.arrayFinal.filter(rep => rep.repair._id === id))
+        );
+    }
 }

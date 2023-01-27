@@ -11,6 +11,7 @@ import { ReparerVoitureComponent } from './reparer-voiture/reparer-voiture.compo
 import { ReparationDetailsComponent } from './reparation-details/reparation-details.component';
 import { NonRecupereComponent } from './non-recupere/non-recupere.component';
 import { PdfBonDeSortieComponent } from './pdf-bon-de-sortie/pdf-bon-de-sortie.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { PdfBonDeSortieComponent } from './pdf-bon-de-sortie/pdf-bon-de-sortie.c
     GlobalModule,
     ReactiveFormsModule,
     DragDropModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class AtelierModule { }

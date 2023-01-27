@@ -25,15 +25,20 @@
              <th
              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
              >
-             Marque</th>
-             <th
-             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-             >
-             Modèle</th>
-             <th
-             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-             >
              Dépôt
+             </th>
+             <th
+             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+             >
+             Dû</th>
+             <th
+             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+             >
+             Payé</th>
+             <th
+             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+             >
+             Reste
              </th>
              <th
              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
@@ -42,7 +47,7 @@
         </tr>
       </thead>
       <tbody>
-            <tr *ngFor="let car of unpaidReparations$ | async ">
+            <tr *ngFor="let car of unpaidReparations ">
                 <th 
                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                     >
@@ -65,17 +70,22 @@
                 <td 
                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                 >
-                {{car.repair.voiture.marque}}
-                </td>
-                <td 
-                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                >
-                {{car.repair.voiture.modele}}
-                </td>
-                <td 
-                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                >
                 {{car.repair.dateDepot | date}}
+                </td>
+                <td 
+                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                >
+                {{car.montantTotal |currency:'AR'}}
+                </td>
+                <td 
+                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                >
+                {{car.totalPaid |currency:'AR'}}
+                </td>
+                <td 
+                class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                >
+                {{car.restToPay |currency:'AR'}}
                 </td>
                 
               <td 
@@ -170,8 +180,8 @@
             <span class="text-xl inline-block mr-5 align-middle">
               <i class="fas fa-bell"></i>
             </span>
-            <span class="inline-block align-middle mr-8">
-              <b class="capitalize">Merci!</b> Votre paiement a été pris en charge
+            <span class="inline-block align-middle mx-4">
+              <b class="capitalize">Merci!</b> Votre paiement a été pris en charge. Veuillez attendre la validation du responsable financier.
             </span>
             <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="submitted = false">
               <span>×</span>
@@ -182,7 +192,7 @@
             <span class="text-xl inline-block mr-5 align-middle">
               <i class="fas fa-bell"></i>
             </span>
-            <span class="inline-block align-middle mr-8">
+            <span class="inline-block align-middle mx-4">
               <b class="capitalize">Erreur!</b> Il y a eu un problème dans la transaction
             </span>
             <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="errorMessage = false">

@@ -19,6 +19,7 @@ export class PaiementComponent implements OnInit {
 
   unpaidReparations$! :  Observable<any>;
   reparationId : string = null;
+  unpaidReparations : any;
 
   constructor(private formBuilder : FormBuilder,
     private reparationService : ReparationService,
@@ -32,6 +33,21 @@ export class PaiementComponent implements OnInit {
     this.unpaidReparations$ = this.reparationService.getUnpaidReparationsByUser().pipe(
       map(values=>values.arrayFinal)
     );
+
+    this.unpaidReparations$.subscribe(
+      (response)=>{
+        
+        for(let obj of response){
+          this.reparationService.getUnpaidReparationByIdReparation(obj.repair._id).subscribe(
+            (response2) =>{
+              this.unpaidReparations = response2;
+            }
+          )
+        }
+        
+      }
+    );
+    
 
     if (this.route.snapshot.params['reparationId']){
       this.reparationId = this.route.snapshot.params['reparationId']

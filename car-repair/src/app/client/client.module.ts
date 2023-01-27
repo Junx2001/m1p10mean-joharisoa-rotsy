@@ -17,6 +17,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActivateUserAccountComponent } from './activate-user-account/activate-user-account.component';
 import { PdfFactureComponent } from './pdf-facture/pdf-facture.component';
 import { FicheVoitureComponent } from './fiche-voiture/fiche-voiture.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { FicheVoitureComponent } from './fiche-voiture/fiche-voiture.component';
     ClientRoutingModule,
     GlobalModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    NgxPaginationModule
   ],
   providers:[
     CurrencyPipe

@@ -40,7 +40,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     {provide : LOCALE_ID, useValue: 'fr-FR'},
