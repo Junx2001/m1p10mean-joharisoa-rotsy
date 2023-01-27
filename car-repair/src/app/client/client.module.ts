@@ -18,7 +18,6 @@ import { ActivateUserAccountComponent } from './activate-user-account/activate-u
 import { PdfFactureComponent } from './pdf-facture/pdf-facture.component';
 import { FicheVoitureComponent } from './fiche-voiture/fiche-voiture.component';
 
-
 @NgModule({
   declarations: [
     LoginClientComponent,
