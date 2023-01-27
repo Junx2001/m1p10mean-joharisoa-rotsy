@@ -10,10 +10,12 @@ import { VoitureService } from 'src/app/global/services/voiture.service';
 })
 export class AjoutVoitureComponent implements OnInit {
   depotForm! : FormGroup;
-  successMessage : boolean = false; 
-  errorMessage : boolean = false;
+  successMessage :string; 
+  errorMessage :string;
   imageURL! : string;
-  file ! : any;
+  file ! : File;
+  message : boolean = false;
+  errorFile! : string;
 
   constructor(private formBuilder : FormBuilder,
     private voitureService : VoitureService,
@@ -29,6 +31,21 @@ export class AjoutVoitureComponent implements OnInit {
   }
   showPreview(event) {
     this.file = (event.target as HTMLInputElement).files[0];
+    this.message = false;
+    this.successMessage = null; 
+    this.errorMessage = null;
+     // if size greater the 1MB
+     if (this.file.size >= 1000000) {
+      this.errorFile = "L'image importée doit être inférieur à 1MB.";
+      this.message = true;
+    } 
+
+    var extension = this.file.type.split('/').pop();
+    if (['jpg', 'jpeg'].indexOf(extension) <= -1) {
+      this.errorFile = "L'image importée doit être en format 'jpeg' ou 'jpg'.";
+      this.message = true;
+    } 
+
     this.depotForm.patchValue({
       image: this.file
     });
@@ -42,18 +59,41 @@ export class AjoutVoitureComponent implements OnInit {
   }
 
   onAddNewCar(){
-    this.voitureService.addCar(this.depotForm.value).subscribe(
-      (response) =>{ 
-        console.log("response received");
-        this.successMessage = true;
-      },
-      (error)=>{
-        console.error('request failed with error');
-        if (error.status === 409){
-          this.errorMessage = true;
-        }
+    let countError = 0;
+    if (this.depotForm.value.image != null){
+      var extension = this.file.type.split('/').pop();
+      if (['jpg', 'jpeg'].indexOf(extension) <= -1) {
+        this.errorMessage = "L'image importée doit être en format 'jpeg' ou 'jpg'.";
+        this.message = true;
+        countError ++ ; 
+      } 
+      if (this.depotForm.value.image.size >= 1000000){
+        const num = this.depotForm.value.image.size / 1000 / 1000;
+        const mb = (Math.round(num * 100) / 100).toFixed(3);
+        this.errorMessage = `Votre image est de ${mb} MB. L'image importée doit être inférieur à 1MB`;
+        this.message = true;
+        countError ++ ;
       }
-    )
+    } 
+    
+    if (countError == 0 ){
+      this.voitureService.addCar(this.depotForm.value).subscribe(
+        (response) =>{ 
+          console.log("response received");
+          this.successMessage = "La voitura a été ajouté à la collection.";
+            this.message = true;
+        },
+        (error)=>{
+          console.error('request failed with error');
+          this.errorMessage = error.message;
+          if (error.status == 409){
+            this.errorMessage = "Une voiture de même immatriculation existe déjà";
+          }
+         
+            this.message = true;
+        }
+      )
+    }
   }
   onViewCars(){
     this.router.navigateByUrl('/liste-voitures-deposees');

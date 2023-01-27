@@ -111,8 +111,9 @@
                   </label>
                   <input 
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  type="file" accept="image/*" (change)="showPreview($event)"
+                  type="file" accept="image/jpeg" (change)="showPreview($event)"
                   >
+                  <p class="text-red" *ngIf="errorFile && message">{{errorFile}}</p>
                 </div>
               </div>
             </div>
@@ -133,23 +134,23 @@
               </button>
               </div>
             </div>
-            <div *ngIf="successMessage" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
+            <div *ngIf="successMessage && message" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
               <span class=" inline-block mr-5 align-middle">
                 <i class="fas fa-bell"></i> Ajout réussi! 
               </span><br>
               <span class="inline-block align-middle text-xs mr-8">
-                Une nouvelle voiture a été ajouté à la collection.
+                {{successMessage}}
               </span>
-              <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="successMessage = false">
+              <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="message = false">
                 <span>×</span>
               </button>
             </div>
-            <div *ngIf="errorMessage" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+            <div *ngIf="errorMessage && message" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
 
               <span class="inline-block align-middle mr-8">
-                Une voiture du même immatriculation existe déjà.
+                {{errorMessage}}
               </span>
-              <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="errorMessage = false">
+              <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="message = false">
                 <span>×</span>
               </button>
             </div>

@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./fiche-voiture.component.css']
 })
 export class FicheVoitureComponent implements OnInit {
-  car! : Observable<any>;
+  car! : any;
   updateForm! : FormGroup;
   successMessage :string; 
   errorMessage :string;
@@ -26,7 +26,6 @@ export class FicheVoitureComponent implements OnInit {
   ngOnInit(): void {
     
     this.updateForm = this.formBuilder.group({
-      immatriculation : [null],
       marque : [null],
       modele : [null],
       image : [null],
@@ -37,7 +36,6 @@ export class FicheVoitureComponent implements OnInit {
       (response)=>{
         this.car = response;
         this.updateForm.patchValue({
-          immatriculation : this.car[0].car.immatriculation,
           marque : this.car[0].car.marque,
           modele : this.car[0].car.modele,
         });
@@ -49,10 +47,18 @@ export class FicheVoitureComponent implements OnInit {
   showPreview(event) {
     this.file = (event.target as HTMLInputElement).files[0];
     this.message = false;
+    this.successMessage = null; 
+    this.errorMessage = null;
     
     // if size greater the 1MB
     if (this.file.size >= 1000000) {
       this.errorFile = "L'image importée doit être inférieur à 1MB.";
+      this.message = true;
+    } 
+
+    var extension = this.file.type.split('/').pop();
+    if (['jpg', 'jpeg'].indexOf(extension) <= -1) {
+      this.errorFile = "L'image importée doit être en format 'jpeg' ou 'jpg'.";
       this.message = true;
     } 
     
@@ -70,13 +76,26 @@ export class FicheVoitureComponent implements OnInit {
     }
   }
   onUpdateCar(){
-    if (this.updateForm.value.image.size >= 1000000) {
-      const num = this.updateForm.value.image.size / 1000 / 1000;
-      const mb = (Math.round(num * 100) / 100).toFixed(3);
-      this.errorMessage = `Votre image est de ${mb} MB. L'image importée doit être inférieur à 1MB`;
-      this.message = true;
-    } else{
-      this.voitureService.uploadCarImage(this.updateForm.value, this.car[0].car._id).subscribe(
+    let countError = 0;
+    if (this.updateForm.value.image != null){
+      var extension = this.file.type.split('/').pop();
+      if (['jpg', 'jpeg'].indexOf(extension) <= -1) {
+        this.errorMessage = "L'image importée doit être en format 'jpeg' ou 'jpg'.";
+        this.message = true;
+        countError ++ ; 
+      } 
+      if (this.updateForm.value.image.size >= 1000000){
+        const num = this.updateForm.value.image.size / 1000 / 1000;
+        const mb = (Math.round(num * 100) / 100).toFixed(3);
+        this.errorMessage = `Votre image est de ${mb} MB. L'image importée doit être inférieur à 1MB`;
+        this.message = true;
+        countError ++ ;
+      }
+    } 
+    
+    if (countError == 0 ){
+      
+      this.voitureService.updateCar(this.updateForm.value, this.car[0].car._id).subscribe(
           (response) =>{ 
             console.log("response received");
             this.voitureService.getCarByImmatriculation(this.car[0].car.immatriculation).subscribe(

@@ -47,19 +47,6 @@ export class VoitureService {
         return retour;
     }
     
-    addCar (formValue:{immatriculation: string,marque:string, modele:string, image: File }): Observable<any>{
-        var formData : any = new FormData();
-        formData.append("immatriculation", formValue.immatriculation);
-        formData.append("marque", formValue.marque);
-        formData.append("modele", formValue.modele);
-        formData.append("file", formValue.image);
-        return this.http.post<any>(`${apiUrl.key}/cars/add`, formData );
-    }
-    uploadCarImage (formValue:{immatriculation: string,marque:string, modele:string, image: File }, id): Observable<any>{
-        var formData : any = new FormData();
-        formData.append("file", formValue.image);
-        return this.http.post<any>(`${apiUrl.key}/cars/upload/${id}`, formData );
-    }
     
     searchCar(formValue:{immatriculation: string, marque: string, modele:string , depot: string}): Observable<any>{
         let params = new HttpParams();
@@ -92,4 +79,30 @@ export class VoitureService {
         return this.http.get<any>(`${apiUrl.key}/cars/all`);
     }
     
+    
+    addCar (formValue:{immatriculation: string,marque:string, modele:string, image: File }): Observable<any>{
+        var formData : any = new FormData();
+        formData.append("immatriculation", formValue.immatriculation);
+        formData.append("marque", formValue.marque);
+        formData.append("modele", formValue.modele);
+        formData.append("file", formValue.image);
+        return this.http.post<any>(`${apiUrl.key}/cars/add`, formData );
+    }
+    updateCar (formValue:{immatriculation: string,marque:string, modele:string, image: File }, id): Observable<any>{
+        var formData : any = new FormData();
+        if (formValue.immatriculation!=null && formValue.immatriculation!=''){
+            formData.append("immatriculation", formValue.immatriculation);
+        }
+        if (formValue.marque!=null && formValue.marque!=''){
+            formData.append("marque", formValue.marque);
+        }
+        if (formValue.modele!=null && formValue.modele!=''){
+            formData.append("modele", formValue.modele);
+        }
+        if (formValue.image!=null){
+            formData.append("file", formValue.image);
+        }
+        
+        return this.http.put<any>(`${apiUrl.key}/cars/${id}`, formData );
+    }
 }
