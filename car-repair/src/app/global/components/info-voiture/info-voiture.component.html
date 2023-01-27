@@ -7,12 +7,12 @@
         <div class="relative">
           
           <img *ngIf="!voiture.imageUrl"
-              src="assets/img/2017_hyundai_santa_fe.jpg" style="width: 150px; height: 150px;"
+              src="assets/img/2017_hyundai_santa_fe.jpg" style="width: 150px; height: 150px; object-fit: cover;"
               class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
               alt="image voiture"
             />
             <img *ngIf="voiture.imageUrl"
-              src="{{voiture.imageUrl}}" style="width: 150px; height: 150px;"
+              src="{{voiture.imageUrl}}" style="width: 150px; height: 150px; object-fit: cover;"
               class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
               alt="image voiture"
             />

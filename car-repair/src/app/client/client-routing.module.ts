@@ -5,6 +5,7 @@ import { AuthGuard } from "../global/guards/auth.guard";
 import { ActivateUserAccountComponent } from "./activate-user-account/activate-user-account.component";
 import { AjoutVoitureComponent } from "./ajout-voiture/ajout-voiture.component";
 import { DepotVoitureComponent } from "./depot-voiture/depot-voiture.component";
+import { FicheVoitureComponent } from "./fiche-voiture/fiche-voiture.component";
 import { HistoriqueComponent } from "./historique/historique.component";
 import { ListeFacturesComponent } from "./liste-factures/liste-factures.component";
 import { ListeReparationsComponent } from "./liste-reparations/liste-reparations.component";
@@ -27,13 +28,14 @@ const routes: Routes = [
         { path: "paiement", component: PaiementComponent },
         { path: "paiement/:reparationId", component: PaiementComponent },
         { path: "ajout-voiture", component: AjoutVoitureComponent },
-        { path: "liste-voitures", component: ListeVoituresComponent },
+        { path: "voitures", component: ListeVoituresComponent },
+        { path: "voitures/:immatriculation", component: FicheVoitureComponent },
         { path: 'historique-reparations/:immatriculation', component: HistoriqueComponent },
         { path: 'reparations/:immatriculation', component: ListeReparationsComponent },
         { path: 'factures/:immatriculation', component: ListeFacturesComponent },
         { path: "depot-voiture", component: DepotVoitureComponent },
         { path: "recuperation-voiture", component: RecuperationVoitureComponent },
-        { path: "", redirectTo: "liste-voitures", pathMatch: "full" },
+        { path: "", redirectTo: "voitures", pathMatch: "full" },
     ],
     canActivate:[AuthGuard]},
   ];

@@ -29,7 +29,6 @@ export class PdfBonDeSortieComponent implements OnInit {
     this.reparation$ = this.reparationService.getReparationDetailsByReparationId(this.reparationId);
     this.reparation$.subscribe(
       response =>{
-        console.log(response);
         if (response.repair.valide == 1 ){
           this.recup = true;
         }

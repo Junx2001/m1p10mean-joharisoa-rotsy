@@ -51,11 +51,16 @@
                         <th 
                             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                             >
-                            <img
+                            <img *ngIf="!car.voiture.imageUrl"
                                 src="assets/img/2017_hyundai_santa_fe.jpg"
                                 class="h-12 w-12 bg-white rounded-full border"
-                                alt="image voiture"
-                              />
+                                alt="image voiture" style="object-fit: cover"
+                            />
+                            <img *ngIf="car.voiture.imageUrl"
+                                src="{{car.voiture.imageUrl}}"
+                                class="h-12 w-12 bg-white rounded-full border"
+                                alt="image voiture" style="object-fit: cover"
+                            />
                         </th>
                         <td 
                         class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"

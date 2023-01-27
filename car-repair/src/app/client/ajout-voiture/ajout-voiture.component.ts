@@ -54,19 +54,6 @@ export class AjoutVoitureComponent implements OnInit {
         }
       }
     )
-
-    // console.log(this.depotForm.value);
-    // this.fileUploadService.upload(this.file).subscribe(
-    //   (event: any) => {
-    //     if (typeof (event) === 'object') {
-
-    //           // Short link via api response
-    //           console.log(event.link);
- 
-    //       }
-    //   }
-    // )
-    
   }
   onViewCars(){
     this.router.navigateByUrl('/liste-voitures-deposees');

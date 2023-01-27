@@ -1,0 +1,142 @@
+
+    <div  class="flex flex-wrap">
+      <div class="w-full lg:w-3/12 px-4">
+            <app-info-voiture *ngIf="car" [voiture]="car[0].car" ></app-info-voiture>
+      </div>
+        <div class="w-full lg:w-9/12 px-4">
+          <div
+            class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
+          >
+          <div class="rounded-t bg-white mb-0 px-6 py-6">
+            <div class="text-center flex justify-between">
+              <h3 class="font-semibold text-lg text-blueGray-700">Fiche de la voiture</h3>
+              
+              <a 
+                  [routerLink]="['/voitures']"
+                  class="bg-red-600
+                  text-white 
+                  active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded 
+                  shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                >
+                Retour 
+              </a>
+            </div>
+          </div>
+            
+          <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+            <form [formGroup]="updateForm">
+              <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                Formulaire de modification
+              </h6>
+              <div class="flex flex-wrap">
+                <div class="w-full lg:w-12/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Numéro d'immatriculation
+                    </label>
+                    <input
+                      type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Immatriculation" formControlName="immatriculation"
+                      />
+                  </div>
+                </div>
+                
+                <div class="w-full lg:w-12/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Marque
+                    </label>
+                    <input
+                      type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Marque"
+                      formControlName="marque"
+                    />
+                  </div>
+                </div>
+                <div class="w-full lg:w-12/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Modèle
+                    </label>
+                    <input
+                      type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Modèle"
+                      formControlName="modele"
+                    />
+                  </div>
+                </div>
+                <div class="w-full lg:w-12/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Photo de la voiture
+                    </label>
+                    <input 
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    type="file" accept="image/*" (change)="showPreview($event)"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="imageURL && imageURL !== ''" class="w-full lg:w-12/12 px-4">
+                <div class="relative w-full mb-3">
+                  <div class="imagePreview" >
+                    <img [src]="imageURL" [alt]="immatriculation">
+                  </div>
+                </div>
+              </div>
+              <div class="w-full lg:w-12/12 px-4">
+                <div class="relative w-full mb-3">
+                  <button
+                  class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                  type="submit" (click)="onUpdateCar()"
+                >
+                  Valider
+                </button>
+                </div>
+              </div>
+              <div *ngIf="successMessage && message" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
+                <span class=" inline-block mr-5 align-middle">
+                  <i class="fas fa-bell"></i> Ajout réussi! 
+                </span><br>
+                <span class="inline-block align-middle text-xs mr-8">
+                  {{successMessage}}
+                </span>
+                <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="message = false">
+                  <span>×</span>
+                </button>
+              </div>
+              <div *ngIf="errorMessage && message" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+  
+                <span class="inline-block align-middle mr-8">
+                  {{errorMessage}}
+                </span>
+                <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="message = false">
+                  <span>×</span>
+                </button>
+              </div>
+  
+            </form>
+          </div>
+
+          </div>
+        </div>
+      </div>
+   
+      
+  
+  

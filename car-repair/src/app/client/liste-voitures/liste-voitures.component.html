@@ -112,18 +112,22 @@
                         <img *ngIf="!car.car.imageUrl"
                             src="assets/img/2017_hyundai_santa_fe.jpg"
                             class="h-12 w-12 bg-white rounded-full border"
-                            alt="image voiture"
+                            alt="image voiture" style="object-fit: cover"
                           />
                           <img *ngIf="car.car.imageUrl"
                             src="{{car.car.imageUrl}}"
                             class="h-12 w-12 bg-white rounded-full border"
-                            alt="image voiture"
+                            alt="image voiture" style="object-fit: cover"
                           />
                     </th>
                     <td 
                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                     >
-                    {{car.car.immatriculation}}
+                      <a [routerLink]="['/voitures/',car.car.immatriculation]"
+                      >
+                        <span style="text-decoration : underline;">{{car.car.immatriculation}}</span>
+                      </a>
+                    
                     </td>
                     <td 
                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"

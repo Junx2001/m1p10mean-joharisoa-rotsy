@@ -55,6 +55,11 @@ export class VoitureService {
         formData.append("file", formValue.image);
         return this.http.post<any>(`${apiUrl.key}/cars/add`, formData );
     }
+    uploadCarImage (formValue:{immatriculation: string,marque:string, modele:string, image: File }, id): Observable<any>{
+        var formData : any = new FormData();
+        formData.append("file", formValue.image);
+        return this.http.post<any>(`${apiUrl.key}/cars/upload/${id}`, formData );
+    }
     
     searchCar(formValue:{immatriculation: string, marque: string, modele:string , depot: string}): Observable<any>{
         let params = new HttpParams();
@@ -86,6 +91,5 @@ export class VoitureService {
     getAllCars(): Observable<any>{
         return this.http.get<any>(`${apiUrl.key}/cars/all`);
     }
-
     
 }
