@@ -15,7 +15,7 @@ export class ListeVoituresComponent implements OnInit {
   searchGroup! : FormGroup;
   cars$! : Observable<any>;
   results$ : Observable<any>;
-  page : number = 1;
+  page : number = 0;
 
   constructor(private voitureService : VoitureService,
     private formBuilder : FormBuilder) { }

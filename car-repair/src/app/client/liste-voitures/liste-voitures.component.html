@@ -178,7 +178,7 @@
               <div class=" block has-text-centered">
                   <pagination-template class="my-pagination" #p="paginationApi" (pageChange)="page = $event">
                     <div class="custom-pagination flex pl-0 m-4 rounded list-none flex-wrap">
-                      <div class="chevron pagination-previous" [class.disabled]="p.isFirstPage()">
+                      <div class="chevron pagination-previous" [class.isDisabled]="p.isFirstPage()">
                           <a 
                             class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-red-500 bg-white text-red-500"                          
                              (click)="p.previous()"> 
@@ -200,7 +200,7 @@
                           </div>
                       </div>
               
-                      <div class="chevron pagination-next" [class.disabled]="p.isLastPage()">
+                      <div class="chevron pagination-next" [class.isDisabled]="p.isLastPage()">
                           <a 
                           class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-red-500 bg-white text-red-500"          
                           
