@@ -51,7 +51,7 @@
                 </tr>
               </thead>
               <tbody *ngIf="unpaidReparations$ | async as array">
-                    <tr *ngFor="let rep of array.arrayFinal | paginate:{itemsPerPage: 3, currentPage: page} " >
+                    <tr *ngFor="let rep of array.arrayFinal | paginate:{itemsPerPage: 4, currentPage: page} " >
                         <th 
                             class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                             >

@@ -102,7 +102,7 @@ export class LineChartJourComponent implements OnInit {
         responsive: true,
         title: {
           display: true,
-          text: "Chiffre d'affaires par mois",
+          text: "Chiffre d'affaires par jour",
         },
         tooltips: {
           mode: "index",
@@ -125,7 +125,7 @@ export class LineChartJourComponent implements OnInit {
               display: true,
               scaleLabel: {
                 display: true,
-                labelString: "Mois",
+                labelString: "Jour",
                 fontColor: "#f00",
               },
               gridLines: {
