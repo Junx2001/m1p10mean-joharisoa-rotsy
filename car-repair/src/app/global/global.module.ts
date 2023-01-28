@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AvancementPipe } from './pipes/avancement.pipe';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AuthNavbarComponent } from './components/auth-navbar/auth-navbar.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AvancementPipe,
     SpinnerComponent,
     NotFoundComponent,
+    AuthNavbarComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +54,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     InfoVoitureComponent,
     AvancementPipe,
     SpinnerComponent,
+    AuthNavbarComponent,
   ]
 })
 export class GlobalModule { 

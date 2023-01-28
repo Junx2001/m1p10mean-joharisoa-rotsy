@@ -16,7 +16,7 @@ export class LoginFinancierComponent implements OnInit {
       'email':'finance@carrepair.com',
       'password':'motdepasse'
     };
-    this.roleUser = "RESPONSABLE FINANCIER";
+    this.roleUser = "Responsable Financier";
     this.landingPage = '/finance/factures-non-payees';
   }
 }

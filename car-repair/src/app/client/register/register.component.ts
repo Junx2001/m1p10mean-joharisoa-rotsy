@@ -40,8 +40,5 @@ export class RegisterComponent implements OnInit {
       }
     )
   }
-  onLogin(){
-    this.router.navigateByUrl('/login');
-  }
 
 }

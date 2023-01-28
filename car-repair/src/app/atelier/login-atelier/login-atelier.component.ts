@@ -16,7 +16,7 @@ export class LoginAtelierComponent implements OnInit {
       'email':'rafa.rotsy@gmail.com',
       'password':'motdepasse'
     };
-    this.roleUser = "RESPONSABLE ATELIER";
+    this.roleUser = "Responsable Atelier";
     this.landingPage = '/atelier/reception-voiture';
   }
 }
