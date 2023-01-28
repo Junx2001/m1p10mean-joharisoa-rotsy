@@ -97,7 +97,7 @@ export class FicheVoitureComponent implements OnInit {
       
       this.voitureService.updateCar(this.updateForm.value, this.car[0].car._id).subscribe(
           (response) =>{ 
-            console.log("response received");
+            // console.log("response received");
             this.voitureService.getCarByImmatriculation(this.car[0].car.immatriculation).subscribe(
               (response)=>{
                 this.car = response;
@@ -114,7 +114,7 @@ export class FicheVoitureComponent implements OnInit {
             this.message = true;
           },
           (error)=>{
-            console.error('request failed with error');
+            // console.error('request failed with error');
               this.errorMessage = error.message;
               this.message = true;
           }

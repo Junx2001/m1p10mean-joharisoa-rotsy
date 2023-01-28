@@ -30,11 +30,11 @@ export class DepensesComponent implements OnInit {
   onAddDepense(){
     this.paiementService.addDepense(this.depenseForm.value).subscribe(
       (response) =>{ 
-        console.log("response received");
+        // console.log("response received");
         this.submitted = true;
       },
       (error)=>{
-        console.error('request failed with error');
+        // console.error('request failed with error');
           this.errorMessage = true;
       }
     )

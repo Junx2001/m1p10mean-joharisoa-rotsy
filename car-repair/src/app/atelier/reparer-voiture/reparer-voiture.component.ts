@@ -40,11 +40,11 @@ export class ReparerVoitureComponent implements OnInit {
   onRepair(){    
     this.reparationDetService.addReparationDetails(this.repairForm.value, this.reparationId).subscribe(
       (response) =>{ 
-        console.log("response received");
+        // console.log("response received");
         this.submitted = true;
       },
       (error)=>{
-        console.error('request failed with error');
+        // console.error('request failed with error');
         if (error.status === 409){
           this.errorMessage = true;
         }

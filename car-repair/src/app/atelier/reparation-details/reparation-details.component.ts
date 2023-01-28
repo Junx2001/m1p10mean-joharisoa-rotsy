@@ -47,15 +47,14 @@ export class ReparationDetailsComponent implements OnInit {
     this.reparationDetails$ = this.reparationDetService.getReparationDetailsById(detailsId);
   }
   confirmDelete(detailsId: string){
-    console.log(detailsId);
     this.reparationDetService.deleteReparationDetails(detailsId).subscribe(
       (response) =>{ 
-        console.log("response received");
+        // console.log("response received");
         this.reparation$ = this.reparationService.getReparationDetailsByReparationId(this.reparationId);
         this.showModalDelete = false;
       },
       (error)=>{
-        console.error('request failed with error');
+        // console.error('request failed with error');
         this.errorMessage = 'La suppression de la réparation a echoué';
       }
     );
@@ -63,12 +62,12 @@ export class ReparationDetailsComponent implements OnInit {
   onSubmitForm(form : NgForm):void{
     this.reparationDetService.updateReparationDetails(form.value).subscribe(
       (response) =>{ 
-        console.log("response received");
+        // console.log("response received");
         this.reparation$ = this.reparationService.getReparationDetailsByReparationId(this.reparationId);
         this.showModal = false;
       },
       (error)=>{
-        console.error(error);
+        // console.error(error);
         this.errorMessage = 'La modification des informations a echoué';
       }
     );
