@@ -79,12 +79,12 @@ export class AjoutVoitureComponent implements OnInit {
     if (countError == 0 ){
       this.voitureService.addCar(this.depotForm.value).subscribe(
         (response) =>{ 
-          console.log("response received");
+          // console.log("response received");
           this.successMessage = "La voitura a été ajouté à la collection.";
             this.message = true;
         },
         (error)=>{
-          console.error('request failed with error');
+          // console.error('request failed with error');
           this.errorMessage = error.message;
           if (error.status == 409){
             this.errorMessage = "Une voiture de même immatriculation existe déjà";

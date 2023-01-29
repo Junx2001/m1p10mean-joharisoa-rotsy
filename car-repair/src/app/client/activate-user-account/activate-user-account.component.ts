@@ -18,12 +18,12 @@ export class ActivateUserAccountComponent implements OnInit {
     const secretEmailToken = this.route.snapshot.params['secretEmailToken'];
     this.authService.activateAccount(userId, secretEmailToken).subscribe(
       (response) =>{ 
-        console.log("response received");
+        // console.log("response received");
         
         this.router.navigateByUrl(`/login/${1}`);
       },
       (error)=>{        
-        console.error('request failed with error');
+        // console.error('request failed with error');
         this.router.navigateByUrl(`/login/${0}`);
       }
     );

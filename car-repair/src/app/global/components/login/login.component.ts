@@ -43,19 +43,19 @@ export class LoginComponent implements OnInit {
     // login from API
     this.authService.login(this.loginForm.value).subscribe(
       (response) =>{ 
-        console.log("response received");
+        // console.log("response received");
         // this.reponse = response;
         localStorage.setItem("token",response.token);
       },
       (error)=>{
-        console.error('request failed with error');
+        // console.error('request failed with error');
         if (error.status === 401){
           this.showAlert = true; 
           this.errorMessage = "Email ou mot de passe invalide";
         }
       },
       ()=>{
-        console.log('Request completed')
+        // console.log('Request completed')
         this.router.navigateByUrl(this.landingPage);
       }
     );

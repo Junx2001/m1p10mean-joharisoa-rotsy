@@ -116,44 +116,45 @@
                   <p class="text-red" *ngIf="errorFile && message">{{errorFile}}</p>
                 </div>
               </div>
-            </div>
-            <div *ngIf="imageURL && imageURL !== ''" class="w-full lg:w-6/12 px-4">
-              <div class="relative w-full mb-3">
-                <div class="imagePreview" >
-                  <img [src]="imageURL" [alt]="depotForm.value.immatriculation">
+              <div *ngIf="imageURL && imageURL !== ''" class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <div class="imagePreview" >
+                    <img [src]="imageURL" [alt]="depotForm.value.immatriculation" width="500">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="w-full lg:w-12/12 px-4">
-              <div class="relative w-full mb-3">
-                <button
-                class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                type="submit" (click)="onAddNewCar()"
-              >
-                Valider
-              </button>
+              <div class="w-full lg:w-12/12 px-4">
+                <div class="relative w-full mb-3">
+                  <button
+                  class="bg-red-600 text-white active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                  type="submit" (click)="onAddNewCar()"
+                >
+                  Valider
+                </button>
+                </div>
+              </div>
+              <div *ngIf="successMessage && message" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
+                <span class=" inline-block mr-5 align-middle">
+                  <i class="fas fa-bell"></i> Ajout réussi! 
+                </span><br>
+                <span class="inline-block align-middle text-xs mr-8">
+                  {{successMessage}}
+                </span>
+                <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="message = false">
+                  <span>×</span>
+                </button>
+              </div>
+              <div *ngIf="errorMessage && message" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+  
+                <span class="inline-block align-middle mr-8">
+                  {{errorMessage}}
+                </span>
+                <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="message = false">
+                  <span>×</span>
+                </button>
               </div>
             </div>
-            <div *ngIf="successMessage && message" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-emerald-500">
-              <span class=" inline-block mr-5 align-middle">
-                <i class="fas fa-bell"></i> Ajout réussi! 
-              </span><br>
-              <span class="inline-block align-middle text-xs mr-8">
-                {{successMessage}}
-              </span>
-              <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="message = false">
-                <span>×</span>
-              </button>
-            </div>
-            <div *ngIf="errorMessage && message" class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
-
-              <span class="inline-block align-middle mr-8">
-                {{errorMessage}}
-              </span>
-              <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-4 outline-none focus:outline-none" (click)="message = false">
-                <span>×</span>
-              </button>
-            </div>
+            
 
           </form>
         </div>

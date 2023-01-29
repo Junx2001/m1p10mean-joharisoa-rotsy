@@ -1,5 +1,7 @@
    
 <div>
+  <app-auth-navbar roleUser="client"></app-auth-navbar>
+
   <main>
     <section class="relative w-full h-full py-40 min-h-screen">
       <div
@@ -17,7 +19,7 @@
       >
         <div class="rounded-t mb-0 px-6 py-6">
           <div class="text-center mb-3">
-            <h6 class="text-blueGray-500 text-sm font-bold uppercase">créer un compte</h6>
+            <h6 class="text-blueGray-500 text-sm font-bold ">Créer un compte</h6>
           </div>
           
           <hr class="mt-6 border-b-1 border-blueGray-300" />
@@ -33,7 +35,7 @@
                 Nom
               </label>
               <input
-                type="password"
+                type="text"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Nom" formControlName="name"
               />
@@ -76,10 +78,7 @@
               </button>
             </div>
 
-            <div *ngIf="successMessage" class="text-white px-6 py-4 border-0 rounded relative m-4 bg-emerald-500">
-              <span class=" inline-block mr-5 align-middle">
-                <i class="fas fa-bell"></i> 
-              </span>
+            <div class="text-white px-4 py-4 border-0 rounded relative mt-4 bg-emerald-500">
               <span class="inline-block align-middle text-xs mx-4">
                 Vérifiez votre mail pour valider votre inscription.
               </span>
@@ -87,7 +86,7 @@
                 <span>×</span>
               </button>
             </div>
-            <div *ngIf="errorMessage" class="text-white px-6 py-4 border-0 rounded relative m-4 bg-red-500">
+            <div *ngIf="errorMessage" class="text-white px-6 py-4 border-0 rounded relative mt-4 bg-red-500">
   
               <span class="inline-block align-middle mr-4">
                 Cet email est déjà associé à un compte.

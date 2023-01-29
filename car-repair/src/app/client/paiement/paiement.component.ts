@@ -36,14 +36,9 @@ export class PaiementComponent implements OnInit {
 
     this.unpaidReparations$.subscribe(
       (response)=>{
+        console.log(response);
         
-        for(let obj of response){
-          this.reparationService.getUnpaidReparationByIdReparation(obj.repair._id).subscribe(
-            (response2) =>{
-              this.unpaidReparations = response2;
-            }
-          )
-        }
+        
         
       }
     );
@@ -67,16 +62,15 @@ export class PaiementComponent implements OnInit {
   onPay(){
     this.paiementService.pay(this.paiementForm.value).subscribe(
       (response) =>{ 
-        console.log("response received");
+        // console.log("response received");
         this.submitted = true;
       },
       (error)=>{
-        console.error('request failed with error');
+        // console.error('request failed with error');
         this.errorMessage = true;
       }
     )
     
-    // console.log(this.paiementService.getPaiementsByReparation(this.paiementForm.value.reparationId));
   }
 
   onPayReparation(reparationId){

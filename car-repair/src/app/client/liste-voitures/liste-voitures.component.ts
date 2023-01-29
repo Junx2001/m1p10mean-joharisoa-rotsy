@@ -28,6 +28,8 @@ export class ListeVoituresComponent implements OnInit {
       'immatriculation':[null],
       'marque':[null],
       'modele':[null],
+    },{
+      updateOn:'blur'
     });
     this.searchGroup.valueChanges.subscribe(
       value => {

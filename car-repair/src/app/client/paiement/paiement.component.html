@@ -47,7 +47,7 @@
         </tr>
       </thead>
       <tbody>
-            <tr *ngFor="let car of unpaidReparations ">
+            <tr *ngFor="let car of unpaidReparations$ | async ">
                 <th 
                     class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                     >

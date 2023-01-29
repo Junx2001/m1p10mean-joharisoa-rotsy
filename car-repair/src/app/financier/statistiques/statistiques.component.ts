@@ -17,9 +17,14 @@ export class StatistiquesComponent implements OnInit {
     private voitureService : VoitureService) { }
 
   ngOnInit(): void {
-    this.defaultCar = '4567TVE';
     this.cars$ = this.voitureService.getAllCars();
-    this.avg$ = this.reparationService.getAvgReparationDurationByCar(this.defaultCar);    
+    this.cars$.subscribe(
+      (response)=>{
+        this.defaultCar = response[0].immatriculation;
+        this.avg$ = this.reparationService.getAvgReparationDurationByCar(this.defaultCar);
+      }
+    );
+        
   }
   onFilterCars(immatriculation:string) {
     this.avg$ = this.reparationService.getAvgReparationDurationByCar(immatriculation);    
