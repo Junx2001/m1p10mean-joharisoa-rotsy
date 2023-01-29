@@ -127,7 +127,7 @@ export class LineChartComponent implements OnInit {
               display: true,
               scaleLabel: {
                 display: true,
-                labelString: "Chiffre d'affaires",
+                labelString: "Chiffre d'affaires (AR)",
                 fontColor: "#f00",
               },
               gridLines: {

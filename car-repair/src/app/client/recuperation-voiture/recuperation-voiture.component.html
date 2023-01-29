@@ -18,7 +18,13 @@
         </div>
         <div class="block w-full overflow-x-auto">
           <!-- Projects table -->
-          <table class="items-center w-full bg-transparent border-collapse">
+          <table 
+          cdkDropList
+          #notRecover="cdkDropList"
+          [cdkDropListData]="cars"
+          [cdkDropListConnectedTo]="[recoverList]"
+          (cdkDropListDropped)="drop($event)"
+          class="items-center w-full bg-transparent border-collapse">
             <thead>
               <tr >
                 <th
@@ -48,12 +54,7 @@
                 </th>
               </tr>
             </thead>
-            <tbody
-            cdkDropList
-            #notRecover="cdkDropList"
-            [cdkDropListData]="cars"
-            [cdkDropListConnectedTo]="[recoverList]"
-            (cdkDropListDropped)="drop($event)">
+            <tbody>
               <tr *ngFor="let depositCar of cars " cdkDrag>
                 <td 
                   class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"

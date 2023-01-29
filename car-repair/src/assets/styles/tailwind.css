@@ -515,8 +515,11 @@ object {
 
 img,
 video {
-  /* max-width: 100%; */
+  max-width: 100%;
   height: auto;
+}
+table tbody tr th img{
+  max-width: unset;
 }
 
 

@@ -126,7 +126,7 @@ export class StatDepensesComponent implements OnInit {
               display: true,
               scaleLabel: {
                 display: true,
-                labelString: "Bénéfice / Perte",
+                labelString: "Bénéfice / Perte (AR)",
                 fontColor: "#f00",
               },
               gridLines: {

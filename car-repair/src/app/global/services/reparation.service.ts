@@ -16,9 +16,6 @@ export class ReparationService {
     getCarRepairInProcess(imm: string):Observable<any>{
         return this.http.get<any>(`${apiUrl.key}/reparations/actual/${imm}`);
     }
-    getAllReparationsWithDetails():Observable<any>{
-        return this.http.get<any>(`${apiUrl.key}/reparations/details`);
-    }
     getUnpaidReparationsByUser():Observable<any>{
         return this.http.get<any>(`${apiUrl.key}/reparations/unpaidByUser`);
     }
