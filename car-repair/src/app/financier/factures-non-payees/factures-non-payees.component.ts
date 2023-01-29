@@ -12,20 +12,10 @@ import { ReparationService } from 'src/app/global/services/reparation.service';
 export class FacturesNonPayeesComponent implements OnInit {
   unpaidReparations$! : Observable<any>;
   page : number = 1;
-  paye : boolean = false;
 
-  constructor(private reparationService : ReparationService,
-    private route : ActivatedRoute) { }
+  constructor(private reparationService : ReparationService) { }
 
   ngOnInit(): void {
-    if (this.route.snapshot.params){
-      this.paye = this.route.snapshot.params['paye'];
-      setTimeout( () => {
-        this.paye = !this.route.snapshot.params['paye'];
-      }, 5000);
-      
-    }
-    
     this.unpaidReparations$ = this.reparationService.getAllUnpaidReparations();
   }
 
