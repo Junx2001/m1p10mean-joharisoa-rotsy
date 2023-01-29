@@ -19,6 +19,7 @@ import { AvancementPipe } from './pipes/avancement.pipe';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthNavbarComponent } from './components/auth-navbar/auth-navbar.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { AuthNavbarComponent } from './components/auth-navbar/auth-navbar.compon
     SpinnerComponent,
     NotFoundComponent,
     AuthNavbarComponent,
+    ForbiddenComponent,
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { LayoutComponent } from "../global/components/layout/layout.component";
 import { AuthGuard } from "../global/guards/auth.guard";
+import { PermissionGuard } from "../global/guards/permission.guard";
 import { ActivateUserAccountComponent } from "./activate-user-account/activate-user-account.component";
 import { AjoutVoitureComponent } from "./ajout-voiture/ajout-voiture.component";
 import { DepotVoitureComponent } from "./depot-voiture/depot-voiture.component";
@@ -37,7 +38,7 @@ const routes: Routes = [
         { path: "recuperation-voiture", component: RecuperationVoitureComponent },
         { path: "", redirectTo: "voitures", pathMatch: "full" },
     ],
-    canActivate:[AuthGuard]},
+    canActivate:[AuthGuard, PermissionGuard]},
   ];
 @NgModule({
     imports : [

@@ -95,8 +95,5 @@ export class AjoutVoitureComponent implements OnInit {
       )
     }
   }
-  onViewCars(){
-    this.router.navigateByUrl('/liste-voitures-deposees');
-  }
 
 }

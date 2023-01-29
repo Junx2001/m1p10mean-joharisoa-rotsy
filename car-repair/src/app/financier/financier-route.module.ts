@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { LayoutComponent } from "../global/components/layout/layout.component";
 import { AuthGuard } from "../global/guards/auth.guard";
+import { PermissionGuard } from "../global/guards/permission.guard";
 import { DepensesComponent } from "./depenses/depenses.component";
 import { DetailsFactureComponent } from "./details-facture/details-facture.component";
 import { FacturesNonPayeesComponent } from "./factures-non-payees/factures-non-payees.component";
@@ -19,7 +20,7 @@ const routes: Routes = [
         { path: "statistiques", component: StatistiquesComponent },
         { path: "", redirectTo: "factures-non-payees", pathMatch: "full" },
     ],
-    canActivate:[AuthGuard]},
+    canActivate:[AuthGuard, PermissionGuard]},
   ];
 @NgModule({
     imports : [

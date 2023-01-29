@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { LayoutComponent } from "../global/components/layout/layout.component";
 import { AuthGuard } from "../global/guards/auth.guard";
+import { PermissionGuard } from "../global/guards/permission.guard";
 import { LoginAtelierComponent } from "./login-atelier/login-atelier.component";
 import { NonRecupereComponent } from "./non-recupere/non-recupere.component";
 import { PdfBonDeSortieComponent } from "./pdf-bon-de-sortie/pdf-bon-de-sortie.component";
@@ -23,7 +24,7 @@ const routes: Routes = [
         { path: "reparation-details/:reparationId", component: ReparationDetailsComponent },
         { path: "", redirectTo: "reception-voiture", pathMatch: "full" },
     ],
-    canActivate:[AuthGuard]},
+    canActivate:[AuthGuard, PermissionGuard]},
   ];
 @NgModule({
     imports : [

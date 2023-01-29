@@ -5,11 +5,12 @@
       >
       <div class="rounded-t bg-white mb-0 px-6 py-6">
         <div class="text-center flex justify-between">
-          <h3 class="font-semibold text-lg text-blueGray-700">{{title}}</h3>
+          <h3 class="font-semibold text-lg text-blueGray-700">Fiche de la voiture</h3>
+          
           <select
             class="bg-red-600
              text-white 
-             active:bg-red-700 font-bold uppercase text-xs px-4 py-2 rounded 
+             active:bg-red-700 font-bold uppercase text-xs pr-0 py-2 rounded 
              shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
              #statut (change)="onFilterDepositCars(statut.value)"
           >
@@ -17,7 +18,11 @@
             <option [value]=1 >Voitures déposées</option>
             <option [value]=0 >Voitures non déposées</option>
         </select>
+
         </div>
+      </div>
+
+      
         
         <form [formGroup]="searchGroup" >
         <div class="flex flex-wrap">
@@ -104,8 +109,8 @@
                  ACTIONS</th>
             </tr>
           </thead>
-          <tbody>
-                <tr *ngFor="let car of cars$ | async | paginate:{itemsPerPage: 2, currentPage: page} ">
+          <tbody> 
+                <tr *ngFor="let car of cars$ | async | paginate:{itemsPerPage: 4, currentPage: page} ">
                     <th 
                         class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                         >
