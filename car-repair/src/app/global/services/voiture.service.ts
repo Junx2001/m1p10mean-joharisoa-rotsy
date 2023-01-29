@@ -27,10 +27,6 @@ export class VoitureService {
         }
         return this.http.get<any>(`${apiUrl.key}/cars/search`,{params:params});
     }
-    getRecuperableCarsByUser(): Observable<any>{
-        return this.http.get<any>(`${apiUrl.key}/cars/deposit`);
-    }
-
     filterDepositCarsByUser(depot : number):Observable<any>{
         let retour : Observable<any>;
         if (depot==1){

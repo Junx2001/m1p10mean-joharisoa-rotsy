@@ -15,15 +15,13 @@ export class PermissionGuard implements CanActivate{
         
         this.userService.getCurrentUser().subscribe(
             response => {
-              console.log(response.user.role);
-              console.log(routeChildren);
               if (response.user.role==='ROLE_USER_FINANCE'){
-                if (routeChildren !== 'finance'){
+                if (routeChildren === 'atelier'){
                   this.router.navigateByUrl('/forbidden');
                   return false;
                 }
               }else if (response.user.role==='ROLE_USER_ATELIER'){
-                if (routeChildren !== 'atelier'){
+                if (routeChildren === 'finance'){
                   this.router.navigateByUrl('/forbidden');
                   return false;
                 }
