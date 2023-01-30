@@ -8,7 +8,7 @@
               <h3 class="font-semibold text-lg text-blueGray-700">Les réparations non payées en totalité</h3>
               </div>
           </div>
-          <div class="block w-full overflow-x-auto">
+          <div *ngIf="unpaidReparations$ | async as array" class="block w-full overflow-x-auto">
             <!-- Projects table -->
             
     
@@ -50,8 +50,8 @@
                      </th>
                 </tr>
               </thead>
-              <tbody *ngIf="unpaidReparations$ | async as array">
-                    <tr *ngFor="let rep of array.arrayFinal | paginate:{itemsPerPage: 4, currentPage: page} " >
+              <tbody >
+                    <tr *ngFor="let rep of array | paginate:{itemsPerPage: 4, currentPage: page} " >
                         <th 
                             class="px-6 align-middle border border-solid py-3 text-xs  border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                             >
@@ -109,8 +109,7 @@
                     </tr>
               </tbody>
             </table>
-            <ng-container *ngIf="unpaidReparations$ | async as cars" >
-            <div *ngIf="cars.arrayFinal.length > 1" class="flex flex-wrap">
+            <div *ngIf="array.length > 1" class="flex flex-wrap">
               <div class="w-full lg:w-4/12 px-4"></div>
               <div class="w-full lg:w-4/12 px-4">
                 <div class=" block has-text-centered">
@@ -152,7 +151,6 @@
               </div>
               <div class="w-full lg:w-4/12 px-4"></div>
           </div>
-        </ng-container>
           </div>
           
         </div>
