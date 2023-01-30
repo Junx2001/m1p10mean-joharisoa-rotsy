@@ -80,7 +80,7 @@ export class AjoutVoitureComponent implements OnInit {
       this.voitureService.addCar(this.depotForm.value).subscribe(
         (response) =>{ 
           // console.log("response received");
-          this.successMessage = "La voitura a été ajouté à la collection.";
+          this.successMessage = "La voiture a été ajouté à la collection.";
             this.message = true;
         },
         (error)=>{

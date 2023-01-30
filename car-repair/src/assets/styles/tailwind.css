@@ -522,6 +522,9 @@ table tbody tr th img{
   max-width: unset;
 }
 
+table tbody tr td img{
+  max-width: unset;
+}
 
       [type='text'],
       [type='email'],
