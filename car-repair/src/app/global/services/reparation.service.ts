@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { apiUrl } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -65,7 +65,9 @@ export class ReparationService {
         return this.http.get<any>(`${apiUrl.key}/reparations`);
     }
     getAllUnpaidReparations(): Observable<any>{
-        return this.http.get<any>(`${apiUrl.key}/reparations/unpaid`);
+        return this.http.get<any>(`${apiUrl.key}/reparations/unpaid`).pipe(
+            map(value=>value.arrayFinal.filter(rep => rep.montantTotal > 0))
+        );
     }
     getUnpaidReparationsById(reparationId: string):Observable<any>{
         return this.http.get<any>(`${apiUrl.key}/reparations/unpaidById/${reparationId}`);
