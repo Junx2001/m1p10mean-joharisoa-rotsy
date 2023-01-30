@@ -34,15 +34,6 @@ export class PaiementComponent implements OnInit {
       map(values=>values.arrayFinal)
     );
 
-    this.unpaidReparations$.subscribe(
-      (response)=>{
-        console.log(response);
-        
-        
-        
-      }
-    );
-    
 
     if (this.route.snapshot.params['reparationId']){
       this.reparationId = this.route.snapshot.params['reparationId']

@@ -43,9 +43,27 @@ export class StatDepensesComponent implements OnInit {
         let config = this.configChart(months, this.defaultYear, data);
         let ctx: any = document.getElementById("bar-chart");
         ctx = ctx.getContext("2d");
-        new Chart(ctx, config);
+        this.chart = new Chart(ctx, config);
       }
     )
+    this.filterGroup.valueChanges.subscribe(
+      (value)=>{
+        this.paiementService.getStatsBeneficePerMonth(value.year).subscribe(
+          (response)=>{
+            let months = [];
+            let data = [];
+            for (let i= 0; i<response.length; i++){
+              months.push(this.functions.getMonthName(response[i]._id, 'short'));
+              data.push(response[i].total);
+            }
+            
+            let config = this.configChart(months, value.year, data);
+            this.chart.config = config;
+            this.chart.update();
+          }
+        )
+      }
+    );
   }
   configChart(months, year, data){
     var config = {
@@ -64,19 +82,21 @@ export class StatDepensesComponent implements OnInit {
       },
       plugins: [{
         beforeRender: (x, options) => {
-          const c = x.chart;
-          const dataset = x.data.datasets[0];
-          const yScale = x.scales['y-axis-0'];
-          const yPos = yScale.getPixelForValue(0);
-      
-          const gradientFill = c.ctx.createLinearGradient(0, 0, 0, c.height);
-          gradientFill.addColorStop(0, 'rgb(86,188,77)');
-          gradientFill.addColorStop(yPos / c.height, 'rgb(86,188,77)');
-          gradientFill.addColorStop(yPos / c.height, 'rgb(229,66,66)');
-          gradientFill.addColorStop(1, 'rgb(229,66,66)');
-      
-          const model = x.data.datasets[0]._meta[Object.keys(dataset._meta)[0]].dataset._model;
-          model.borderColor = gradientFill;
+          if (x.data.datasets[0].data.length>1){
+            const c = x.chart;
+            const dataset = x.data.datasets[0];
+            const yScale = x.scales['y-axis-0'];
+            const yPos = yScale.getPixelForValue(0);
+        
+            const gradientFill = c.ctx.createLinearGradient(0, 0, 0, c.height);
+            gradientFill.addColorStop(0, 'rgb(86,188,77)');
+            gradientFill.addColorStop(yPos / c.height, 'rgb(86,188,77)');
+            gradientFill.addColorStop(yPos / c.height, 'rgb(229,66,66)');
+            gradientFill.addColorStop(1, 'rgb(229,66,66)');
+        
+            const model = x.data.datasets[0]._meta[Object.keys(dataset._meta)[0]].dataset._model;
+            model.borderColor = gradientFill;
+          }
         },
       }],
       options: {

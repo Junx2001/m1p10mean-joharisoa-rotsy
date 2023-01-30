@@ -5,17 +5,11 @@
         <div
         class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white"
       >
-        <div class="rounded-t mb-0 px-4 py-3 border-0">
-          <div class="flex flex-wrap items-center">
-            <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3
-                class="font-semibold text-lg text-blueGray-700"
-              >
-              Liste des voitures à récupérer
-              </h3>
-            </div>
-          </div>
+      <div class="rounded-t bg-white mb-0 px-6 py-6">
+        <div class="text-center flex justify-between">
+        <h3 class="font-semibold text-lg text-blueGray-700">Liste des voitures à récupérer</h3>
         </div>
+    </div>
         <div class="block w-full overflow-x-auto">
           <!-- Projects table -->
           <table 
@@ -25,65 +19,74 @@
           [cdkDropListConnectedTo]="[recoverList]"
           (cdkDropListDropped)="drop($event)"
           class="items-center w-full bg-transparent border-collapse">
-            <thead>
-              <tr >
+          <thead>
+            <tr >
                 <th
-                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                >
-                  
-                </th>
-                <th
-                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                >
-                  immatriculation
-                </th>
-                <th
-                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                >
-                  marque
-                </th>
-                <th
-                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                >
-                modèle
-                </th>
-                <th
-                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                >
-                  
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let depositCar of cars " cdkDrag>
+                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                 >
+                 </th>
+                 <th
+                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                 >
+                 Immatriculation</th>
+                 <th
+                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                 >
+                 Marque</th>
+                 <th
+                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                 >
+                 Modèle</th>
+                 <th
+                 class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                 >
+                 </th>
+            </tr>
+          </thead>
+            <tbody >
+              <tr *ngFor="let car of cars " cdkDrag >
                 <td 
-                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
+                >
+                      
+                    <img *ngIf="!car.imageUrl"
+                    src="assets/img/2017_hyundai_santa_fe.jpg"
+                    class="h-12 w-12 bg-white rounded-full border"
+                    alt="image voiture" style="object-fit: cover"
+                  />
+                  <img *ngIf="car.imageUrl"
+                    src="{{car.imageUrl}}"
+                    class="h-12 w-12 bg-white rounded-full border"
+                    alt="image voiture" style="object-fit: cover"
+                  />
+                  </td>
+                  <td 
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                   >
-                  <img *ngIf="!depositCar.imageUrl"
-                  src="assets/img/2017_hyundai_santa_fe.jpg"
-                  class="h-12 w-12 bg-white rounded-full border"
-                  alt="image voiture" style="object-fit: cover"
-                />
-                <img *ngIf="depositCar.imageUrl"
-                  src="{{depositCar.imageUrl}}"
-                  class="h-12 w-12 bg-white rounded-full border"
-                  alt="image voiture" style="object-fit: cover"
-                />
-                </td>
-                <td 
-                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  {{depositCar.immatriculation}}
-                </td>
-                <td 
-                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  {{depositCar.marque}}
-                </td>
-                <td 
-                  class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  {{depositCar.modele}}
-                </td>
+                  {{car.immatriculation}}
+                  </td>
+                  <td 
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                  >
+                  {{car.marque}}
+                  </td>
+                  <td 
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                  >
+                  {{car.modele}}
+                  </td>
+                  <td 
+                  class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                  >
+                  <ng-container *ngIf="car.state === 'INSIDE GARAGE'">
+                      <i  class="fas fa-circle text-emerald-500 mr-2"></i> déposé
+                  </ng-container> 
+                  <ng-container *ngIf="car.state === 'OUT OF GARAGE'">
+                      <i class="fas fa-circle text-orange-500 mr-2"></i> non déposé
+                  </ng-container>
+                  </td>
               </tr>
-            </tbody>
+        </tbody>
           </table>
         </div>
       </div>

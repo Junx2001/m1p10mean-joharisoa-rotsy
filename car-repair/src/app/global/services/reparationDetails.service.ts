@@ -35,7 +35,7 @@ export class ReparationDetailsService {
         return this.http.put<any>(`${apiUrl.key}/reparationDetails/${formValue.id}`, body );
     }
     deleteReparationDetails(repDetId : string){
-        return this.http.delete<any>(`${apiUrl.key}/reparationDetails/${repDetId}`, null );
+        return this.http.delete<any>(`${apiUrl.key}/reparationDetails/${repDetId}` );
     }
 
 }
