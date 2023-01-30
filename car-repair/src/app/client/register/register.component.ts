@@ -10,11 +10,14 @@ import { AuthService } from 'src/app/global/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm! : FormGroup;
+  
+  successMessage : boolean = false;
+  errorMessage : boolean = false;
+  fieldTextType: boolean;
+
   constructor(private formBuilder : FormBuilder,
     private authService : AuthService,
     private router : Router) { }
-    successMessage : boolean = false;
-    errorMessage : boolean = false;
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -22,6 +25,10 @@ export class RegisterComponent implements OnInit {
       email : ['associationvahatra2022@gmail.com', Validators.required],
       password : ['motdepasse', Validators.required]
     })
+  }
+  
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
   }
   onSubmitRegisterForm(){
     this.authService.registerUser(this.registerForm.value).subscribe(

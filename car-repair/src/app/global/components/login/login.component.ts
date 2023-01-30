@@ -17,6 +17,9 @@ export class LoginComponent implements OnInit {
   errorMessage! : string;
   success! : string;
   showAlert! : boolean;
+  fieldTextType: boolean;
+
+
 
   constructor(private formBuilder : FormBuilder,
     private router : Router,
@@ -39,6 +42,11 @@ export class LoginComponent implements OnInit {
     }
     
   }
+  
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
+  
   onSubmitLoginForm(){
     // login from API
     this.authService.login(this.loginForm.value).subscribe(
